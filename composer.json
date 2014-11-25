@@ -1,0 +1,23 @@
+{
+  "name": "saxulum/saxulum-entity-generator",
+  "description": "Saxulum Entity Generator",
+  "keywords": ["saxulum", "entity", "generator"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Dominik Zogg",
+      "email": "dominik.zogg@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3",
+    "nikic/php-parser": "v1.0.0beta1",
+    "symfony/yaml": "~2.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.0.*"
+  },
+  "autoload": {
+    "psr-4": { "Saxulum\\EntityGenerator\\": "src/" }
+  }
+}
