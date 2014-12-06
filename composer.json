@@ -1,6 +1,6 @@
 {
-  "name": "saxulum/saxulum-entity-generator",
-  "description": "Saxulum Entity Generator",
+  "name": "saxulum/saxulum-model-generator",
+  "description": "Saxulum Model Generator",
   "keywords": ["saxulum", "entity", "generator"],
   "license": "MIT",
   "authors": [
