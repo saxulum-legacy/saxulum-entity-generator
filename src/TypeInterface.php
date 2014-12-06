@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\EntityGenerator\Type;
+namespace Saxulum\EntityGenerator;
 
 use PhpParser\Node;
 
