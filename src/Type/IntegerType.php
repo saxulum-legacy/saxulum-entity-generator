@@ -8,7 +8,7 @@ use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Scalar\String;
 
-class TextType extends AbstractSimpleType
+class IntegerType extends AbstractSimpleType
 {
     /**
      * @param string $name
@@ -19,7 +19,7 @@ class TextType extends AbstractSimpleType
         return array(
             new MethodCall(new Variable('builder'), 'addField', array(
                 new Arg(new String($name)),
-                new Arg(new String('string'))
+                new Arg(new String('integer'))
             ))
         );
     }
