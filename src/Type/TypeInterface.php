@@ -22,5 +22,5 @@ interface TypeInterface
      * @param string $name
      * @return Node[]
      */
-    public function getDoctrineOrmMapping($name);
+    public function getDoctrineOrmMetadata($name);
 }

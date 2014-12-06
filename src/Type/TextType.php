@@ -62,11 +62,11 @@ class TextType implements TypeInterface
      * @param string $name
      * @return Node[]
      */
-    public function getDoctrineOrmMapping($name)
+    public function getDoctrineOrmMetadata($name)
     {
         return array(
             new MethodCall(new Variable('builder'), 'addField', array(
-                new Arg(new Variable('name')),
+                new Arg(new Variable($name)),
                 new Arg(new String('string'))
             ))
         );
