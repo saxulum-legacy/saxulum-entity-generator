@@ -66,7 +66,7 @@ class TextType implements TypeInterface
     {
         return array(
             new MethodCall(new Variable('builder'), 'addField', array(
-                new Arg(new Variable($name)),
+                new Arg(new String($name)),
                 new Arg(new String('string'))
             ))
         );
