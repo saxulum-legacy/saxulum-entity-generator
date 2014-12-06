@@ -7,12 +7,20 @@ use PhpParser\Node;
 interface TypeInterface
 {
     /**
+     * @param string $name
      * @return Node[]
      */
-    public function getProperties();
+    public function getProperties($name);
 
     /**
+     * @param string $name
      * @return Node[]
      */
-    public function getMethods();
+    public function getMethods($name);
+
+    /**
+     * @param string $name
+     * @return Node[]
+     */
+    public function getDoctrineOrmMapping($name);
 }
