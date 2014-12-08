@@ -19,6 +19,6 @@
     "doctrine/orm": "~2.4,>=2.4.6"
   },
   "autoload": {
-    "psr-4": { "Saxulum\\EntityGenerator\\": "src/" }
+    "psr-4": { "Saxulum\\ModelGenerator\\": "src/" }
   }
 }

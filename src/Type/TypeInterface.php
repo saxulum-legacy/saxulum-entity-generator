@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\EntityGenerator;
+namespace Saxulum\ModelGenerator\Type;
 
 use PhpParser\Node;
 
@@ -10,7 +10,7 @@ interface TypeInterface
      * @param string $name
      * @return Node[]
      */
-    public function getProperties($name);
+    public function getProperty($name);
 
     /**
      * @param string $name
@@ -23,4 +23,9 @@ interface TypeInterface
      * @return Node[]
      */
     public function getDoctrineOrmMetadata($name);
+
+    /**
+     * @return string
+     */
+    public function getName();
 }
