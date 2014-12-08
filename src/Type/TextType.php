@@ -29,7 +29,7 @@ class TextType implements TypeInterface
                 new PropertyProperty($name)
             ), array(
                 'comments' => array(
-                    new Comment("/**\n * @var string\n */")
+                    new Comment("\n/**\n * @var string\n */")
                 )
             )),
         );
@@ -55,7 +55,7 @@ class TextType implements TypeInterface
                 )
             ), array(
                 'comments' => array(
-                    new Comment("/**\n * @param string \$$name\n */")
+                    new Comment("\n/**\n * @param string \$$name\n */")
                 )
             )),
             new ClassMethod('get' . ucfirst($name), array(
@@ -65,7 +65,7 @@ class TextType implements TypeInterface
                 )
             ), array(
                 'comments' => array(
-                    new Comment("/**\n * @return string\n */")
+                    new Comment("\n/**\n * @return string\n */")
                 )
             )),
         );

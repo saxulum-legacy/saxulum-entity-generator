@@ -29,7 +29,7 @@ class IntegerType implements TypeInterface
                 new PropertyProperty($name)
             ), array(
                 'comments' => array(
-                    new Comment("/**\n * @var int\n */")
+                    new Comment("\n/**\n * @var int\n */")
                 )
             )),
         );
@@ -55,7 +55,7 @@ class IntegerType implements TypeInterface
                 )
             ), array(
                 'comments' => array(
-                    new Comment("/**\n * @param int \$$name\n */")
+                    new Comment("\n/**\n * @param int \$$name\n */")
                 )
             )),
             new ClassMethod('get' . ucfirst($name), array(
@@ -65,7 +65,7 @@ class IntegerType implements TypeInterface
                 )
             ), array(
                 'comments' => array(
-                    new Comment("/**\n * @return int\n */")
+                    new Comment("\n/**\n * @return int\n */")
                 )
             )),
         );
