@@ -14,8 +14,8 @@ class Documentor
      */
     public function __construct(array $rows)
     {
-        foreach($rows as $row) {
-            if(!$row instanceof AbstractRow) {
+        foreach ($rows as $row) {
+            if (!$row instanceof AbstractRow) {
                 throw new \InvalidArgumentException('Rows have to extend AbstractRow!');
             }
 
@@ -29,7 +29,7 @@ class Documentor
     public function __toString()
     {
         $string = '/**' . PHP_EOL;
-        foreach($this->rows as $row) {
+        foreach ($this->rows as $row) {
             $string .= ' * ' . (string) $row . PHP_EOL;
         }
         $string .= ' */';

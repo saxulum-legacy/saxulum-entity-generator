@@ -41,8 +41,8 @@ class Generator
     {
         $this->phpGenerator = $phpGenerator;
 
-        foreach($types as $type) {
-            if(!$type instanceof TypeInterface) {
+        foreach ($types as $type) {
+            if (!$type instanceof TypeInterface) {
                 throw new \InvalidArgumentException("Type is not an instance of TypeInterface!");
             }
 
@@ -127,12 +127,12 @@ class Generator
     protected function generateNodes(ModelMapping $modelMapping, $getterName)
     {
         $fieldNodes = array();
-        foreach($modelMapping->getFieldMappings() as $fieldMapping) {
+        foreach ($modelMapping->getFieldMappings() as $fieldMapping) {
             $type = $this->getType($fieldMapping->getType());
-            if(null === $type) {
+            if (null === $type) {
                 throw new \Exception("Unknown type: {$fieldMapping->getType()}!");
             }
-            if(!is_callable(array($type, $getterName))) {
+            if (!is_callable(array($type, $getterName))) {
                 throw new \Exception("Can't call {$fieldMapping->getType()} method {$getterName}!");
             }
 

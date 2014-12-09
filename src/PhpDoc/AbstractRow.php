@@ -14,7 +14,7 @@ abstract class AbstractRow
      */
     protected function addPart($part)
     {
-        if(null !== $part) {
+        if (null !== $part) {
             $this->parts[] = $part;
         }
     }
@@ -24,9 +24,8 @@ abstract class AbstractRow
      */
     public function __toString()
     {
-
         $string = '@' . $this->getName();
-        foreach($this->parts as $part) {
+        foreach ($this->parts as $part) {
             $string .= ' ' . $part;
         }
 

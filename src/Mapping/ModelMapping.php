@@ -41,7 +41,7 @@ class ModelMapping
      */
     public function addInterface($interface)
     {
-        if(!is_string($interface)) {
+        if (!is_string($interface)) {
             throw new \InvalidArgumentException("Interface name has to be a string!");
         }
 
