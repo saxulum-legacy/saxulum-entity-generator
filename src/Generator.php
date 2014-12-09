@@ -52,14 +52,13 @@ class Generator
 
     public function generateEntity(ModelMapping $modelMapping)
     {
-        $subNodes = array();
-        $subNodes = array_merge($subNodes, $this->generatePropertyNodes($modelMapping));
-        $subNodes = array_merge($subNodes, $this->generateMethodNodes($modelMapping));
-        $subNodes = array_merge($subNodes, $this->generateDoctrineOrmMetadataNodes($modelMapping));
+        $nodes = array();
+        $nodes = array_merge($nodes, $this->generatePropertyNodes($modelMapping));
+        $nodes = array_merge($nodes, $this->generateMethodNodes($modelMapping));
+        $nodes = array_merge($nodes, $this->generateDoctrineOrmMetadataNodes($modelMapping));
+        $nodes = array(new Class_($modelMapping->getName(), array('stmts' => $nodes)));
 
-        $model = new Class_($modelMapping->getName(), array('stmts' => $subNodes));
-
-        echo $this->phpGenerator->prettyPrint(array($model));
+        echo $this->phpGenerator->prettyPrint($nodes);
     }
 
     /**
