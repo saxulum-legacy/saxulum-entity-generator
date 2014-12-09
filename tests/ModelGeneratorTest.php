@@ -11,7 +11,7 @@ use Saxulum\ModelGenerator\Type\TextType;
 
 class ModelGeneratorTest extends \PHPUnit_Framework_TestCase
 {
-    public function testModelGeneration()
+    public function testEntityGeneration()
     {
         $types = array(
             new IntegerType(),
@@ -25,6 +25,6 @@ class ModelGeneratorTest extends \PHPUnit_Framework_TestCase
         $modelMapping->addField(new FieldMapping('id', 'integer'));
         $modelMapping->addField(new FieldMapping('name', 'text'));
 
-        $generator->generateModel($modelMapping);
+        $generator->generateEntity($modelMapping);
     }
 }

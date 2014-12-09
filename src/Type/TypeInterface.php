@@ -10,19 +10,29 @@ interface TypeInterface
      * @param string $name
      * @return Node[]
      */
-    public function getProperty($name);
+    public function getPropertyNodes($name);
 
     /**
      * @param string $name
      * @return Node[]
      */
-    public function getMethods($name);
+    public function getMethodNodes($name);
 
     /**
      * @param string $name
      * @return Node[]
      */
-    public function getDoctrineOrmMetadata($name);
+    public function getDoctrineOrmMetadataNodes($name);
+
+    /**
+     * @return string
+     */
+    public function getPhpDocType();
+
+    /**
+     * @return string
+     */
+    public function getDoctrineOrmType();
 
     /**
      * @return string
