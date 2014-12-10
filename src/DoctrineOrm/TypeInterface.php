@@ -1,22 +1,23 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Type;
+namespace Saxulum\ModelGenerator\DoctrineOrm;
 
 use PhpParser\Node;
+use Saxulum\ModelGenerator\TypeInterface as BaseTypeInterface;
 
-interface TypeInterface
+interface TypeInterface extends BaseTypeInterface
 {
     /**
      * @param string $name
      * @return Node[]
      */
-    public function getPropertyNodes($name);
+    public function getDoctrineOrmPropertyNodes($name);
 
     /**
      * @param string $name
      * @return Node[]
      */
-    public function getMethodNodes($name);
+    public function getDoctrineOrmMethodNodes($name);
 
     /**
      * @param string $name
@@ -27,15 +28,10 @@ interface TypeInterface
     /**
      * @return string
      */
-    public function getPhpDocType();
+    public function getDoctrineOrmPhpDocType();
 
     /**
      * @return string
      */
     public function getDoctrineOrmType();
-
-    /**
-     * @return string
-     */
-    public function getName();
 }

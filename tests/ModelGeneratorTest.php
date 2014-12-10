@@ -3,11 +3,11 @@
 namespace Saxulum\Tests\ModelGenerator;
 
 use PhpParser\PrettyPrinter\Standard as PhpGenerator;
-use Saxulum\ModelGenerator\Generator;
+use Saxulum\ModelGenerator\DoctrineOrm\Generator;
 use Saxulum\ModelGenerator\Mapping\FieldMapping;
 use Saxulum\ModelGenerator\Mapping\ModelMapping;
-use Saxulum\ModelGenerator\Type\IntegerType;
-use Saxulum\ModelGenerator\Type\TextType;
+use Saxulum\ModelGenerator\DoctrineOrm\Type\IntegerType;
+use Saxulum\ModelGenerator\DoctrineOrm\Type\TextType;
 
 class ModelGeneratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,6 +25,6 @@ class ModelGeneratorTest extends \PHPUnit_Framework_TestCase
         $modelMapping->addField(new FieldMapping('id', 'integer'));
         $modelMapping->addField(new FieldMapping('name', 'text'));
 
-        $generator->generateEntity($modelMapping);
+        $generator->generate($modelMapping);
     }
 }

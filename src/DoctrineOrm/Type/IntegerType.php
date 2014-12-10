@@ -1,13 +1,13 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Type;
+namespace Saxulum\ModelGenerator\DoctrineOrm\Type;
 
 class IntegerType extends AbstractSimpleType
 {
     /**
      * @return string
      */
-    public function getPhpDocType()
+    public function getDoctrineOrmPhpDocType()
     {
         return 'int';
     }

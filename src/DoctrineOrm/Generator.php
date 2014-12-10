@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator;
+namespace Saxulum\ModelGenerator\DoctrineOrm;
 
 use PhpParser\Comment;
 use PhpParser\Node;
@@ -13,12 +13,12 @@ use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\PrettyPrinter\Standard as PhpGenerator;
+use Saxulum\ModelGenerator\GeneratorInterface;
 use Saxulum\ModelGenerator\Mapping\ModelMapping;
 use Saxulum\ModelGenerator\PhpDoc\Documentor;
 use Saxulum\ModelGenerator\PhpDoc\ParamRow;
-use Saxulum\ModelGenerator\Type\TypeInterface;
 
-class Generator
+class Generator implements GeneratorInterface
 {
     const CLASS_ORM_METADATA = '\Doctrine\ORM\Mapping\ClassMetadata';
     const CLASS_ORM_METADATA_BUILDER = '\Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder';
@@ -50,7 +50,7 @@ class Generator
         }
     }
 
-    public function generateEntity(ModelMapping $modelMapping)
+    public function generate(ModelMapping $modelMapping)
     {
         $nodes = array();
         $nodes = array_merge($nodes, $this->generatePropertyNodes($modelMapping));
@@ -68,7 +68,7 @@ class Generator
      */
     protected function generatePropertyNodes(ModelMapping $modelMapping)
     {
-        return $this->generateNodes($modelMapping, 'getPropertyNodes');
+        return $this->generateNodes($modelMapping, 'getDoctrineOrmPropertyNodes');
     }
 
     /**
@@ -78,7 +78,7 @@ class Generator
      */
     protected function generateMethodNodes(ModelMapping $modelMapping)
     {
-        return $this->generateNodes($modelMapping, 'getMethodNodes');
+        return $this->generateNodes($modelMapping, 'getDoctrineOrmMethodNodes');
     }
 
     /**

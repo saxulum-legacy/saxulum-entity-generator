@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Type;
+namespace Saxulum\ModelGenerator\DoctrineOrm\Type;
 
 use PhpParser\Comment;
 use PhpParser\Node;
@@ -15,6 +15,7 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\PropertyProperty;
 use PhpParser\Node\Stmt\Return_;
+use Saxulum\ModelGenerator\DoctrineOrm\TypeInterface;
 use Saxulum\ModelGenerator\PhpDoc\Documentor;
 use Saxulum\ModelGenerator\PhpDoc\ParamRow;
 use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
@@ -26,7 +27,7 @@ abstract class AbstractSimpleType implements TypeInterface
      * @param string $name
      * @return Node[]
      */
-    public function getPropertyNodes($name)
+    public function getDoctrineOrmPropertyNodes($name)
     {
         return array(
             new Property(2,
@@ -37,7 +38,7 @@ abstract class AbstractSimpleType implements TypeInterface
                     'comments' => array(
                         new Comment(
                             new Documentor(array(
-                                new VarRow($this->getPhpDocType())
+                                new VarRow($this->getDoctrineOrmPhpDocType())
                             ))
                         )
                     )
@@ -50,7 +51,7 @@ abstract class AbstractSimpleType implements TypeInterface
      * @param string $name
      * @return Node[]
      */
-    public function getMethodNodes($name)
+    public function getDoctrineOrmMethodNodes($name)
     {
         return array(
             new ClassMethod('set' . ucfirst($name),
@@ -70,7 +71,7 @@ abstract class AbstractSimpleType implements TypeInterface
                     'comments' => array(
                         new Comment(
                             new Documentor(array(
-                                new ParamRow($this->getPhpDocType(), $name)
+                                new ParamRow($this->getDoctrineOrmPhpDocType(), $name)
                             ))
                         )
                     )
@@ -87,7 +88,7 @@ abstract class AbstractSimpleType implements TypeInterface
                     'comments' => array(
                         new Comment(
                             new Documentor(array(
-                                new ReturnRow($this->getPhpDocType())
+                                new ReturnRow($this->getDoctrineOrmPhpDocType())
                             ))
                         )
                     )

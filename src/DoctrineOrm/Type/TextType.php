@@ -1,13 +1,13 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Type;
+namespace Saxulum\ModelGenerator\DoctrineOrm\Type;
 
 class TextType extends AbstractSimpleType
 {
     /**
      * @return string
      */
-    public function getPhpDocType()
+    public function getDoctrineOrmPhpDocType()
     {
         return 'string';
     }
