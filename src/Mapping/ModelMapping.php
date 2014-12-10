@@ -10,9 +10,14 @@ class ModelMapping
     protected $name;
 
     /**
-     * @var string[]
+     * @var string
      */
-    protected $interfaces;
+    protected $baseNamespace;
+
+    /**
+     * @var string
+     */
+    protected $basePath;
 
     /**
      * @var FieldMapping[]
@@ -21,10 +26,19 @@ class ModelMapping
 
     /**
      * @param string $name
+     * @param string $baseNamespace
+     * @param string $basePath
      */
-    public function __construct($name)
+    public function __construct($name, $baseNamespace, $basePath)
     {
         $this->name = $name;
+        $this->baseNamespace = $baseNamespace;
+
+        if (!is_dir($basePath)) {
+            throw new \InvalidArgumentException("There is no directory at path '{$basePath}'");
+        }
+
+        $this->basePath = realpath($basePath);
     }
 
     /**
@@ -36,26 +50,19 @@ class ModelMapping
     }
 
     /**
-     * @param string $interface
-     * @return $this
+     * @return string
      */
-    public function addInterface($interface)
+    public function getBaseNamespace()
     {
-        if (!is_string($interface)) {
-            throw new \InvalidArgumentException("Interface name has to be a string!");
-        }
-
-        $this->interfaces[$interface] = $interface;
-
-        return $this;
+        return $this->baseNamespace;
     }
 
     /**
-     * @return \string[]
+     * @return string
      */
-    public function getInterfaces()
+    public function getBasePath()
     {
-        return $this->interfaces;
+        return $this->basePath;
     }
 
     /**

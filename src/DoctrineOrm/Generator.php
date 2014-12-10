@@ -6,6 +6,7 @@ use PhpParser\Comment;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\Assign;
+use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\New_;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Name;
@@ -20,6 +21,7 @@ use Saxulum\ModelGenerator\PhpDoc\ParamRow;
 
 class Generator implements GeneratorInterface
 {
+    const NAMESPACE_PART = 'Entity';
     const CLASS_ORM_METADATA = '\Doctrine\ORM\Mapping\ClassMetadata';
     const CLASS_ORM_METADATA_BUILDER = '\Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder';
 
@@ -50,15 +52,32 @@ class Generator implements GeneratorInterface
         }
     }
 
+    /**
+     * @param ModelMapping $modelMapping
+     */
     public function generate(ModelMapping $modelMapping)
     {
+        $baseNamespace = $modelMapping->getBaseNamespace() . '\\' . static::NAMESPACE_PART;
+        $basePath = $modelMapping->getBasePath() . DIRECTORY_SEPARATOR . static::NAMESPACE_PART;
+        if (!is_dir($basePath)) {
+            mkdir($basePath, 0777, true);
+        }
+
+
+        $baseClassPath = $basePath . DIRECTORY_SEPARATOR . 'Abstract' . $modelMapping->getName() . '.php';
+
         $nodes = array();
         $nodes = array_merge($nodes, $this->generatePropertyNodes($modelMapping));
         $nodes = array_merge($nodes, $this->generateMethodNodes($modelMapping));
         $nodes = array_merge($nodes, $this->generateDoctrineOrmMetadataNodes($modelMapping));
-        $nodes = array(new Class_($modelMapping->getName(), array('stmts' => $nodes)));
+        $nodes = array(
+            new Node\Stmt\Namespace_(new Name($baseNamespace), array(
+                new Class_('Abstract' . $modelMapping->getName(), array('type' => 16, 'stmts' => $nodes)))
+            )
+        );
+        $baseClassCode = $this->phpGenerator->prettyPrint($nodes);
 
-        echo $this->phpGenerator->prettyPrint($nodes);
+        file_put_contents($baseClassPath, '<?php' . PHP_EOL . PHP_EOL . $baseClassCode);
     }
 
     /**
@@ -99,7 +118,8 @@ class Generator implements GeneratorInterface
                         array(
                             new Assign(new Variable('builder'), new New_(new Name(static::CLASS_ORM_METADATA_BUILDER), array(
                                 new Arg(new Variable('metadata'))
-                            )))
+                            ))),
+                            new MethodCall(new Variable('builder'), 'setMappedSuperClass')
                         ),
                         $this->generateNodes($modelMapping, 'getDoctrineOrmMetadataNodes')
                     )

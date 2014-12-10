@@ -9,9 +9,9 @@ use Saxulum\ModelGenerator\Mapping\ModelMapping;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\IntegerType;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\TextType;
 
-class ModelGeneratorTest extends \PHPUnit_Framework_TestCase
+class DoctrineOrmGeneratorTest extends \PHPUnit_Framework_TestCase
 {
-    public function testEntityGeneration()
+    public function testSimple()
     {
         $types = array(
             new IntegerType(),
@@ -21,7 +21,7 @@ class ModelGeneratorTest extends \PHPUnit_Framework_TestCase
         $phpGenerator = new PhpGenerator();
         $generator = new Generator($phpGenerator, $types);
 
-        $modelMapping = new ModelMapping('Product');
+        $modelMapping = new ModelMapping('Product', 'Saxulum', __DIR__ . '/../generated');
         $modelMapping->addField(new FieldMapping('id', 'integer'));
         $modelMapping->addField(new FieldMapping('name', 'text'));
 

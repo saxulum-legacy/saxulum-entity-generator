@@ -8,7 +8,7 @@ interface GeneratorInterface
 {
     /**
      * @param ModelMapping $modelMapping
-     * @return mixed
+     * @return void
      */
     public function generate(ModelMapping $modelMapping);
 }
