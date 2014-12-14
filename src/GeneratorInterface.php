@@ -8,7 +8,8 @@ interface GeneratorInterface
 {
     /**
      * @param ModelMapping $modelMapping
+     * @param bool $override
      * @return void
      */
-    public function generate(ModelMapping $modelMapping);
+    public function generate(ModelMapping $modelMapping, $override = false);
 }

@@ -18,7 +18,7 @@ class AAAATest extends \PHPUnit_Framework_TestCase
         $nodeDumper = new NodeDumper();
 
         try {
-            $stmts = $parser->parse("<?php \$builder->createField('id', 'integer')->isPrimaryKey()->generatedValue()->build();");
+            $stmts = $parser->parse("<?php class A extends B {}");
 
             echo $nodeDumper->dump($stmts), "\n";
         } catch (Error $e) {

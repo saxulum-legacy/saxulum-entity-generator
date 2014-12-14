@@ -53,8 +53,9 @@ class Generator implements GeneratorInterface
 
     /**
      * @param ModelMapping $modelMapping
+     * @param bool $override
      */
-    public function generate(ModelMapping $modelMapping)
+    public function generate(ModelMapping $modelMapping, $override = false)
     {
         $namespace = $modelMapping->getBaseNamespace() . '\\' . $modelMapping->getEntityNamespacePart();
         $abstractNamespace = $namespace . '\\Base';
@@ -69,7 +70,10 @@ class Generator implements GeneratorInterface
             mkdir($abstractPath, 0777, true);
         }
 
-        $abstractClassPath = $abstractPath . DIRECTORY_SEPARATOR . 'Abstract' . $modelMapping->getName() . '.php';
+        $abstracClassName = 'Abstract' . $modelMapping->getName();
+
+        $classPath = $path . DIRECTORY_SEPARATOR . $modelMapping->getName() . '.php';
+        $abstractClassPath = $abstractPath . DIRECTORY_SEPARATOR . $abstracClassName . '.php';
 
         $nodes = array();
         $nodes = array_merge($nodes, $this->generatePropertyNodes($modelMapping));
@@ -80,9 +84,22 @@ class Generator implements GeneratorInterface
                 new Class_('Abstract' . $modelMapping->getName(), array('type' => 16, 'stmts' => $nodes)))
             )
         );
-        $baseClassCode = $this->phpGenerator->prettyPrint($nodes);
+        $abstractClassCode = $this->phpGenerator->prettyPrint($nodes);
 
-        file_put_contents($abstractClassPath, '<?php' . PHP_EOL . PHP_EOL . $baseClassCode);
+        file_put_contents($abstractClassPath, '<?php' . PHP_EOL . PHP_EOL . $abstractClassCode);
+
+        if (file_exists($classPath) && !$override) {
+            return;
+        }
+
+        $nodes = array(
+            new Node\Stmt\Namespace_(new Name($namespace), array(
+                new Class_($modelMapping->getName(), array('extends' => new Name($abstractNamespace . '\\' . $abstracClassName)))
+            ))
+        );
+
+        $classCode = $this->phpGenerator->prettyPrint($nodes);
+        file_put_contents($classPath, '<?php' . PHP_EOL . PHP_EOL . $classCode);
     }
 
     /**
