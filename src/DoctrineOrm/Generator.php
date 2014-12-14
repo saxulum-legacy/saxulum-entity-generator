@@ -94,7 +94,7 @@ class Generator implements GeneratorInterface
 
         $nodes = array(
             new Node\Stmt\Namespace_(new Name($namespace), array(
-                new Class_($modelMapping->getName(), array('extends' => new Name($abstractNamespace . '\\' . $abstracClassName)))
+                new Class_($modelMapping->getName(), array('extends' => new Name('\\' . $abstractNamespace . '\\' . $abstracClassName)))
             ))
         );
 
