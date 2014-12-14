@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator\DoctrineOrm\Type;
+namespace Saxulum\ModelGenerator\DoctrineOrm\Type\Simple;
 
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 

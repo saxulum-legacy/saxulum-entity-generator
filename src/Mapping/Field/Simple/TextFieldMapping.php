@@ -1,6 +1,8 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Mapping\Field;
+namespace Saxulum\ModelGenerator\Mapping\Field\Simple;
+
+use Saxulum\ModelGenerator\Mapping\Field\AbstractFieldMapping;
 
 class TextFieldMapping extends AbstractFieldMapping
 {

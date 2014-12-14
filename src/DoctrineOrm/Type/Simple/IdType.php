@@ -1,23 +1,13 @@
 <?php
 
-namespace Saxulum\ModelGenerator\DoctrineOrm\Type;
+namespace Saxulum\ModelGenerator\DoctrineOrm\Type\Simple;
 
-use PhpParser\Comment;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Expr\PropertyFetch;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Scalar\String;
-use PhpParser\Node\Stmt\ClassMethod;
-use PhpParser\Node\Stmt\Property;
-use PhpParser\Node\Stmt\PropertyProperty;
-use PhpParser\Node\Stmt\Return_;
-use Saxulum\ModelGenerator\DoctrineOrm\TypeInterface;
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
-use Saxulum\ModelGenerator\PhpDoc\Documentor;
-use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
-use Saxulum\ModelGenerator\PhpDoc\VarRow;
 
 class IdType extends AbstractType
 {

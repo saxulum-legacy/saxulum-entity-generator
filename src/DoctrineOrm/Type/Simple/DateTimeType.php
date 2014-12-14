@@ -1,20 +1,30 @@
 <?php
 
-namespace Saxulum\ModelGenerator\DoctrineOrm\Type;
+namespace Saxulum\ModelGenerator\DoctrineOrm\Type\Simple;
 
 use PhpParser\Node\Expr;
+use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Name;
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 
-class ArrayType extends AbstractType
+class DateTimeType extends AbstractType
 {
+    /**
+     * @param FieldMappingInterface $fieldMapping
+     * @return null|Expr
+     */
+    protected function getSetterDefault(FieldMappingInterface $fieldMapping)
+    {
+        return new ConstFetch(new Name('null'));
+    }
+
     /**
      * @param FieldMappingInterface $fieldMapping
      * @return null|string|Name
      */
     protected function getSetterType(FieldMappingInterface $fieldMapping)
     {
-        return 'array';
+        return new Name('\DateTime');
     }
 
     /**
@@ -23,7 +33,7 @@ class ArrayType extends AbstractType
      */
     public function getPhpDocType(FieldMappingInterface $fieldMapping)
     {
-        return 'array';
+        return '\DateTime';
     }
 
     /**
@@ -31,7 +41,7 @@ class ArrayType extends AbstractType
      */
     public function getOrmType()
     {
-        return 'json_array';
+        return 'datetime';
     }
 
     /**
@@ -39,6 +49,6 @@ class ArrayType extends AbstractType
      */
     public function getName()
     {
-        return 'array';
+        return 'datetime';
     }
 }

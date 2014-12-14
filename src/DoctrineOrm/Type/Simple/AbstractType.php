@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator\DoctrineOrm\Type;
+namespace Saxulum\ModelGenerator\DoctrineOrm\Type\Simple;
 
 use PhpParser\Comment;
 use PhpParser\Node;

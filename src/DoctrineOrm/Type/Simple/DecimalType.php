@@ -1,10 +1,10 @@
 <?php
 
-namespace Saxulum\ModelGenerator\DoctrineOrm\Type;
+namespace Saxulum\ModelGenerator\DoctrineOrm\Type\Simple;
 
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 
-class IntegerType extends AbstractType
+class DecimalType extends AbstractType
 {
     /**
      * @param FieldMappingInterface $fieldMapping
@@ -12,7 +12,7 @@ class IntegerType extends AbstractType
      */
     public function getPhpDocType(FieldMappingInterface $fieldMapping)
     {
-        return 'int';
+        return 'string';
     }
 
     /**
@@ -20,7 +20,7 @@ class IntegerType extends AbstractType
      */
     public function getOrmType()
     {
-        return 'integer';
+        return 'decimal';
     }
 
     /**
@@ -28,6 +28,6 @@ class IntegerType extends AbstractType
      */
     public function getName()
     {
-        return 'integer';
+        return 'decimal';
     }
 }
