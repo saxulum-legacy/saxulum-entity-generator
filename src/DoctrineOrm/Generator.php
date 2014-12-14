@@ -10,6 +10,7 @@ use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\New_;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Name;
+use PhpParser\Node\Name\FullyQualified;
 use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -94,7 +95,7 @@ class Generator implements GeneratorInterface
 
         $nodes = array(
             new Node\Stmt\Namespace_(new Name($namespace), array(
-                new Class_($modelMapping->getName(), array('extends' => new Name('\\' . $abstractNamespace . '\\' . $abstracClassName)))
+                new Class_($modelMapping->getName(), array('extends' => new FullyQualified($abstractNamespace . '\\' . $abstracClassName)))
             ))
         );
 

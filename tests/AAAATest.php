@@ -18,7 +18,7 @@ class AAAATest extends \PHPUnit_Framework_TestCase
         $nodeDumper = new NodeDumper();
 
         try {
-            $stmts = $parser->parse("<?php class A extends B {}");
+            $stmts = $parser->parse("<?php class A { public function setDate(\\DateTime \$date = null) {}}");
 
             echo $nodeDumper->dump($stmts), "\n";
         } catch (Error $e) {
