@@ -2,6 +2,8 @@
 
 namespace Saxulum\ModelGenerator\Mapping;
 
+use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
+
 class ModelMapping
 {
     /**
@@ -20,7 +22,7 @@ class ModelMapping
     protected $basePath;
 
     /**
-     * @var FieldMapping[]
+     * @var FieldMappingInterface[]
      */
     protected $fieldMappings;
 
@@ -73,10 +75,10 @@ class ModelMapping
     }
 
     /**
-     * @param FieldMapping $fieldMapping
+     * @param FieldMappingInterface $fieldMapping
      * @return $this
      */
-    public function addField(FieldMapping $fieldMapping)
+    public function addField(FieldMappingInterface $fieldMapping)
     {
         $this->fieldMappings[$fieldMapping->getName()] = $fieldMapping;
 
@@ -84,7 +86,7 @@ class ModelMapping
     }
 
     /**
-     * @return FieldMapping[]
+     * @return FieldMappingInterface[]
      */
     public function getFieldMappings()
     {

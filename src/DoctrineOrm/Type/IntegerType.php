@@ -2,12 +2,15 @@
 
 namespace Saxulum\ModelGenerator\DoctrineOrm\Type;
 
+use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
+
 class IntegerType extends AbstractType
 {
     /**
+     * @param FieldMappingInterface $fieldMapping
      * @return string
      */
-    public function getPhpDocType()
+    public function getPhpDocType(FieldMappingInterface $fieldMapping)
     {
         return 'int';
     }

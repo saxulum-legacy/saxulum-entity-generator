@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Mapping;
+namespace Saxulum\ModelGenerator\Mapping\Field;
 
-class FieldMapping
+abstract class AbstractFieldMapping implements FieldMappingInterface
 {
     /**
      * @var string
@@ -10,18 +10,11 @@ class FieldMapping
     protected $name;
 
     /**
-     * @var string
-     */
-    protected $type;
-
-    /**
      * @param string $name
-     * @param string $type
      */
-    public function __construct($name, $type)
+    public function __construct($name)
     {
         $this->name = $name;
-        $this->type = $type;
     }
 
     /**
@@ -35,8 +28,5 @@ class FieldMapping
     /**
      * @return string
      */
-    public function getType()
-    {
-        return $this->type;
-    }
+    abstract public function getType();
 }

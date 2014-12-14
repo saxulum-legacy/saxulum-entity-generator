@@ -14,6 +14,7 @@ use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\PropertyProperty;
 use PhpParser\Node\Stmt\Return_;
 use Saxulum\ModelGenerator\DoctrineOrm\TypeInterface;
+use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 use Saxulum\ModelGenerator\PhpDoc\Documentor;
 use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
 use Saxulum\ModelGenerator\PhpDoc\VarRow;
@@ -21,27 +22,27 @@ use Saxulum\ModelGenerator\PhpDoc\VarRow;
 class IdType extends AbstractType
 {
     /**
-     * @param string $name
+     * @param FieldMappingInterface $fieldMapping
      * @return Node[]
      */
-    public function getMethodsNodes($name)
+    public function getMethodsNodes(FieldMappingInterface $fieldMapping)
     {
         return array(
-            $this->getGetterMethodNode($name)
+            $this->getGetterMethodNode($fieldMapping)
         );
     }
 
     /**
-     * @param string $name
+     * @param FieldMappingInterface $fieldMapping
      * @return Node
      */
-    public function getMetadataNode($name)
+    public function getMetadataNode(FieldMappingInterface $fieldMapping)
     {
         return new MethodCall(
             new MethodCall(
                 new MethodCall(
                     new MethodCall(new Variable('builder'), 'createField', array(
-                        new Arg(new String($name)),
+                        new Arg(new String($fieldMapping->getName())),
                         new Arg(new String('integer'))
                     )),
                     'isPrimaryKey'
@@ -53,9 +54,10 @@ class IdType extends AbstractType
     }
 
     /**
+     * @param FieldMappingInterface $fieldMapping
      * @return string
      */
-    protected function getPhpDocType()
+    public function getPhpDocType(FieldMappingInterface $fieldMapping)
     {
         return 'int';
     }

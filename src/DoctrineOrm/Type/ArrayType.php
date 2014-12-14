@@ -2,17 +2,28 @@
 
 namespace Saxulum\ModelGenerator\DoctrineOrm\Type;
 
+use PhpParser\Node\Expr;
+use PhpParser\Node\Name;
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 
-class StringType extends AbstractType
+class ArrayType extends AbstractType
 {
+    /**
+     * @param FieldMappingInterface $fieldMapping
+     * @return null|string|Name
+     */
+    protected function getSetterType(FieldMappingInterface $fieldMapping)
+    {
+        return 'array';
+    }
+
     /**
      * @param FieldMappingInterface $fieldMapping
      * @return string
      */
     public function getPhpDocType(FieldMappingInterface $fieldMapping)
     {
-        return 'string';
+        return 'array';
     }
 
     /**
@@ -20,7 +31,7 @@ class StringType extends AbstractType
      */
     public function getOrmType()
     {
-        return 'string';
+        return 'json_array';
     }
 
     /**
@@ -28,6 +39,6 @@ class StringType extends AbstractType
      */
     public function getName()
     {
-        return 'string';
+        return 'array';
     }
 }

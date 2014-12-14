@@ -6,8 +6,9 @@ use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Name;
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
+use Saxulum\ModelGenerator\Mapping\Field\ObjectFieldMapping;
 
-class DateTimeType extends AbstractType
+class ObjectType extends AbstractType
 {
     /**
      * @param FieldMappingInterface $fieldMapping
@@ -24,7 +25,11 @@ class DateTimeType extends AbstractType
      */
     protected function getSetterType(FieldMappingInterface $fieldMapping)
     {
-        return new Name('\DateTime');
+        if (!$fieldMapping instanceof ObjectFieldMapping) {
+            throw new \InvalidArgumentException('Field mapping has to be ObjectFieldMapping!');
+        }
+
+        return new Name($fieldMapping->getClass());
     }
 
     /**
@@ -33,7 +38,11 @@ class DateTimeType extends AbstractType
      */
     public function getPhpDocType(FieldMappingInterface $fieldMapping)
     {
-        return '\DateTime';
+        if (!$fieldMapping instanceof ObjectFieldMapping) {
+            throw new \InvalidArgumentException('Field mapping has to be ObjectFieldMapping!');
+        }
+
+        return $fieldMapping->getClass();
     }
 
     /**
@@ -41,7 +50,7 @@ class DateTimeType extends AbstractType
      */
     public function getOrmType()
     {
-        return 'datetime';
+        return 'object';
     }
 
     /**
@@ -49,6 +58,6 @@ class DateTimeType extends AbstractType
      */
     public function getName()
     {
-        return 'datetime';
+        return 'object';
     }
 }

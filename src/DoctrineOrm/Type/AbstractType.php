@@ -18,6 +18,7 @@ use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\PropertyProperty;
 use PhpParser\Node\Stmt\Return_;
 use Saxulum\ModelGenerator\DoctrineOrm\TypeInterface;
+use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 use Saxulum\ModelGenerator\PhpDoc\Documentor;
 use Saxulum\ModelGenerator\PhpDoc\ParamRow;
 use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
@@ -26,20 +27,20 @@ use Saxulum\ModelGenerator\PhpDoc\VarRow;
 abstract class AbstractType implements TypeInterface
 {
     /**
-     * @param string $name
+     * @param FieldMappingInterface $fieldMapping
      * @return Node
      */
-    public function getPropertyNode($name)
+    public function getPropertyNode(FieldMappingInterface $fieldMapping)
     {
         return new Property(2,
             array(
-                new PropertyProperty($name)
+                new PropertyProperty($fieldMapping->getName())
             ),
             array(
                 'comments' => array(
                     new Comment(
                         new Documentor(array(
-                            new VarRow($this->getPhpDocType())
+                            new VarRow($this->getPhpDocType($fieldMapping))
                         ))
                     )
                 )
@@ -48,16 +49,18 @@ abstract class AbstractType implements TypeInterface
     }
 
     /**
-     * @param string $name
+     * @param FieldMappingInterface $fieldMapping
      * @return Node|null
      */
-    public function getSetterMethodNode($name)
+    public function getSetterMethodNode(FieldMappingInterface $fieldMapping)
     {
+        $name = $fieldMapping->getName();
+
         return new ClassMethod($this->getSetterPrefix() . ucfirst($name),
             array(
                 'type' => 1,
                 'params' => array(
-                    new Param($name, $this->getSetterDefault(), $this->getSetterType())
+                    new Param($fieldMapping->getName(), $this->getSetterDefault($fieldMapping), $this->getSetterType($fieldMapping))
                 ),
                 'stmts' => array(
                     new Assign(
@@ -70,7 +73,7 @@ abstract class AbstractType implements TypeInterface
                 'comments' => array(
                     new Comment(
                         new Documentor(array(
-                            new ParamRow($this->getPhpDocType(), $name)
+                            new ParamRow($this->getPhpDocType($fieldMapping), $name)
                         ))
                     )
                 )
@@ -79,11 +82,13 @@ abstract class AbstractType implements TypeInterface
     }
 
     /**
-     * @param string $name
+     * @param FieldMappingInterface $fieldMapping
      * @return Node
      */
-    public function getGetterMethodNode($name)
+    public function getGetterMethodNode(FieldMappingInterface $fieldMapping)
     {
+        $name = $fieldMapping->getName();
+
         return new ClassMethod($this->getGetterPrefix() . ucfirst($name),
             array(
                 'type' => 1,
@@ -95,7 +100,7 @@ abstract class AbstractType implements TypeInterface
                 'comments' => array(
                     new Comment(
                         new Documentor(array(
-                            new ReturnRow($this->getPhpDocType())
+                            new ReturnRow($this->getPhpDocType($fieldMapping))
                         ))
                     )
                 )
@@ -104,26 +109,26 @@ abstract class AbstractType implements TypeInterface
     }
 
     /**
-     * @param string $name
+     * @param FieldMappingInterface $fieldMapping
      * @return Node
      */
-    public function getMetadataNode($name)
+    public function getMetadataNode(FieldMappingInterface $fieldMapping)
     {
         return new MethodCall(new Variable('builder'), 'addField', array(
-            new Arg(new String($name)),
+            new Arg(new String($fieldMapping->getName())),
             new Arg(new String($this->getOrmType()))
         ));
     }
 
     /**
-     * @param string $name
+     * @param FieldMappingInterface $fieldMapping
      * @return Node[]
      */
-    public function getMethodsNodes($name)
+    public function getMethodsNodes(FieldMappingInterface $fieldMapping)
     {
         return array(
-            $this->getSetterMethodNode($name),
-            $this->getGetterMethodNode($name)
+            $this->getSetterMethodNode($fieldMapping),
+            $this->getGetterMethodNode($fieldMapping)
         );
     }
 
@@ -136,17 +141,19 @@ abstract class AbstractType implements TypeInterface
     }
 
     /**
+     * @param FieldMappingInterface $fieldMapping
      * @return null|Expr
      */
-    protected function getSetterDefault()
+    protected function getSetterDefault(FieldMappingInterface $fieldMapping)
     {
         return null;
     }
 
     /**
+     * @param FieldMappingInterface $fieldMapping
      * @return null|string|Name
      */
-    protected function getSetterType()
+    protected function getSetterType(FieldMappingInterface $fieldMapping)
     {
         return null;
     }
@@ -160,9 +167,10 @@ abstract class AbstractType implements TypeInterface
     }
 
     /**
+     * @param FieldMappingInterface $fieldMapping
      * @return string
      */
-    abstract protected function getPhpDocType();
+    abstract protected function getPhpDocType(FieldMappingInterface $fieldMapping);
 
     /**
      * @return string

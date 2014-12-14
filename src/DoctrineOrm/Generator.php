@@ -178,7 +178,7 @@ class Generator implements GeneratorInterface
                 throw new \Exception("Can't call {$fieldMapping->getType()} method {$getterName}!");
             }
 
-            $nodes = $type->$getterName($fieldMapping->getName());
+            $nodes = $type->$getterName($fieldMapping);
 
             if (!is_array($nodes)) {
                 $nodes = array($nodes);

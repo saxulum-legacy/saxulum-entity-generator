@@ -3,26 +3,27 @@
 namespace Saxulum\ModelGenerator\DoctrineOrm;
 
 use PhpParser\Node;
+use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 
 interface TypeInterface
 {
     /**
-     * @param string $name
+     * @param FieldMappingInterface $fieldMapping
      * @return Node
      */
-    public function getPropertyNode($name);
+    public function getPropertyNode(FieldMappingInterface $fieldMapping);
 
     /**
-     * @param string $name
+     * @param FieldMappingInterface $fieldMapping
      * @return Node[]
      */
-    public function getMethodsNodes($name);
+    public function getMethodsNodes(FieldMappingInterface $fieldMapping);
 
     /**
-     * @param string $name
+     * @param FieldMappingInterface $fieldMapping
      * @return Node
      */
-    public function getMetadataNode($name);
+    public function getMetadataNode(FieldMappingInterface $fieldMapping);
 
     /**
      * @return string
