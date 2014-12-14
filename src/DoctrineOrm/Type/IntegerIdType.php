@@ -18,7 +18,7 @@ use Saxulum\ModelGenerator\PhpDoc\Documentor;
 use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
 use Saxulum\ModelGenerator\PhpDoc\VarRow;
 
-class IdType implements TypeInterface
+class IntegerIdType implements TypeInterface
 {
     /**
      * @param string $name
@@ -99,6 +99,6 @@ class IdType implements TypeInterface
      */
     public function getName()
     {
-        return 'id';
+        return 'integerid';
     }
 }
