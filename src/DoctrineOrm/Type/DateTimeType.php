@@ -2,12 +2,32 @@
 
 namespace Saxulum\ModelGenerator\DoctrineOrm\Type;
 
-class DateTimeType extends AbstractDateType
+use PhpParser\Node\Expr;
+use PhpParser\Node\Expr\ConstFetch;
+use PhpParser\Node\Name;
+
+class DateTimeType extends AbstractType
 {
+    /**
+     * @return null|Expr
+     */
+    protected function getSetterDefault()
+    {
+        return new ConstFetch(new Name('null'));
+    }
+
+    /**
+     * @return null|string|Name
+     */
+    protected function getSetterType()
+    {
+        return new Name('\DateTime');
+    }
+
     /**
      * @return string
      */
-    public function getDoctrineOrmPhpDocType()
+    public function getPhpDocType()
     {
         return '\DateTime';
     }
@@ -15,7 +35,7 @@ class DateTimeType extends AbstractDateType
     /**
      * @return string
      */
-    public function getDoctrineOrmType()
+    public function getOrmType()
     {
         return 'datetime';
     }

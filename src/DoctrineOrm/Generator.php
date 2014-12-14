@@ -79,7 +79,7 @@ class Generator implements GeneratorInterface
         $nodes = array();
         $nodes = array_merge($nodes, $this->generatePropertyNodes($modelMapping));
         $nodes = array_merge($nodes, $this->generateMethodNodes($modelMapping));
-        $nodes = array_merge($nodes, $this->generateDoctrineOrmMetadataNodes($modelMapping));
+        $nodes = array_merge($nodes, $this->generateMetadataNodes($modelMapping));
         $nodes = array(
             new Node\Stmt\Namespace_(new Name($abstractNamespace), array(
                 new Class_('Abstract' . $modelMapping->getName(), array('type' => 16, 'stmts' => $nodes)))
@@ -110,7 +110,7 @@ class Generator implements GeneratorInterface
      */
     protected function generatePropertyNodes(ModelMapping $modelMapping)
     {
-        return $this->generateNodes($modelMapping, 'getDoctrineOrmPropertyNodes');
+        return $this->generateNodes($modelMapping, 'getPropertyNode');
     }
 
     /**
@@ -120,7 +120,7 @@ class Generator implements GeneratorInterface
      */
     protected function generateMethodNodes(ModelMapping $modelMapping)
     {
-        return $this->generateNodes($modelMapping, 'getDoctrineOrmMethodNodes');
+        return $this->generateNodes($modelMapping, 'getMethodsNodes');
     }
 
     /**
@@ -128,7 +128,7 @@ class Generator implements GeneratorInterface
      * @return Node[]
      * @throws \Exception
      */
-    protected function generateDoctrineOrmMetadataNodes(ModelMapping $modelMapping)
+    protected function generateMetadataNodes(ModelMapping $modelMapping)
     {
         return array(
             new ClassMethod('loadMetadata',
@@ -144,7 +144,7 @@ class Generator implements GeneratorInterface
                             ))),
                             new MethodCall(new Variable('builder'), 'setMappedSuperClass')
                         ),
-                        $this->generateNodes($modelMapping, 'getDoctrineOrmMetadataNodes')
+                        $this->generateNodes($modelMapping, 'getMetadataNode')
                     )
                 ),
                 array(
@@ -178,7 +178,13 @@ class Generator implements GeneratorInterface
                 throw new \Exception("Can't call {$fieldMapping->getType()} method {$getterName}!");
             }
 
-            $fieldNodes = array_merge($fieldNodes, $type->$getterName($fieldMapping->getName()));
+            $nodes = $type->$getterName($fieldMapping->getName());
+
+            if (!is_array($nodes)) {
+                $nodes = array($nodes);
+            }
+
+            $fieldNodes = array_merge($fieldNodes, $nodes);
         }
 
         return $fieldNodes;

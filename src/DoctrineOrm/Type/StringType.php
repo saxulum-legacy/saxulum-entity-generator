@@ -2,12 +2,12 @@
 
 namespace Saxulum\ModelGenerator\DoctrineOrm\Type;
 
-class StringType extends AbstractSimpleType
+class StringType extends AbstractType
 {
     /**
      * @return string
      */
-    public function getDoctrineOrmPhpDocType()
+    public function getPhpDocType()
     {
         return 'string';
     }
@@ -15,7 +15,7 @@ class StringType extends AbstractSimpleType
     /**
      * @return string
      */
-    public function getDoctrineOrmType()
+    public function getOrmType()
     {
         return 'string';
     }

@@ -2,12 +2,12 @@
 
 namespace Saxulum\ModelGenerator\DoctrineOrm\Type;
 
-class DecimalType extends AbstractSimpleType
+class DecimalType extends AbstractType
 {
     /**
      * @return string
      */
-    public function getDoctrineOrmPhpDocType()
+    public function getPhpDocType()
     {
         return 'float';
     }
@@ -15,7 +15,7 @@ class DecimalType extends AbstractSimpleType
     /**
      * @return string
      */
-    public function getDoctrineOrmType()
+    public function getOrmType()
     {
         return 'decimal';
     }
