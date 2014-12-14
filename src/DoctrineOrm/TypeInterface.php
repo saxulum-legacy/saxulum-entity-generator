@@ -15,6 +15,12 @@ interface TypeInterface
 
     /**
      * @param FieldMappingInterface $fieldMapping
+     * @return Node|null
+     */
+    public function getConstructNode(FieldMappingInterface $fieldMapping);
+
+    /**
+     * @param FieldMappingInterface $fieldMapping
      * @return Node[]
      */
     public function getMethodsNodes(FieldMappingInterface $fieldMapping);

@@ -13,6 +13,8 @@ use Saxulum\ModelGenerator\DoctrineOrm\Type\DateType;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\DecimalType;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\IdType;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\ObjectType;
+use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\One2OneInverseSide;
+use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\One2OneOwningSide;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\SmallIntType;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\TextType;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\TimeType;
@@ -23,6 +25,8 @@ use Saxulum\ModelGenerator\Mapping\Field\DecimalFieldMapping;
 use Saxulum\ModelGenerator\Mapping\Field\IdFieldMapping;
 use Saxulum\ModelGenerator\Mapping\Field\IntegerFieldMapping;
 use Saxulum\ModelGenerator\Mapping\Field\ObjectFieldMapping;
+use Saxulum\ModelGenerator\Mapping\Field\Relation\One2OneInverseSideMapping;
+use Saxulum\ModelGenerator\Mapping\Field\Relation\One2OneOwningSideMapping;
 use Saxulum\ModelGenerator\Mapping\Field\StringFieldMapping;
 use Saxulum\ModelGenerator\Mapping\Field\TextFieldMapping;
 use Saxulum\ModelGenerator\Mapping\FieldMapping;
@@ -43,7 +47,9 @@ class DoctrineOrmGeneratorTest extends \PHPUnit_Framework_TestCase
             new IntegerType(),
             new ObjectType(),
             new StringType(),
-            new TextType()
+            new TextType(),
+            new One2OneOwningSide(),
+            new One2OneInverseSide()
         );
 
         $phpGenerator = new PhpGenerator();
@@ -59,6 +65,9 @@ class DoctrineOrmGeneratorTest extends \PHPUnit_Framework_TestCase
         $modelMapping->addField(new ObjectFieldMapping('object', '\stdClass'));
         $modelMapping->addField(new StringFieldMapping('string'));
         $modelMapping->addField(new TextFieldMapping('text'));
+        $modelMapping->addField(new One2OneOwningSideMapping('unidirectionalOne2One', '\Saxulum\Entity\Product'));
+        $modelMapping->addField(new One2OneOwningSideMapping('owningDidirectionalOne2One', '\Saxulum\Entity\Product', 'inverseDidirectionalOne2One'));
+        $modelMapping->addField(new One2OneInverseSideMapping('inverseDidirectionalOne2One', '\Saxulum\Entity\Product', 'owningDidirectionalOne2One'));
 
         $generator->generate($modelMapping);
     }

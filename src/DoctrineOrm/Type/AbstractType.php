@@ -50,9 +50,18 @@ abstract class AbstractType implements TypeInterface
 
     /**
      * @param FieldMappingInterface $fieldMapping
+     * @return Node
+     */
+    public function getConstructNode(FieldMappingInterface $fieldMapping)
+    {
+        return null;
+    }
+
+    /**
+     * @param FieldMappingInterface $fieldMapping
      * @return Node|null
      */
-    public function getSetterMethodNode(FieldMappingInterface $fieldMapping)
+    protected function getSetterMethodNode(FieldMappingInterface $fieldMapping)
     {
         $name = $fieldMapping->getName();
 
@@ -85,7 +94,7 @@ abstract class AbstractType implements TypeInterface
      * @param FieldMappingInterface $fieldMapping
      * @return Node
      */
-    public function getGetterMethodNode(FieldMappingInterface $fieldMapping)
+    protected function getGetterMethodNode(FieldMappingInterface $fieldMapping)
     {
         $name = $fieldMapping->getName();
 

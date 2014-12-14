@@ -13,12 +13,12 @@ class AAAATest extends \PHPUnit_Framework_TestCase
 {
     public function testSample()
     {
-        return;
+        //return;
         $parser = new Parser(new Lexer());
         $nodeDumper = new NodeDumper();
 
         try {
-            $stmts = $parser->parse("<?php class A { public function setDate(\\DateTime \$date = null) {}}");
+            $stmts = $parser->parse("<?php class A { public function setProduct(\\Saxulum\\Enity\\Product \$product = null, \$stopPropagation = false) {if(!\$stopPropagation){if(null !== \$this->product) { \$this->product->setProduct(null);}if(null !== \$product) { \$product->setProduct(\$this, true);} \$this->product = \$product;}}}");
 
             echo $nodeDumper->dump($stmts), "\n";
         } catch (Error $e) {
