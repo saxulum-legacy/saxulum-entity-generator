@@ -13,7 +13,7 @@ class AAAATest extends \PHPUnit_Framework_TestCase
 {
     public function testSample()
     {
-        //return;
+        return;
         $parser = new Parser(new Lexer());
         $nodeDumper = new NodeDumper();
 

@@ -45,7 +45,6 @@ class DoctrineOrmGeneratorTest extends \PHPUnit_Framework_TestCase
             new DecimalType(),
             new DateTimeType(),
             new IntegerType(),
-            new ObjectType(),
             new StringType(),
             new TextType(),
             new One2OneOwningSide(),
@@ -62,7 +61,6 @@ class DoctrineOrmGeneratorTest extends \PHPUnit_Framework_TestCase
         $modelMapping->addField(new DecimalFieldMapping('decimal'));
         $modelMapping->addField(new DateTimeFieldMapping('datetime'));
         $modelMapping->addField(new IntegerFieldMapping('integer'));
-        $modelMapping->addField(new ObjectFieldMapping('object', '\stdClass'));
         $modelMapping->addField(new StringFieldMapping('string'));
         $modelMapping->addField(new TextFieldMapping('text'));
         $modelMapping->addField(new One2OneOwningSideMapping('unidirectionalOne2One', '\Saxulum\Entity\Product'));
