@@ -21,7 +21,6 @@ use Saxulum\ModelGenerator\PhpDoc\ParamRow;
 
 class Generator implements GeneratorInterface
 {
-    const NAMESPACE_PART = 'Entity';
     const CLASS_ORM_METADATA = '\Doctrine\ORM\Mapping\ClassMetadata';
     const CLASS_ORM_METADATA_BUILDER = '\Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder';
 
@@ -57,27 +56,33 @@ class Generator implements GeneratorInterface
      */
     public function generate(ModelMapping $modelMapping)
     {
-        $baseNamespace = $modelMapping->getBaseNamespace() . '\\' . static::NAMESPACE_PART;
-        $basePath = $modelMapping->getBasePath() . DIRECTORY_SEPARATOR . static::NAMESPACE_PART;
-        if (!is_dir($basePath)) {
-            mkdir($basePath, 0777, true);
+        $namespace = $modelMapping->getBaseNamespace() . '\\' . $modelMapping->getEntityNamespacePart();
+        $abstractNamespace = $namespace . '\\Base';
+
+        $path = $modelMapping->getBasePath() . DIRECTORY_SEPARATOR . $modelMapping->getEntityNamespacePart();
+        if (!is_dir($path)) {
+            mkdir($path, 0777, true);
         }
 
+        $abstractPath = $path . DIRECTORY_SEPARATOR . 'Base';
+        if (!is_dir($abstractPath)) {
+            mkdir($abstractPath, 0777, true);
+        }
 
-        $baseClassPath = $basePath . DIRECTORY_SEPARATOR . 'Abstract' . $modelMapping->getName() . '.php';
+        $abstractClassPath = $abstractPath . DIRECTORY_SEPARATOR . 'Abstract' . $modelMapping->getName() . '.php';
 
         $nodes = array();
         $nodes = array_merge($nodes, $this->generatePropertyNodes($modelMapping));
         $nodes = array_merge($nodes, $this->generateMethodNodes($modelMapping));
         $nodes = array_merge($nodes, $this->generateDoctrineOrmMetadataNodes($modelMapping));
         $nodes = array(
-            new Node\Stmt\Namespace_(new Name($baseNamespace), array(
+            new Node\Stmt\Namespace_(new Name($abstractNamespace), array(
                 new Class_('Abstract' . $modelMapping->getName(), array('type' => 16, 'stmts' => $nodes)))
             )
         );
         $baseClassCode = $this->phpGenerator->prettyPrint($nodes);
 
-        file_put_contents($baseClassPath, '<?php' . PHP_EOL . PHP_EOL . $baseClassCode);
+        file_put_contents($abstractClassPath, '<?php' . PHP_EOL . PHP_EOL . $baseClassCode);
     }
 
     /**

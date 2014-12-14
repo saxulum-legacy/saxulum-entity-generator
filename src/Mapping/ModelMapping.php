@@ -25,11 +25,17 @@ class ModelMapping
     protected $fieldMappings;
 
     /**
+     * @var string
+     */
+    protected $entityNamespacePart;
+
+    /**
      * @param string $name
      * @param string $baseNamespace
      * @param string $basePath
+     * @param string $entityNamespacePart
      */
-    public function __construct($name, $baseNamespace, $basePath)
+    public function __construct($name, $baseNamespace, $basePath, $entityNamespacePart = 'Entity')
     {
         $this->name = $name;
         $this->baseNamespace = $baseNamespace;
@@ -39,6 +45,7 @@ class ModelMapping
         }
 
         $this->basePath = realpath($basePath);
+        $this->entityNamespacePart = $entityNamespacePart;
     }
 
     /**
@@ -82,5 +89,13 @@ class ModelMapping
     public function getFieldMappings()
     {
         return $this->fieldMappings;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEntityNamespacePart()
+    {
+        return $this->entityNamespacePart;
     }
 }
