@@ -4,26 +4,29 @@ namespace Saxulum\Tests\ModelGenerator;
 
 use PhpParser\PrettyPrinter\Standard as PhpGenerator;
 use Saxulum\ModelGenerator\DoctrineOrm\Generator;
+use Saxulum\ModelGenerator\DoctrineOrm\Type\IdType;
 use Saxulum\ModelGenerator\Mapping\FieldMapping;
 use Saxulum\ModelGenerator\Mapping\ModelMapping;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\IntegerType;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\TextType;
+use Saxulum\ModelGenerator\DoctrineOrm\Type\StringType;
 
 class DoctrineOrmGeneratorTest extends \PHPUnit_Framework_TestCase
 {
     public function testSimple()
     {
         $types = array(
+            new IdType(),
             new IntegerType(),
-            new TextType(),
+            new StringType(),
         );
 
         $phpGenerator = new PhpGenerator();
         $generator = new Generator($phpGenerator, $types);
 
         $modelMapping = new ModelMapping('Product', 'Saxulum', __DIR__ . '/../generated');
-        $modelMapping->addField(new FieldMapping('id', 'integer'));
-        $modelMapping->addField(new FieldMapping('name', 'text'));
+        $modelMapping->addField(new FieldMapping('id', 'id'));
+        $modelMapping->addField(new FieldMapping('name', 'string'));
+        $modelMapping->addField(new FieldMapping('value', 'integer'));
 
         $generator->generate($modelMapping);
     }

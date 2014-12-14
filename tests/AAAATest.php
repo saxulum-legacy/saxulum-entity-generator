@@ -13,12 +13,12 @@ class AAAATest extends \PHPUnit_Framework_TestCase
 {
     public function testSample()
     {
-        //return;
+        return;
         $parser = new Parser(new Lexer());
         $nodeDumper = new NodeDumper();
 
         try {
-            $stmts = $parser->parse("<?php namespace Saxulum\\Entity; abstract class Test { public static function loadMetadata(ClassMetadata \$metadata) {  \$builder = new Doctrine\\ORM\\Mapping\\Builder\\ClassMetadataBuilder(\$metadata);  \$builder->addField(\$name, 'string');}}");
+            $stmts = $parser->parse("<?php \$builder->createField('id', 'integer')->isPrimaryKey()->generatedValue()->build();");
 
             echo $nodeDumper->dump($stmts), "\n";
         } catch (Error $e) {

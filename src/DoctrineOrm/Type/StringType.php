@@ -2,7 +2,7 @@
 
 namespace Saxulum\ModelGenerator\DoctrineOrm\Type;
 
-class TextType extends AbstractSimpleType
+class StringType extends AbstractSimpleType
 {
     /**
      * @return string
@@ -25,6 +25,6 @@ class TextType extends AbstractSimpleType
      */
     public function getName()
     {
-        return 'text';
+        return 'string';
     }
 }

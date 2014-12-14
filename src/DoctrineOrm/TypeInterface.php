@@ -24,14 +24,4 @@ interface TypeInterface extends BaseTypeInterface
      * @return Node[]
      */
     public function getDoctrineOrmMetadataNodes($name);
-
-    /**
-     * @return string
-     */
-    public function getDoctrineOrmPhpDocType();
-
-    /**
-     * @return string
-     */
-    public function getDoctrineOrmType();
 }
