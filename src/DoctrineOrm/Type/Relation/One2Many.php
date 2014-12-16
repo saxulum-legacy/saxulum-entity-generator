@@ -18,6 +18,7 @@ use PhpParser\Node\Name;
 use PhpParser\Node\Param;
 use PhpParser\Node\Scalar\String;
 use PhpParser\Node\Stmt\ClassMethod;
+use PhpParser\Node\Stmt\Foreach_;
 use PhpParser\Node\Stmt\If_;
 use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\PropertyProperty;
@@ -83,102 +84,231 @@ class One2Many implements TypeInterface
             throw new \InvalidArgumentException('Field mapping has to be One2ManyMapping!');
         }
 
+        return array(
+            $this->getAddMethodNode($fieldMapping),
+            $this->getRemoveMethodNode($fieldMapping),
+            $this->getSetterMethodNode($fieldMapping),
+            $this->getGetterMethodNode($fieldMapping),
+        );
+    }
+
+    /**
+     * @param FieldMappingInterface $fieldMapping
+     * @return Node
+     */
+    protected function getAddMethodNode(FieldMappingInterface $fieldMapping)
+    {
+        if (!$fieldMapping instanceof One2ManyMapping) {
+            throw new \InvalidArgumentException('Field mapping has to be One2ManyMapping!');
+        }
+
         $name = $fieldMapping->getName();
         $singularName = StringUtil::singularify($name);
+        $targetModel = $fieldMapping->getTargetModel();
         $mappedBy = $fieldMapping->getMappedBy();
 
-        return array(
-            new ClassMethod('add' . ucfirst($singularName),
-                array(
-                    'type' => 1,
-                    'params' => array(
-                        new Param($singularName, new ConstFetch(new Name('null')), new Name($fieldMapping->getTargetModel())),
-                        new Param('stopPropagation', new ConstFetch(new Name('false')))
-                    ),
-                    'stmts' => array(
-                        new MethodCall(
-                            new PropertyFetch(new Variable('this'), $name),
-                            'add',
-                            array(
-                                new Arg(new Variable($singularName))
-                            )
-                        ),
-                        new Node\Stmt\If_(
-                            new Expr\BooleanNot(
-                                new Variable('stopPropagation')
-                            ),
-                            array(
-                                'stmts' => array(
-                                    new MethodCall(
-                                        new Variable($singularName),
-                                        'set' . ucfirst($mappedBy),
-                                        array(
-                                            new Arg(new Variable('this')),
-                                            new Arg(new ConstFetch(new Name('true')))
-                                        )
-                                    )
-                                ),
-                            )
-                        ),
-                        new Return_(new Variable('this'))
-                    )
+        return new ClassMethod('add' . ucfirst($singularName),
+            array(
+                'type' => 1,
+                'params' => array(
+                    new Param($singularName, new ConstFetch(new Name('null')), new Name($targetModel)),
+                    new Param('stopPropagation', new ConstFetch(new Name('false')))
                 ),
-                array(
-                    'comments' => array(
-                        new Comment(
-                            new Documentor(array(
-                                new ParamRow($fieldMapping->getTargetModel(), $singularName),
-                                new ParamRow('bool', 'stopPropagation'),
-                                new ReturnRow('$this')
-                            ))
+                'stmts' => array(
+                    new MethodCall(
+                        new PropertyFetch(new Variable('this'), $name),
+                        'add',
+                        array(
+                            new Arg(new Variable($singularName))
                         )
-                    )
+                    ),
+                    new Node\Stmt\If_(
+                        new Expr\BooleanNot(new Variable('stopPropagation')),
+                        array(
+                            'stmts' => array(
+                                new MethodCall(
+                                    new Variable($singularName),
+                                    'set' . ucfirst($mappedBy),
+                                    array(
+                                        new Arg(new Variable('this')),
+                                        new Arg(new ConstFetch(new Name('true')))
+                                    )
+                                )
+                            ),
+                        )
+                    ),
+                    new Return_(new Variable('this'))
                 )
             ),
-            new ClassMethod('remove' . ucfirst($singularName),
-                array(
-                    'type' => 1,
-                    'params' => array(
-                        new Param($singularName, new ConstFetch(new Name('null')), new Name($fieldMapping->getTargetModel())),
-                        new Param('stopPropagation', new ConstFetch(new Name('false')))
-                    ),
-                    'stmts' => array(
-                        new MethodCall(
-                            new PropertyFetch(new Variable('this'), $name),
-                            'removeElement',
-                            array(
-                                new Arg(new Variable($singularName))
-                            )
-                        ),
-                        new Node\Stmt\If_(
-                            new Expr\BooleanNot(
-                                new Variable('stopPropagation')
-                            ),
-                            array(
-                                'stmts' => array(
-                                    new MethodCall(
-                                        new Variable($singularName),
-                                        'set' . ucfirst($mappedBy),
-                                        array(
-                                            new Arg(new ConstFetch(new Name('null'))),
-                                            new Arg(new ConstFetch(new Name('true')))
-                                        )
-                                    )
-                                ),
-                            )
-                        ),
-                        new Return_(new Variable('this'))
+            array(
+                'comments' => array(
+                    new Comment(
+                        new Documentor(array(
+                            new ParamRow($targetModel, $singularName),
+                            new ParamRow('bool', 'stopPropagation'),
+                            new ReturnRow('$this')
+                        ))
                     )
+                )
+            )
+        );
+    }
+
+    /**
+     * @param FieldMappingInterface $fieldMapping
+     * @return Node
+     */
+    protected function getRemoveMethodNode(FieldMappingInterface $fieldMapping)
+    {
+        if (!$fieldMapping instanceof One2ManyMapping) {
+            throw new \InvalidArgumentException('Field mapping has to be One2ManyMapping!');
+        }
+
+        $name = $fieldMapping->getName();
+        $singularName = StringUtil::singularify($name);
+        $targetModel = $fieldMapping->getTargetModel();
+        $mappedBy = $fieldMapping->getMappedBy();
+
+        return new ClassMethod('remove' . ucfirst($singularName),
+            array(
+                'type' => 1,
+                'params' => array(
+                    new Param($singularName, new ConstFetch(new Name('null')), new Name($targetModel)),
+                    new Param('stopPropagation', new ConstFetch(new Name('false')))
                 ),
-                array(
-                    'comments' => array(
-                        new Comment(
-                            new Documentor(array(
-                                new ParamRow($fieldMapping->getTargetModel(), $singularName),
-                                new ParamRow('bool', 'stopPropagation'),
-                                new ReturnRow('$this')
-                            ))
+                'stmts' => array(
+                    new MethodCall(
+                        new PropertyFetch(new Variable('this'), $name),
+                        'removeElement',
+                        array(
+                            new Arg(new Variable($singularName))
                         )
+                    ),
+                    new Node\Stmt\If_(
+                        new Expr\BooleanNot(new Variable('stopPropagation')),
+                        array(
+                            'stmts' => array(
+                                new MethodCall(
+                                    new Variable($singularName),
+                                    'set' . ucfirst($mappedBy),
+                                    array(
+                                        new Arg(new ConstFetch(new Name('null'))),
+                                        new Arg(new ConstFetch(new Name('true')))
+                                    )
+                                )
+                            ),
+                        )
+                    ),
+                    new Return_(new Variable('this'))
+                )
+            ),
+            array(
+                'comments' => array(
+                    new Comment(
+                        new Documentor(array(
+                            new ParamRow($targetModel, $singularName),
+                            new ParamRow('bool', 'stopPropagation'),
+                            new ReturnRow('$this')
+                        ))
+                    )
+                )
+            )
+        );
+    }
+
+    /**
+     * @param FieldMappingInterface $fieldMapping
+     * @return Node
+     */
+    protected function getSetterMethodNode(FieldMappingInterface $fieldMapping)
+    {
+        if (!$fieldMapping instanceof One2ManyMapping) {
+            throw new \InvalidArgumentException('Field mapping has to be One2ManyMapping!');
+        }
+
+        $name = $fieldMapping->getName();
+        $singularName = StringUtil::singularify($name);
+        $targetModel = $fieldMapping->getTargetModel();
+
+        return new ClassMethod('set' . ucfirst($name),
+            array(
+                'type' => 1,
+                'params' => array(
+                    new Param($name)
+                ),
+                'stmts' => array(
+                    new Node\Stmt\Foreach_(
+                        new PropertyFetch(new Variable('this'), $name),
+                        new Variable($singularName),
+                        array(
+                            'stmts' => array(
+                                new MethodCall(
+                                    new Variable('this'),
+                                    'remove' . ucfirst($singularName),
+                                    array(
+                                        new Arg(new Variable($singularName))
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    new Node\Stmt\Foreach_(
+                        new Variable($name),
+                        new Variable($singularName),
+                        array(
+                            'stmts' => array(
+                                new MethodCall(
+                                    new Variable('this'),
+                                    'add' . ucfirst($singularName),
+                                    array(
+                                        new Arg(new Variable($singularName))
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    new Return_(new Variable('this'))
+                )
+            ),
+            array(
+                'comments' => array(
+                    new Comment(
+                        new Documentor(array(
+                            new ParamRow($targetModel . '[]|\Doctrine\Common\Collections\Collection', $name),
+                            new ReturnRow('$this')
+                        ))
+                    )
+                )
+            )
+        );
+    }
+
+    /**
+     * @param FieldMappingInterface $fieldMapping
+     * @return Node
+     */
+    protected function getGetterMethodNode(FieldMappingInterface $fieldMapping)
+    {
+        if (!$fieldMapping instanceof One2ManyMapping) {
+            throw new \InvalidArgumentException('Field mapping has to be One2ManyMapping!');
+        }
+
+        $name = $fieldMapping->getName();
+        $targetModel = $fieldMapping->getTargetModel();
+
+        return new ClassMethod('get' . ucfirst($name),
+            array(
+                'type' => 1,
+                'stmts' => array(
+                    new Return_(new PropertyFetch(new Variable('this'), $name))
+                )
+            ),
+            array(
+                'comments' => array(
+                    new Comment(
+                        new Documentor(array(
+                            new ReturnRow($targetModel . '[]|\Doctrine\Common\Collections\Collection')
+                        ))
                     )
                 )
             )
