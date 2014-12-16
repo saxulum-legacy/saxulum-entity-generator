@@ -14,10 +14,12 @@ use PhpParser\Node\Name;
 use PhpParser\Node\Param;
 use PhpParser\Node\Scalar\String;
 use PhpParser\Node\Stmt\ClassMethod;
+use PhpParser\Node\Stmt\Return_;
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\One2OneOwningSideMapping;
 use Saxulum\ModelGenerator\PhpDoc\Documentor;
 use Saxulum\ModelGenerator\PhpDoc\ParamRow;
+use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
 
 class One2OneOwningSide extends AbstractOne2One
 {
@@ -66,14 +68,16 @@ class One2OneOwningSide extends AbstractOne2One
                     new Assign(
                         new PropertyFetch(new Variable('this'), $name),
                         new Variable($name)
-                    )
+                    ),
+                    new Return_(new Variable('this'))
                 )
             ),
             array(
                 'comments' => array(
                     new Comment(
                         new Documentor(array(
-                            new ParamRow($fieldMapping->getTargetModel(), $name)
+                            new ParamRow($fieldMapping->getTargetModel(), $name),
+                            new ReturnRow('$this')
                         ))
                     )
                 )

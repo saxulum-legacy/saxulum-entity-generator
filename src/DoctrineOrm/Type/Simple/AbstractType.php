@@ -75,14 +75,16 @@ abstract class AbstractType implements TypeInterface
                     new Assign(
                         new PropertyFetch(new Variable('this'), $name),
                         new Variable($name)
-                    )
+                    ),
+                    new Return_(new Variable('this'))
                 )
             ),
             array(
                 'comments' => array(
                     new Comment(
                         new Documentor(array(
-                            new ParamRow($this->getPhpDocType($fieldMapping), $name)
+                            new ParamRow($this->getPhpDocType($fieldMapping), $name),
+                            new ReturnRow('$this')
                         ))
                     )
                 )

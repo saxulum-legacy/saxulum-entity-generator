@@ -136,7 +136,8 @@ abstract class AbstractOne2One implements TypeInterface
                     new Assign(
                         new PropertyFetch(new Variable('this'), $name),
                         new Variable($name)
-                    )
+                    ),
+                    new Return_(new Variable('this'))
                 )
             ),
             array(
@@ -144,7 +145,8 @@ abstract class AbstractOne2One implements TypeInterface
                     new Comment(
                         new Documentor(array(
                             new ParamRow($fieldMapping->getTargetModel(), $name),
-                            new ParamRow('bool', 'stopPropagation')
+                            new ParamRow('bool', 'stopPropagation'),
+                            new ReturnRow('$this')
                         ))
                     )
                 )
