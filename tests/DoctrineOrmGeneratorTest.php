@@ -3,6 +3,7 @@
 namespace Saxulum\Tests\ModelGenerator;
 
 use PhpParser\PrettyPrinter\Standard as PhpGenerator;
+use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\One2Many;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\One2OneInverseSide;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\One2OneOwningSide;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\ArrayType;
@@ -14,6 +15,7 @@ use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\IntegerType;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\StringType;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\TextType;
 use Saxulum\ModelGenerator\DoctrineOrmGenerator;
+use Saxulum\ModelGenerator\Mapping\Field\Relation\One2ManyMapping;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\One2OneInverseSideMapping;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\One2OneOwningSideMapping;
 use Saxulum\ModelGenerator\Mapping\Field\Simple\ArrayFieldMapping;
@@ -39,6 +41,7 @@ class DoctrineOrmGeneratorTest extends \PHPUnit_Framework_TestCase
             new IntegerType(),
             new StringType(),
             new TextType(),
+            new One2Many(),
             new One2OneOwningSide(),
             new One2OneInverseSide()
         );
@@ -55,6 +58,7 @@ class DoctrineOrmGeneratorTest extends \PHPUnit_Framework_TestCase
         $modelMapping->addField(new IntegerFieldMapping('integer'));
         $modelMapping->addField(new StringFieldMapping('string'));
         $modelMapping->addField(new TextFieldMapping('text'));
+        $modelMapping->addField(new One2ManyMapping('manies', '\Saxulum\Entity\Product', 'one'));
         $modelMapping->addField(new One2OneOwningSideMapping('unidirectionalOne2One', '\Saxulum\Entity\Product'));
         $modelMapping->addField(new One2OneOwningSideMapping('owningDidirectionalOne2One', '\Saxulum\Entity\Product', 'inverseDidirectionalOne2One'));
         $modelMapping->addField(new One2OneInverseSideMapping('inverseDidirectionalOne2One', '\Saxulum\Entity\Product', 'owningDidirectionalOne2One'));
