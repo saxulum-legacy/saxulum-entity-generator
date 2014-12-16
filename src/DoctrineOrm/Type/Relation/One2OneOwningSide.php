@@ -57,12 +57,13 @@ class One2OneOwningSide extends AbstractOne2One
         }
 
         $name = $fieldMapping->getName();
+        $targetModel = $fieldMapping->getTargetModel();
 
         return new ClassMethod('set' . ucfirst($name),
             array(
                 'type' => 1,
                 'params' => array(
-                    new Param($fieldMapping->getName(), new ConstFetch(new Name('null')), new Name($fieldMapping->getTargetModel()))
+                    new Param($fieldMapping->getName(), new ConstFetch(new Name('null')), new Name($targetModel))
                 ),
                 'stmts' => array(
                     new Assign(
@@ -76,7 +77,7 @@ class One2OneOwningSide extends AbstractOne2One
                 'comments' => array(
                     new Comment(
                         new Documentor(array(
-                            new ParamRow($fieldMapping->getTargetModel(), $name),
+                            new ParamRow($targetModel, $name),
                             new ReturnRow('$this')
                         ))
                     )

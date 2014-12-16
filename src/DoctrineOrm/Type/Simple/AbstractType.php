@@ -69,7 +69,7 @@ abstract class AbstractType implements TypeInterface
             array(
                 'type' => 1,
                 'params' => array(
-                    new Param($fieldMapping->getName(), $this->getSetterDefault($fieldMapping), $this->getSetterType($fieldMapping))
+                    new Param($name, $this->getSetterDefault($fieldMapping), $this->getSetterType($fieldMapping))
                 ),
                 'stmts' => array(
                     new Assign(

@@ -79,12 +79,13 @@ abstract class AbstractOne2One implements TypeInterface
         }
 
         $name = $fieldMapping->getName();
+        $targetModel = $fieldMapping->getTargetModel();
 
         return new ClassMethod('set' . ucfirst($name),
             array(
                 'type' => 1,
                 'params' => array(
-                    new Param($fieldMapping->getName(), new ConstFetch(new Name('null')), new Name($fieldMapping->getTargetModel())),
+                    new Param($name, new ConstFetch(new Name('null')), new Name($targetModel)),
                     new Param('stopPropagation', new ConstFetch(new Name('false')))
                 ),
                 'stmts' => array(
@@ -144,7 +145,7 @@ abstract class AbstractOne2One implements TypeInterface
                 'comments' => array(
                     new Comment(
                         new Documentor(array(
-                            new ParamRow($fieldMapping->getTargetModel(), $name),
+                            new ParamRow($targetModel, $name),
                             new ParamRow('bool', 'stopPropagation'),
                             new ReturnRow('$this')
                         ))
@@ -165,6 +166,7 @@ abstract class AbstractOne2One implements TypeInterface
         }
 
         $name = $fieldMapping->getName();
+        $targetModel = $fieldMapping->getTargetModel();
 
         return new ClassMethod('get' . ucfirst($name),
             array(
@@ -177,7 +179,7 @@ abstract class AbstractOne2One implements TypeInterface
                 'comments' => array(
                     new Comment(
                         new Documentor(array(
-                            new ReturnRow(new Name($fieldMapping->getTargetModel()))
+                            new ReturnRow(new Name($targetModel))
                         ))
                     )
                 )
