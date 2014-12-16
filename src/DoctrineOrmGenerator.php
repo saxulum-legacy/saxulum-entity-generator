@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator\DoctrineOrm;
+namespace Saxulum\ModelGenerator;
 
 use PhpParser\Comment;
 use PhpParser\Node;
@@ -15,12 +15,12 @@ use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\PrettyPrinter\Standard as PhpGenerator;
-use Saxulum\ModelGenerator\GeneratorInterface;
+use Saxulum\ModelGenerator\DoctrineOrm\TypeInterface;
 use Saxulum\ModelGenerator\Mapping\ModelMapping;
 use Saxulum\ModelGenerator\PhpDoc\Documentor;
 use Saxulum\ModelGenerator\PhpDoc\ParamRow;
 
-class Generator implements GeneratorInterface
+class DoctrineOrmGenerator implements GeneratorInterface
 {
     const CLASS_ORM_METADATA = '\Doctrine\ORM\Mapping\ClassMetadata';
     const CLASS_ORM_METADATA_BUILDER = '\Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder';
@@ -54,14 +54,15 @@ class Generator implements GeneratorInterface
 
     /**
      * @param ModelMapping $modelMapping
+     * @param string $namespace
+     * @param string $path
      * @param bool $override
+     * @return void
      */
-    public function generate(ModelMapping $modelMapping, $override = false)
+    public function generate(ModelMapping $modelMapping, $namespace, $path, $override = false)
     {
-        $namespace = $modelMapping->getBaseNamespace() . '\\' . $modelMapping->getEntityNamespacePart();
         $abstractNamespace = $namespace . '\\Base';
 
-        $path = $modelMapping->getBasePath() . DIRECTORY_SEPARATOR . $modelMapping->getEntityNamespacePart();
         if (!is_dir($path)) {
             mkdir($path, 0777, true);
         }

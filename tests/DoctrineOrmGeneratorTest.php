@@ -3,7 +3,6 @@
 namespace Saxulum\Tests\ModelGenerator;
 
 use PhpParser\PrettyPrinter\Standard as PhpGenerator;
-use Saxulum\ModelGenerator\DoctrineOrm\Generator;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\One2OneInverseSide;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\One2OneOwningSide;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\ArrayType;
@@ -14,6 +13,7 @@ use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\IdType;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\IntegerType;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\StringType;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\TextType;
+use Saxulum\ModelGenerator\DoctrineOrmGenerator;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\One2OneInverseSideMapping;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\One2OneOwningSideMapping;
 use Saxulum\ModelGenerator\Mapping\Field\Simple\ArrayFieldMapping;
@@ -44,9 +44,9 @@ class DoctrineOrmGeneratorTest extends \PHPUnit_Framework_TestCase
         );
 
         $phpGenerator = new PhpGenerator();
-        $generator = new Generator($phpGenerator, $types);
+        $generator = new DoctrineOrmGenerator($phpGenerator, $types);
 
-        $modelMapping = new ModelMapping('Product', 'Saxulum', __DIR__ . '/../generated');
+        $modelMapping = new ModelMapping('Product');
         $modelMapping->addField(new IdFieldMapping('id'));
         $modelMapping->addField(new ArrayFieldMapping('array'));
         $modelMapping->addField(new BooleanFieldMapping('bool'));
@@ -59,6 +59,6 @@ class DoctrineOrmGeneratorTest extends \PHPUnit_Framework_TestCase
         $modelMapping->addField(new One2OneOwningSideMapping('owningDidirectionalOne2One', '\Saxulum\Entity\Product', 'inverseDidirectionalOne2One'));
         $modelMapping->addField(new One2OneInverseSideMapping('inverseDidirectionalOne2One', '\Saxulum\Entity\Product', 'owningDidirectionalOne2One'));
 
-        $generator->generate($modelMapping);
+        $generator->generate($modelMapping, 'Saxulum\Entity', __DIR__ . '/../generated/Entity');
     }
 }
