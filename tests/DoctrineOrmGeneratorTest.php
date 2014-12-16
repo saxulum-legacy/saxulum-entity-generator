@@ -59,6 +59,6 @@ class DoctrineOrmGeneratorTest extends \PHPUnit_Framework_TestCase
         $modelMapping->addField(new One2OneOwningSideMapping('owningDidirectionalOne2One', '\Saxulum\Entity\Product', 'inverseDidirectionalOne2One'));
         $modelMapping->addField(new One2OneInverseSideMapping('inverseDidirectionalOne2One', '\Saxulum\Entity\Product', 'owningDidirectionalOne2One'));
 
-        $generator->generate($modelMapping, 'Saxulum\Entity', __DIR__ . '/../generated/Entity');
+        $generator->generate($modelMapping, 'Saxulum\Entity', __DIR__ . '/../generated/Saxulum/Entity');
     }
 }
