@@ -40,7 +40,7 @@ class One2OneInverseSide extends AbstractOne2One
 
         return new MethodCall(new Variable('builder'), 'addInverseOneToOne', array(
             new Arg(new String($fieldMapping->getName())),
-            new Arg(new String($fieldMapping->getTargetClass())),
+            new Arg(new String($fieldMapping->getTargetModel())),
             new Arg(new String($fieldMapping->getMappedBy()))
         ));
     }

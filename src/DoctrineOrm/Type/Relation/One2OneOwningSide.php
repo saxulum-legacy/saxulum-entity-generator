@@ -60,7 +60,7 @@ class One2OneOwningSide extends AbstractOne2One
             array(
                 'type' => 1,
                 'params' => array(
-                    new Param($fieldMapping->getName(), new ConstFetch(new Name('null')), new Name($fieldMapping->getTargetClass()))
+                    new Param($fieldMapping->getName(), new ConstFetch(new Name('null')), new Name($fieldMapping->getTargetModel()))
                 ),
                 'stmts' => array(
                     new Assign(
@@ -73,7 +73,7 @@ class One2OneOwningSide extends AbstractOne2One
                 'comments' => array(
                     new Comment(
                         new Documentor(array(
-                            new ParamRow($fieldMapping->getTargetClass(), $name)
+                            new ParamRow($fieldMapping->getTargetModel(), $name)
                         ))
                     )
                 )
@@ -94,13 +94,13 @@ class One2OneOwningSide extends AbstractOne2One
         if (null === $fieldMapping->getInversedBy()) {
             return new MethodCall(new Variable('builder'), 'addOwningOneToOne', array(
                 new Arg(new String($fieldMapping->getName())),
-                new Arg(new String($fieldMapping->getTargetClass()))
+                new Arg(new String($fieldMapping->getTargetModel()))
             ));
         }
 
         return new MethodCall(new Variable('builder'), 'addOwningOneToOne', array(
             new Arg(new String($fieldMapping->getName())),
-            new Arg(new String($fieldMapping->getTargetClass())),
+            new Arg(new String($fieldMapping->getTargetModel())),
             new Arg(new String($fieldMapping->getInversedBy()))
         ));
     }

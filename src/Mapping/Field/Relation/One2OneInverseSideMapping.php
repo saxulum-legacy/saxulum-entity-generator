@@ -11,12 +11,12 @@ class One2OneInverseSideMapping extends AbstractOne2OneMapping
 
     /**
      * @param string $name
-     * @param string $targetClass
+     * @param string $targetModel
      * @param string $mappedBy
      */
-    public function __construct($name, $targetClass, $mappedBy)
+    public function __construct($name, $targetModel, $mappedBy)
     {
-        parent::__construct($name, $targetClass);
+        parent::__construct($name, $targetModel);
         $this->mappedBy = $mappedBy;
     }
 

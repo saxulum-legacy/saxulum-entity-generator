@@ -9,23 +9,23 @@ abstract class AbstractOne2OneMapping extends AbstractFieldMapping
     /**
      * @var string
      */
-    protected $targetClass;
+    protected $targetModel;
 
     /**
      * @param string $name
-     * @param string $targetClass
+     * @param string $targetModel
      */
-    public function __construct($name, $targetClass)
+    public function __construct($name, $targetModel)
     {
         parent::__construct($name);
-        $this->targetClass = $targetClass;
+        $this->targetModel = $targetModel;
     }
 
     /**
      * @return string
      */
-    public function getTargetClass()
+    public function getTargetModel()
     {
-        return $this->targetClass;
+        return $this->targetModel;
     }
 }
