@@ -33,7 +33,7 @@ class One2OneOwningSide extends AbstractOne2One
             throw new \InvalidArgumentException('Field mapping has to be One2OneOwningSideMapping!');
         }
 
-        if (null === $fieldMapping->getInversedBy()) {
+        if (null === $inversedBy = $fieldMapping->getInversedBy()) {
             return array(
                 $this->getUnidirectionalSetterMethodNode($fieldMapping),
                 $this->getGetterMethodNode($fieldMapping)
@@ -41,7 +41,7 @@ class One2OneOwningSide extends AbstractOne2One
         }
 
         return array(
-            $this->getBidiretionalSetterMethodNode($fieldMapping, $fieldMapping->getInversedBy()),
+            $this->getBidiretionalSetterMethodNode($fieldMapping, $inversedBy),
             $this->getGetterMethodNode($fieldMapping)
         );
     }
