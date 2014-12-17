@@ -24,22 +24,24 @@ class IdType extends AbstractType
 
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @return Node
+     * @return Node[]
      */
-    public function getMetadataNode(FieldMappingInterface $fieldMapping)
+    public function getMetadataNodes(FieldMappingInterface $fieldMapping)
     {
-        return new MethodCall(
+        return array(
             new MethodCall(
                 new MethodCall(
-                    new MethodCall(new Variable('builder'), 'createField', array(
-                        new Arg(new String($fieldMapping->getName())),
-                        new Arg(new String('integer'))
-                    )),
-                    'isPrimaryKey'
+                    new MethodCall(
+                        new MethodCall(new Variable('builder'), 'createField', array(
+                            new Arg(new String($fieldMapping->getName())),
+                            new Arg(new String('integer'))
+                        )),
+                        'isPrimaryKey'
+                    ),
+                    'generatedValue'
                 ),
-                'generatedValue'
-            ),
-            'build'
+                'build'
+            )
         );
     }
 

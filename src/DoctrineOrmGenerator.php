@@ -79,6 +79,7 @@ class DoctrineOrmGenerator implements GeneratorInterface
 
         $nodes = array();
         $nodes = array_merge($nodes, $this->generatePropertyNodes($modelMapping));
+        $nodes = array_merge($nodes, $this->generateConstructNodes($modelMapping));
         $nodes = array_merge($nodes, $this->generateMethodNodes($modelMapping));
         $nodes = array_merge($nodes, $this->generateMetadataNodes($modelMapping));
         $nodes = array(
@@ -111,7 +112,24 @@ class DoctrineOrmGenerator implements GeneratorInterface
      */
     protected function generatePropertyNodes(ModelMapping $modelMapping)
     {
-        return $this->generateNodes($modelMapping, 'getPropertyNode');
+        return $this->generateNodes($modelMapping, 'getPropertyNodes');
+    }
+
+    /**
+     * @param ModelMapping $modelMapping
+     * @return Node[]
+     * @throws \Exception
+     */
+    protected function generateConstructNodes(ModelMapping $modelMapping)
+    {
+        return array(
+            new ClassMethod('__construct',
+                array(
+                    'type' => 1,
+                    'stmts' => $this->generateNodes($modelMapping, 'getConstructNodes')
+                )
+            )
+        );
     }
 
     /**
@@ -145,7 +163,7 @@ class DoctrineOrmGenerator implements GeneratorInterface
                             ))),
                             new MethodCall(new Variable('builder'), 'setMappedSuperClass')
                         ),
-                        $this->generateNodes($modelMapping, 'getMetadataNode')
+                        $this->generateNodes($modelMapping, 'getMetadataNodes')
                     )
                 ),
                 array(
@@ -180,11 +198,6 @@ class DoctrineOrmGenerator implements GeneratorInterface
             }
 
             $nodes = $type->$getterName($fieldMapping);
-
-            if (!is_array($nodes)) {
-                $nodes = array($nodes);
-            }
-
             $fieldNodes = array_merge($fieldNodes, $nodes);
         }
 

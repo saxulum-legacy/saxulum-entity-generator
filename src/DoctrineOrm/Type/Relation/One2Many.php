@@ -38,24 +38,26 @@ class One2Many implements TypeInterface
 {
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @return Node
+     * @return Node[]
      */
-    public function getPropertyNode(FieldMappingInterface $fieldMapping)
+    public function getPropertyNodes(FieldMappingInterface $fieldMapping)
     {
         if (!$fieldMapping instanceof One2ManyMapping) {
             throw new \InvalidArgumentException('Field mapping has to be One2ManyMapping!');
         }
 
-        return new Property(2,
-            array(
-                new PropertyProperty($fieldMapping->getName())
-            ),
-            array(
-                'comments' => array(
-                    new Comment(
-                        new Documentor(array(
-                            new VarRow($fieldMapping->getTargetModel() . '[]|\Doctrine\Common\Collections\Collection')
-                        ))
+        return array(
+            new Property(2,
+                array(
+                    new PropertyProperty($fieldMapping->getName())
+                ),
+                array(
+                    'comments' => array(
+                        new Comment(
+                            new Documentor(array(
+                                new VarRow($fieldMapping->getTargetModel() . '[]|\Doctrine\Common\Collections\Collection')
+                            ))
+                        )
                     )
                 )
             )
@@ -64,13 +66,15 @@ class One2Many implements TypeInterface
 
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @return Node|null
+     * @return Node[]
      */
-    public function getConstructNode(FieldMappingInterface $fieldMapping)
+    public function getConstructNodes(FieldMappingInterface $fieldMapping)
     {
-        return new Assign(
-            new PropertyFetch(new Variable('this')),
-            new New_(new Name('\Doctrine\Common\Collections\ArrayCollection'))
+        return array(
+            new Assign(
+                new PropertyFetch(new Variable('this'), $fieldMapping->getName()),
+                new New_(new Name('\Doctrine\Common\Collections\ArrayCollection'))
+            )
         );
     }
 
@@ -317,19 +321,21 @@ class One2Many implements TypeInterface
 
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @return Node
+     * @return Node[]
      */
-    public function getMetadataNode(FieldMappingInterface $fieldMapping)
+    public function getMetadataNodes(FieldMappingInterface $fieldMapping)
     {
         if (!$fieldMapping instanceof One2ManyMapping) {
             throw new \InvalidArgumentException('Field mapping has to be One2ManyMapping!');
         }
 
-        return new MethodCall(new Variable('builder'), 'addOneToMany', array(
-            new Arg(new String($fieldMapping->getName())),
-            new Arg(new String($fieldMapping->getTargetModel())),
-            new Arg(new String($fieldMapping->getMappedBy()))
-        ));
+        return array(
+            new MethodCall(new Variable('builder'), 'addOneToMany', array(
+                new Arg(new String($fieldMapping->getName())),
+                new Arg(new String($fieldMapping->getTargetModel())),
+                new Arg(new String($fieldMapping->getMappedBy()))
+            ))
+        );
     }
 
     /**

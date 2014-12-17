@@ -88,26 +88,30 @@ class One2OneOwningSide extends AbstractOne2One
 
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @return Node
+     * @return Node[]
      */
-    public function getMetadataNode(FieldMappingInterface $fieldMapping)
+    public function getMetadataNodes(FieldMappingInterface $fieldMapping)
     {
         if (!$fieldMapping instanceof One2OneOwningSideMapping) {
             throw new \InvalidArgumentException('Field mapping has to be One2OneOwningSideMapping!');
         }
 
         if (null === $fieldMapping->getInversedBy()) {
-            return new MethodCall(new Variable('builder'), 'addOwningOneToOne', array(
-                new Arg(new String($fieldMapping->getName())),
-                new Arg(new String($fieldMapping->getTargetModel()))
-            ));
+            return array(
+                new MethodCall(new Variable('builder'), 'addOwningOneToOne', array(
+                    new Arg(new String($fieldMapping->getName())),
+                    new Arg(new String($fieldMapping->getTargetModel()))
+                ))
+            );
         }
 
-        return new MethodCall(new Variable('builder'), 'addOwningOneToOne', array(
-            new Arg(new String($fieldMapping->getName())),
-            new Arg(new String($fieldMapping->getTargetModel())),
-            new Arg(new String($fieldMapping->getInversedBy()))
-        ));
+        return array(
+            new MethodCall(new Variable('builder'), 'addOwningOneToOne', array(
+                new Arg(new String($fieldMapping->getName())),
+                new Arg(new String($fieldMapping->getTargetModel())),
+                new Arg(new String($fieldMapping->getInversedBy()))
+            ))
+        );
     }
 
     /**

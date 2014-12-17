@@ -34,24 +34,26 @@ abstract class AbstractOne2One implements TypeInterface
 {
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @return Node
+     * @return Node[]
      */
-    public function getPropertyNode(FieldMappingInterface $fieldMapping)
+    public function getPropertyNodes(FieldMappingInterface $fieldMapping)
     {
         if (!$fieldMapping instanceof AbstractOne2OneMapping) {
             throw new \InvalidArgumentException('Field mapping has to be AbstractOne2OneMapping!');
         }
 
-        return new Property(2,
-            array(
-                new PropertyProperty($fieldMapping->getName())
-            ),
-            array(
-                'comments' => array(
-                    new Comment(
-                        new Documentor(array(
-                            new VarRow($fieldMapping->getTargetModel())
-                        ))
+        return array(
+            new Property(2,
+                array(
+                    new PropertyProperty($fieldMapping->getName())
+                ),
+                array(
+                    'comments' => array(
+                        new Comment(
+                            new Documentor(array(
+                                new VarRow($fieldMapping->getTargetModel())
+                            ))
+                        )
                     )
                 )
             )
@@ -60,11 +62,11 @@ abstract class AbstractOne2One implements TypeInterface
 
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @return Node|null
+     * @return Node[]
      */
-    public function getConstructNode(FieldMappingInterface $fieldMapping)
+    public function getConstructNodes(FieldMappingInterface $fieldMapping)
     {
-        return null;
+        return array();
     }
 
     /**

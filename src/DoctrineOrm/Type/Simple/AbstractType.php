@@ -28,20 +28,22 @@ abstract class AbstractType implements TypeInterface
 {
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @return Node
+     * @return Node[]
      */
-    public function getPropertyNode(FieldMappingInterface $fieldMapping)
+    public function getPropertyNodes(FieldMappingInterface $fieldMapping)
     {
-        return new Property(2,
-            array(
-                new PropertyProperty($fieldMapping->getName())
-            ),
-            array(
-                'comments' => array(
-                    new Comment(
-                        new Documentor(array(
-                            new VarRow($this->getPhpDocType($fieldMapping))
-                        ))
+        return array(
+            new Property(2,
+                array(
+                    new PropertyProperty($fieldMapping->getName())
+                ),
+                array(
+                    'comments' => array(
+                        new Comment(
+                            new Documentor(array(
+                                new VarRow($this->getPhpDocType($fieldMapping))
+                            ))
+                        )
                     )
                 )
             )
@@ -50,11 +52,11 @@ abstract class AbstractType implements TypeInterface
 
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @return Node
+     * @return Node[]
      */
-    public function getConstructNode(FieldMappingInterface $fieldMapping)
+    public function getConstructNodes(FieldMappingInterface $fieldMapping)
     {
-        return null;
+        return array();
     }
 
     /**
@@ -121,14 +123,16 @@ abstract class AbstractType implements TypeInterface
 
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @return Node
+     * @return Node[]
      */
-    public function getMetadataNode(FieldMappingInterface $fieldMapping)
+    public function getMetadataNodes(FieldMappingInterface $fieldMapping)
     {
-        return new MethodCall(new Variable('builder'), 'addField', array(
-            new Arg(new String($fieldMapping->getName())),
-            new Arg(new String($this->getOrmType()))
-        ));
+        return array(
+            new MethodCall(new Variable('builder'), 'addField', array(
+                new Arg(new String($fieldMapping->getName())),
+                new Arg(new String($this->getOrmType()))
+            ))
+        );
     }
 
     /**

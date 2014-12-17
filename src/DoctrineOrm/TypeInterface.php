@@ -9,15 +9,15 @@ interface TypeInterface
 {
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @return Node
+     * @return Node[]
      */
-    public function getPropertyNode(FieldMappingInterface $fieldMapping);
+    public function getPropertyNodes(FieldMappingInterface $fieldMapping);
 
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @return Node|null
+     * @return Node[]
      */
-    public function getConstructNode(FieldMappingInterface $fieldMapping);
+    public function getConstructNodes(FieldMappingInterface $fieldMapping);
 
     /**
      * @param FieldMappingInterface $fieldMapping
@@ -27,9 +27,9 @@ interface TypeInterface
 
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @return Node
+     * @return Node[]
      */
-    public function getMetadataNode(FieldMappingInterface $fieldMapping);
+    public function getMetadataNodes(FieldMappingInterface $fieldMapping);
 
     /**
      * @return string

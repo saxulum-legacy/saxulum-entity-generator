@@ -30,19 +30,21 @@ class One2OneInverseSide extends AbstractOne2One
 
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @return Node
+     * @return Node[]
      */
-    public function getMetadataNode(FieldMappingInterface $fieldMapping)
+    public function getMetadataNodes(FieldMappingInterface $fieldMapping)
     {
         if (!$fieldMapping instanceof One2OneInverseSideMapping) {
             throw new \InvalidArgumentException('Field mapping has to be One2OneInverseSideMapping!');
         }
 
-        return new MethodCall(new Variable('builder'), 'addInverseOneToOne', array(
-            new Arg(new String($fieldMapping->getName())),
-            new Arg(new String($fieldMapping->getTargetModel())),
-            new Arg(new String($fieldMapping->getMappedBy()))
-        ));
+        return array(
+            new MethodCall(new Variable('builder'), 'addInverseOneToOne', array(
+                new Arg(new String($fieldMapping->getName())),
+                new Arg(new String($fieldMapping->getTargetModel())),
+                new Arg(new String($fieldMapping->getMappedBy()))
+            ))
+        );
     }
 
     /**
