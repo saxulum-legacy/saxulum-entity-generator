@@ -122,11 +122,17 @@ class DoctrineOrmGenerator implements GeneratorInterface
      */
     protected function generateConstructNodes(ModelMapping $modelMapping)
     {
+        $constructNodes = $this->generateNodes($modelMapping, 'getConstructNodes');
+
+        if(0 === count($constructNodes)) {
+            return array();
+        }
+
         return array(
             new ClassMethod('__construct',
                 array(
                     'type' => 1,
-                    'stmts' => $this->generateNodes($modelMapping, 'getConstructNodes')
+                    'stmts' => $constructNodes
                 )
             )
         );
