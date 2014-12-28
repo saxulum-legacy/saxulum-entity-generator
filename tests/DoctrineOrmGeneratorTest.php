@@ -3,6 +3,8 @@
 namespace Saxulum\Tests\ModelGenerator;
 
 use PhpParser\PrettyPrinter\Standard as PhpGenerator;
+use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\Many2ManyInverseSide;
+use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\Many2ManyOwningSide;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\Many2One;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\One2Many;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\One2OneInverseSide;
@@ -16,6 +18,8 @@ use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\IntegerType;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\StringType;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\TextType;
 use Saxulum\ModelGenerator\DoctrineOrmGenerator;
+use Saxulum\ModelGenerator\Mapping\Field\Relation\Many2ManyInverseSideMapping;
+use Saxulum\ModelGenerator\Mapping\Field\Relation\Many2ManyOwningSideMapping;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\Many2OneMapping;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\One2ManyMapping;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\One2OneInverseSideMapping;
@@ -44,6 +48,8 @@ class DoctrineOrmGeneratorTest extends \PHPUnit_Framework_TestCase
             new StringType(),
             new TextType(),
             new Many2One(),
+            new Many2ManyOwningSide(),
+            new Many2ManyInverseSide(),
             new One2Many(),
             new One2OneOwningSide(),
             new One2OneInverseSide(),
@@ -62,12 +68,15 @@ class DoctrineOrmGeneratorTest extends \PHPUnit_Framework_TestCase
         $modelMapping->addField(new IntegerFieldMapping('integer'));
         $modelMapping->addField(new StringFieldMapping('string'));
         $modelMapping->addField(new TextFieldMapping('text'));
-        $modelMapping->addField(new One2ManyMapping('manies', '\Saxulum\Entity\Product', 'one'));
-        $modelMapping->addField(new Many2OneMapping('one', '\Saxulum\Entity\Product', 'manies'));
+        $modelMapping->addField(new Many2ManyOwningSideMapping('unidirectionalMany2Manies', '\Saxulum\Entity\Product'));
+        $modelMapping->addField(new Many2ManyOwningSideMapping('owningBidirectionalMany2Manies', '\Saxulum\Entity\Product', 'inverseBidirectionalMany2Manies'));
+        $modelMapping->addField(new Many2ManyInverseSideMapping('inverseBidirectionalMany2Manies', '\Saxulum\Entity\Product', 'owningBidirectionalMany2Manies'));
         $modelMapping->addField(new Many2OneMapping('unidirectionalMany2One', '\Saxulum\Entity\Product'));
+        $modelMapping->addField(new Many2OneMapping('one', '\Saxulum\Entity\Product', 'manies'));
+        $modelMapping->addField(new One2ManyMapping('manies', '\Saxulum\Entity\Product', 'one'));
         $modelMapping->addField(new One2OneOwningSideMapping('unidirectionalOne2One', '\Saxulum\Entity\Product'));
-        $modelMapping->addField(new One2OneOwningSideMapping('owningDidirectionalOne2One', '\Saxulum\Entity\Product', 'inverseDidirectionalOne2One'));
-        $modelMapping->addField(new One2OneInverseSideMapping('inverseDidirectionalOne2One', '\Saxulum\Entity\Product', 'owningDidirectionalOne2One'));
+        $modelMapping->addField(new One2OneOwningSideMapping('owningBidirectionalOne2One', '\Saxulum\Entity\Product', 'inverseBidirectionalOne2One'));
+        $modelMapping->addField(new One2OneInverseSideMapping('inverseBidirectionalOne2One', '\Saxulum\Entity\Product', 'owningBidirectionalOne2One'));
 
         $generator->generate($modelMapping, 'Saxulum\Entity', __DIR__ . '/../generated/Saxulum/Entity');
     }
