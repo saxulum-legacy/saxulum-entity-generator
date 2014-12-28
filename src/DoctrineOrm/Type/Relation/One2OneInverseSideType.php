@@ -10,7 +10,7 @@ use PhpParser\Node\Scalar\String;
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\One2OneInverseSideMapping;
 
-class One2OneInverseSide extends AbstractOne2One
+class One2OneInverseSideType extends AbstractOne2OneType
 {
     /**
      * @param FieldMappingInterface $fieldMapping

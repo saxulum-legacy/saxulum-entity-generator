@@ -3,12 +3,12 @@
 namespace Saxulum\Tests\ModelGenerator;
 
 use PhpParser\PrettyPrinter\Standard as PhpGenerator;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\Many2ManyInverseSide;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\Many2ManyOwningSide;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\Many2One;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\One2Many;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\One2OneInverseSide;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\One2OneOwningSide;
+use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\Many2ManyInverseSideType;
+use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\Many2ManyOwningSideType;
+use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\Many2OneType;
+use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\One2ManyType;
+use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\One2OneInverseSideType;
+use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\One2OneOwningSideType;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\ArrayType;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\BooleanType;
 use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\DateTimeType;
@@ -47,12 +47,12 @@ class DoctrineOrmGeneratorTest extends \PHPUnit_Framework_TestCase
             new IntegerType(),
             new StringType(),
             new TextType(),
-            new Many2One(),
-            new Many2ManyOwningSide(),
-            new Many2ManyInverseSide(),
-            new One2Many(),
-            new One2OneOwningSide(),
-            new One2OneInverseSide(),
+            new Many2OneType(),
+            new Many2ManyOwningSideType(),
+            new Many2ManyInverseSideType(),
+            new One2ManyType(),
+            new One2OneOwningSideType(),
+            new One2OneInverseSideType(),
 
         );
 

@@ -22,7 +22,7 @@ use Saxulum\ModelGenerator\PhpDoc\ParamRow;
 use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
 use Saxulum\ModelGenerator\Helper\StringUtil;
 
-class Many2ManyOwningSide extends AbstractMany2Many
+class Many2ManyOwningSideType extends AbstractMany2ManyType
 {
     /**
      * @param FieldMappingInterface $fieldMapping

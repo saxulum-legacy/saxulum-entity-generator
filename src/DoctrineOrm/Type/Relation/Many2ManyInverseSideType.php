@@ -10,7 +10,7 @@ use PhpParser\Node\Scalar\String;
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\Many2ManyInverseSideMapping;
 
-class Many2ManyInverseSide extends AbstractMany2Many
+class Many2ManyInverseSideType extends AbstractMany2ManyType
 {
     /**
      * @param FieldMappingInterface $fieldMapping

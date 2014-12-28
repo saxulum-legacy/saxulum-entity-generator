@@ -21,7 +21,7 @@ use Saxulum\ModelGenerator\PhpDoc\Documentor;
 use Saxulum\ModelGenerator\PhpDoc\ParamRow;
 use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
 
-class One2OneOwningSide extends AbstractOne2One
+class One2OneOwningSideType extends AbstractOne2OneType
 {
     /**
      * @param FieldMappingInterface $fieldMapping

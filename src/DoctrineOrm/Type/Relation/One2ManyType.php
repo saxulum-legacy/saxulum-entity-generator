@@ -24,14 +24,14 @@ use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\PropertyProperty;
 use PhpParser\Node\Stmt\Return_;
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
-use Saxulum\ModelGenerator\Mapping\Field\Relation\AbstractMany2ManyMapping;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\AbstractRelationMapping;
+use Saxulum\ModelGenerator\Mapping\Field\Relation\One2ManyMapping;
 use Saxulum\ModelGenerator\PhpDoc\Documentor;
 use Saxulum\ModelGenerator\PhpDoc\ParamRow;
 use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
 use Saxulum\ModelGenerator\Helper\StringUtil;
 
-abstract class AbstractMany2Many extends Abstract2ManyRelationType
+class One2ManyType extends Abstract2ManyRelationType
 {
     /**
      * @param AbstractRelationMapping $fieldMapping
@@ -44,20 +44,40 @@ abstract class AbstractMany2Many extends Abstract2ManyRelationType
 
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @param string $relatedName
+     * @return Node[]
+     */
+    public function getMethodsNodes(FieldMappingInterface $fieldMapping)
+    {
+        if (!$fieldMapping instanceof One2ManyMapping) {
+            throw new \InvalidArgumentException('Field mapping has to be One2ManyMapping!');
+        }
+
+        return array(
+            $this->getAddMethodNode($fieldMapping),
+            $this->getRemoveMethodNode($fieldMapping),
+            $this->getSetterMethodNode($fieldMapping),
+            $this->getGetterMethodNode(
+                $fieldMapping->getName(),
+                $fieldMapping->getTargetModel() . '[]|\Doctrine\Common\Collections\Collection'
+            )
+        );
+    }
+
+    /**
+     * @param FieldMappingInterface $fieldMapping
      * @return Node
      */
-    protected function getBidiretionalAddMethodNode(FieldMappingInterface $fieldMapping, $relatedName)
+    protected function getAddMethodNode(FieldMappingInterface $fieldMapping)
     {
-        if (!$fieldMapping instanceof AbstractRelationMapping) {
-            throw new \InvalidArgumentException('Field mapping has to be AbstractRelationMapping!');
+        if (!$fieldMapping instanceof One2ManyMapping) {
+            throw new \InvalidArgumentException('Field mapping has to be One2ManyMapping!');
         }
 
         return $this->getBidiretionalMethodNode(
             $fieldMapping,
-            $relatedName,
+            $fieldMapping->getMappedBy(),
             'add',
-            'add',
+            'set',
             'add',
             new Arg(new Variable('this'))
         );
@@ -65,22 +85,21 @@ abstract class AbstractMany2Many extends Abstract2ManyRelationType
 
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @param string $relatedName
      * @return Node
      */
-    protected function getBidiretionalRemoveMethodNode(FieldMappingInterface $fieldMapping, $relatedName)
+    protected function getRemoveMethodNode(FieldMappingInterface $fieldMapping)
     {
-        if (!$fieldMapping instanceof AbstractRelationMapping) {
-            throw new \InvalidArgumentException('Field mapping has to be AbstractRelationMapping!');
+        if (!$fieldMapping instanceof One2ManyMapping) {
+            throw new \InvalidArgumentException('Field mapping has to be One2ManyMapping!');
         }
 
         return $this->getBidiretionalMethodNode(
             $fieldMapping,
-            $relatedName,
+            $fieldMapping->getMappedBy(),
             'remove',
-            'remove',
+            'set',
             'removeElement',
-            new Arg(new Variable('this'))
+            new Arg(new ConstFetch(new Name('null')))
         );
     }
 
@@ -88,10 +107,10 @@ abstract class AbstractMany2Many extends Abstract2ManyRelationType
      * @param FieldMappingInterface $fieldMapping
      * @return Node
      */
-    protected function getBidiretionalSetterMethodNode(FieldMappingInterface $fieldMapping)
+    protected function getSetterMethodNode(FieldMappingInterface $fieldMapping)
     {
-        if (!$fieldMapping instanceof AbstractMany2ManyMapping) {
-            throw new \InvalidArgumentException('Field mapping has to be AbstractMany2ManyMapping!');
+        if (!$fieldMapping instanceof One2ManyMapping) {
+            throw new \InvalidArgumentException('Field mapping has to be One2ManyMapping!');
         }
 
         $name = $fieldMapping->getName();
@@ -149,5 +168,32 @@ abstract class AbstractMany2Many extends Abstract2ManyRelationType
                 )
             )
         );
+    }
+
+    /**
+     * @param FieldMappingInterface $fieldMapping
+     * @return Node[]
+     */
+    public function getMetadataNodes(FieldMappingInterface $fieldMapping)
+    {
+        if (!$fieldMapping instanceof One2ManyMapping) {
+            throw new \InvalidArgumentException('Field mapping has to be One2ManyMapping!');
+        }
+
+        return array(
+            new MethodCall(new Variable('builder'), 'addOneToMany', array(
+                new Arg(new String($fieldMapping->getName())),
+                new Arg(new String($fieldMapping->getTargetModel())),
+                new Arg(new String($fieldMapping->getMappedBy()))
+            ))
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'one2many';
     }
 }

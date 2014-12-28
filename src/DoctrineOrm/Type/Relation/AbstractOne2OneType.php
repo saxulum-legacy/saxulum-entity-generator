@@ -6,7 +6,7 @@ use PhpParser\Node;
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\AbstractRelationMapping;
 
-abstract class AbstractOne2One extends Abstract2OneRelationType
+abstract class AbstractOne2OneType extends Abstract2OneRelationType
 {
     /**
      * @param AbstractRelationMapping $fieldMapping

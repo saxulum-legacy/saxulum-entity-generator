@@ -31,7 +31,7 @@ use Saxulum\ModelGenerator\PhpDoc\ParamRow;
 use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
 use Saxulum\ModelGenerator\Helper\StringUtil;
 
-class Many2One extends Abstract2OneRelationType
+class Many2OneType extends Abstract2OneRelationType
 {
     /**
      * @param AbstractRelationMapping $fieldMapping
