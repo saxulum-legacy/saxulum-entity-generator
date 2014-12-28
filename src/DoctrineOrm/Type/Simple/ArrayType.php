@@ -10,7 +10,7 @@ class ArrayType extends AbstractType
 {
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @return null|string|Name
+     * @return null|string
      */
     protected function getSetterType(FieldMappingInterface $fieldMapping)
     {
