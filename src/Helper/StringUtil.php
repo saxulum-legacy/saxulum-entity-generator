@@ -14,7 +14,7 @@ class StringUtil
     {
         $singular = OrigStringUtil::singularify($plural);
 
-        if(is_array($singular)) {
+        if (is_array($singular)) {
             return reset($singular);
         }
 
