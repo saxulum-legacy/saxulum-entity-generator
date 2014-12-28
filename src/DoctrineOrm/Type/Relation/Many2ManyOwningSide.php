@@ -39,7 +39,10 @@ class Many2ManyOwningSide extends AbstractMany2Many
                 $this->getUnidirectionalAddMethodNode($fieldMapping),
                 $this->getUnidirectionalRemoveMethodNode($fieldMapping),
                 $this->getUnidirectionalSetterMethodNode($fieldMapping),
-                $this->getGetterMethodNode($fieldMapping)
+                $this->getGetterMethodNode(
+                    $fieldMapping->getName(),
+                    $fieldMapping->getTargetModel() . '[]|\Doctrine\Common\Collections\Collection'
+                )
             );
         }
 
@@ -47,7 +50,10 @@ class Many2ManyOwningSide extends AbstractMany2Many
             $this->getBidiretionalAddMethodNode($fieldMapping, $inversedBy),
             $this->getBidiretionalRemoveMethodNode($fieldMapping, $inversedBy),
             $this->getBidiretionalSetterMethodNode($fieldMapping),
-            $this->getGetterMethodNode($fieldMapping)
+            $this->getGetterMethodNode(
+                $fieldMapping->getName(),
+                $fieldMapping->getTargetModel() . '[]|\Doctrine\Common\Collections\Collection'
+            )
         );
     }
 

@@ -23,7 +23,6 @@ use PhpParser\Node\Stmt\If_;
 use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\PropertyProperty;
 use PhpParser\Node\Stmt\Return_;
-use Saxulum\ModelGenerator\DoctrineOrm\TypeInterface;
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\AbstractMany2ManyMapping;
 use Saxulum\ModelGenerator\PhpDoc\Documentor;
@@ -32,7 +31,7 @@ use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
 use Saxulum\ModelGenerator\PhpDoc\VarRow;
 use Saxulum\ModelGenerator\Helper\StringUtil;
 
-abstract class AbstractMany2Many implements TypeInterface
+abstract class AbstractMany2Many extends AbstractRelationType
 {
     /**
      * @param FieldMappingInterface $fieldMapping
@@ -262,38 +261,6 @@ abstract class AbstractMany2Many implements TypeInterface
                         new Documentor(array(
                             new ParamRow($targetModel . '[]|\Doctrine\Common\Collections\Collection', $name),
                             new ReturnRow('$this')
-                        ))
-                    )
-                )
-            )
-        );
-    }
-
-    /**
-     * @param FieldMappingInterface $fieldMapping
-     * @return Node
-     */
-    protected function getGetterMethodNode(FieldMappingInterface $fieldMapping)
-    {
-        if (!$fieldMapping instanceof AbstractMany2ManyMapping) {
-            throw new \InvalidArgumentException('Field mapping has to be AbstractMany2ManyMapping!');
-        }
-
-        $name = $fieldMapping->getName();
-        $targetModel = $fieldMapping->getTargetModel();
-
-        return new ClassMethod('get' . ucfirst($name),
-            array(
-                'type' => 1,
-                'stmts' => array(
-                    new Return_(new PropertyFetch(new Variable('this'), $name))
-                )
-            ),
-            array(
-                'comments' => array(
-                    new Comment(
-                        new Documentor(array(
-                            new ReturnRow($targetModel . '[]|\Doctrine\Common\Collections\Collection')
                         ))
                     )
                 )

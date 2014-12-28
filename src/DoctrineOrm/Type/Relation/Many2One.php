@@ -23,7 +23,6 @@ use PhpParser\Node\Stmt\If_;
 use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\PropertyProperty;
 use PhpParser\Node\Stmt\Return_;
-use Saxulum\ModelGenerator\DoctrineOrm\TypeInterface;
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\Many2OneMapping;
 use Saxulum\ModelGenerator\PhpDoc\Documentor;
@@ -32,7 +31,7 @@ use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
 use Saxulum\ModelGenerator\PhpDoc\VarRow;
 use Saxulum\ModelGenerator\Helper\StringUtil;
 
-class Many2One implements TypeInterface
+class Many2One extends AbstractRelationType
 {
     /**
      * @param FieldMappingInterface $fieldMapping
@@ -84,13 +83,13 @@ class Many2One implements TypeInterface
         if (null === $inversedBy = $fieldMapping->getInversedBy()) {
             return array(
                 $this->getUnidirectionalSetterMethodNode($fieldMapping),
-                $this->getGetterMethodNode($fieldMapping)
+                $this->getGetterMethodNode($fieldMapping->getName(), $fieldMapping->getTargetModel())
             );
         }
 
         return array(
             $this->getBidiretionalSetterMethodNode($fieldMapping, $inversedBy),
-            $this->getGetterMethodNode($fieldMapping)
+            $this->getGetterMethodNode($fieldMapping->getName(), $fieldMapping->getTargetModel())
         );
     }
 
@@ -227,38 +226,6 @@ class Many2One implements TypeInterface
                             new ParamRow($targetModel, $name),
                             new ParamRow('bool', 'stopPropagation'),
                             new ReturnRow('$this')
-                        ))
-                    )
-                )
-            )
-        );
-    }
-
-    /**
-     * @param FieldMappingInterface $fieldMapping
-     * @return Node
-     */
-    protected function getGetterMethodNode(FieldMappingInterface $fieldMapping)
-    {
-        if (!$fieldMapping instanceof Many2OneMapping) {
-            throw new \InvalidArgumentException('Field mapping has to be Many2OneMapping!');
-        }
-
-        $name = $fieldMapping->getName();
-        $targetModel = $fieldMapping->getTargetModel();
-
-        return new ClassMethod('get' . ucfirst($name),
-            array(
-                'type' => 1,
-                'stmts' => array(
-                    new Return_(new PropertyFetch(new Variable('this'), $name))
-                )
-            ),
-            array(
-                'comments' => array(
-                    new Comment(
-                        new Documentor(array(
-                            new ReturnRow($targetModel)
                         ))
                     )
                 )

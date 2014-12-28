@@ -36,13 +36,13 @@ class One2OneOwningSide extends AbstractOne2One
         if (null === $inversedBy = $fieldMapping->getInversedBy()) {
             return array(
                 $this->getUnidirectionalSetterMethodNode($fieldMapping),
-                $this->getGetterMethodNode($fieldMapping)
+                $this->getGetterMethodNode($fieldMapping->getName(), $fieldMapping->getTargetModel())
             );
         }
 
         return array(
             $this->getBidiretionalSetterMethodNode($fieldMapping, $inversedBy),
-            $this->getGetterMethodNode($fieldMapping)
+            $this->getGetterMethodNode($fieldMapping->getName(), $fieldMapping->getTargetModel())
         );
     }
 
