@@ -168,14 +168,14 @@ class Many2One implements TypeInterface
                     new Param('stopPropagation', new ConstFetch(new Name('false')))
                 ),
                 'stmts' => array(
-                    new Node\Stmt\If_(
-                        new Expr\BooleanNot(
+                    new If_(
+                        new BooleanNot(
                             new Variable('stopPropagation')
                         ),
                         array(
                             'stmts' => array(
-                                new Node\Stmt\If_(
-                                    new Expr\BinaryOp\NotIdentical(
+                                new If_(
+                                    new NotIdentical(
                                         new ConstFetch(new Name('null')),
                                         new PropertyFetch(new Variable('this'), $name)
                                     ),
@@ -192,8 +192,8 @@ class Many2One implements TypeInterface
                                         )
                                     )
                                 ),
-                                new Node\Stmt\If_(
-                                    new Expr\BinaryOp\NotIdentical(
+                                new If_(
+                                    new NotIdentical(
                                         new ConstFetch(new Name('null')),
                                         new Variable($name)
                                     ),

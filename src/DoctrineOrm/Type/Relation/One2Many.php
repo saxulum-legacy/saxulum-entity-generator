@@ -115,7 +115,7 @@ class One2Many implements TypeInterface
             array(
                 'type' => 1,
                 'params' => array(
-                    new Param($singularName, new ConstFetch(new Name('null')), new Name($targetModel)),
+                    new Param($singularName, null, new Name($targetModel)),
                     new Param('stopPropagation', new ConstFetch(new Name('false')))
                 ),
                 'stmts' => array(
@@ -126,8 +126,8 @@ class One2Many implements TypeInterface
                             new Arg(new Variable($singularName))
                         )
                     ),
-                    new Node\Stmt\If_(
-                        new Expr\BooleanNot(new Variable('stopPropagation')),
+                    new If_(
+                        new BooleanNot(new Variable('stopPropagation')),
                         array(
                             'stmts' => array(
                                 new MethodCall(
@@ -177,7 +177,7 @@ class One2Many implements TypeInterface
             array(
                 'type' => 1,
                 'params' => array(
-                    new Param($singularName, new ConstFetch(new Name('null')), new Name($targetModel)),
+                    new Param($singularName, null, new Name($targetModel)),
                     new Param('stopPropagation', new ConstFetch(new Name('false')))
                 ),
                 'stmts' => array(
@@ -188,8 +188,8 @@ class One2Many implements TypeInterface
                             new Arg(new Variable($singularName))
                         )
                     ),
-                    new Node\Stmt\If_(
-                        new Expr\BooleanNot(new Variable('stopPropagation')),
+                    new If_(
+                        new BooleanNot(new Variable('stopPropagation')),
                         array(
                             'stmts' => array(
                                 new MethodCall(
@@ -241,7 +241,7 @@ class One2Many implements TypeInterface
                     new Param($name)
                 ),
                 'stmts' => array(
-                    new Node\Stmt\Foreach_(
+                    new Foreach_(
                         new PropertyFetch(new Variable('this'), $name),
                         new Variable($singularName),
                         array(
@@ -256,7 +256,7 @@ class One2Many implements TypeInterface
                             )
                         )
                     ),
-                    new Node\Stmt\Foreach_(
+                    new Foreach_(
                         new Variable($name),
                         new Variable($singularName),
                         array(
