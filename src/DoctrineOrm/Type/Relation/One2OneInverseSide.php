@@ -23,7 +23,7 @@ class One2OneInverseSide extends AbstractOne2One
         }
 
         return array(
-            $this->getBidiretionalSetterMethodNode($fieldMapping, $fieldMapping->getMappedBy()),
+            $this->getBidiretionalSetterMethodNode($fieldMapping, $fieldMapping->getMappedBy(), 'set', 'set'),
             $this->getGetterMethodNode($fieldMapping->getName(), $fieldMapping->getTargetModel())
         );
     }
