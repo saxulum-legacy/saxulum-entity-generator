@@ -124,7 +124,7 @@ class DoctrineOrmGenerator implements GeneratorInterface
     {
         $constructNodes = $this->generateNodes($modelMapping, 'getConstructNodes');
 
-        if(0 === count($constructNodes)) {
+        if (0 === count($constructNodes)) {
             return array();
         }
 
