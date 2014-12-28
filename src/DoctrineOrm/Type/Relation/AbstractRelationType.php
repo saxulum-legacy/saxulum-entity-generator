@@ -55,6 +55,7 @@ abstract class AbstractRelationType implements TypeInterface
 
     /**
      * @param string $returnString
+     * @param string $name
      * @return Node
      */
     protected function getGetterMethodNode($name, $returnString)
