@@ -73,55 +73,13 @@ class One2Many extends Abstract2ManyRelationType
             throw new \InvalidArgumentException('Field mapping has to be One2ManyMapping!');
         }
 
-        $name = $fieldMapping->getName();
-        $singularName = StringUtil::singularify($name);
-        $targetModel = $fieldMapping->getTargetModel();
-        $mappedBy = $fieldMapping->getMappedBy();
-
-        return new ClassMethod('add' . ucfirst($singularName),
-            array(
-                'type' => 1,
-                'params' => array(
-                    new Param($singularName, null, new Name($targetModel)),
-                    new Param('stopPropagation', new ConstFetch(new Name('false')))
-                ),
-                'stmts' => array(
-                    new MethodCall(
-                        new PropertyFetch(new Variable('this'), $name),
-                        'add',
-                        array(
-                            new Arg(new Variable($singularName))
-                        )
-                    ),
-                    new If_(
-                        new BooleanNot(new Variable('stopPropagation')),
-                        array(
-                            'stmts' => array(
-                                new MethodCall(
-                                    new Variable($singularName),
-                                    'set' . ucfirst($mappedBy),
-                                    array(
-                                        new Arg(new Variable('this')),
-                                        new Arg(new ConstFetch(new Name('true')))
-                                    )
-                                )
-                            ),
-                        )
-                    ),
-                    new Return_(new Variable('this'))
-                )
-            ),
-            array(
-                'comments' => array(
-                    new Comment(
-                        new Documentor(array(
-                            new ParamRow($targetModel, $singularName),
-                            new ParamRow('bool', 'stopPropagation'),
-                            new ReturnRow('$this')
-                        ))
-                    )
-                )
-            )
+        return $this->getBidiretionalMethodNode(
+            $fieldMapping,
+            $fieldMapping->getMappedBy(),
+            'add',
+            'set',
+            'add',
+            new Arg(new Variable('this'))
         );
     }
 
@@ -135,55 +93,13 @@ class One2Many extends Abstract2ManyRelationType
             throw new \InvalidArgumentException('Field mapping has to be One2ManyMapping!');
         }
 
-        $name = $fieldMapping->getName();
-        $singularName = StringUtil::singularify($name);
-        $targetModel = $fieldMapping->getTargetModel();
-        $mappedBy = $fieldMapping->getMappedBy();
-
-        return new ClassMethod('remove' . ucfirst($singularName),
-            array(
-                'type' => 1,
-                'params' => array(
-                    new Param($singularName, null, new Name($targetModel)),
-                    new Param('stopPropagation', new ConstFetch(new Name('false')))
-                ),
-                'stmts' => array(
-                    new MethodCall(
-                        new PropertyFetch(new Variable('this'), $name),
-                        'removeElement',
-                        array(
-                            new Arg(new Variable($singularName))
-                        )
-                    ),
-                    new If_(
-                        new BooleanNot(new Variable('stopPropagation')),
-                        array(
-                            'stmts' => array(
-                                new MethodCall(
-                                    new Variable($singularName),
-                                    'set' . ucfirst($mappedBy),
-                                    array(
-                                        new Arg(new ConstFetch(new Name('null'))),
-                                        new Arg(new ConstFetch(new Name('true')))
-                                    )
-                                )
-                            ),
-                        )
-                    ),
-                    new Return_(new Variable('this'))
-                )
-            ),
-            array(
-                'comments' => array(
-                    new Comment(
-                        new Documentor(array(
-                            new ParamRow($targetModel, $singularName),
-                            new ParamRow('bool', 'stopPropagation'),
-                            new ReturnRow('$this')
-                        ))
-                    )
-                )
-            )
+        return $this->getBidiretionalMethodNode(
+            $fieldMapping,
+            $fieldMapping->getMappedBy(),
+            'remove',
+            'set',
+            'removeElement',
+            new Arg(new ConstFetch(new Name('null')))
         );
     }
 

@@ -49,59 +49,17 @@ abstract class AbstractMany2Many extends Abstract2ManyRelationType
      */
     protected function getBidiretionalAddMethodNode(FieldMappingInterface $fieldMapping, $relatedName)
     {
-        if (!$fieldMapping instanceof AbstractMany2ManyMapping) {
-            throw new \InvalidArgumentException('Field mapping has to be AbstractMany2ManyMapping!');
+        if (!$fieldMapping instanceof AbstractRelationMapping) {
+            throw new \InvalidArgumentException('Field mapping has to be AbstractRelationMapping!');
         }
 
-        $name = $fieldMapping->getName();
-        $singularName = StringUtil::singularify($name);
-        $singularRelatedName = StringUtil::singularify($relatedName);
-        $targetModel = $fieldMapping->getTargetModel();
-
-        return new ClassMethod('add' . ucfirst($singularName),
-            array(
-                'type' => 1,
-                'params' => array(
-                    new Param($singularName, null, new Name($targetModel)),
-                    new Param('stopPropagation', new ConstFetch(new Name('false')))
-                ),
-                'stmts' => array(
-                    new MethodCall(
-                        new PropertyFetch(new Variable('this'), $name),
-                        'add',
-                        array(
-                            new Arg(new Variable($singularName))
-                        )
-                    ),
-                    new If_(
-                        new BooleanNot(new Variable('stopPropagation')),
-                        array(
-                            'stmts' => array(
-                                new MethodCall(
-                                    new Variable($singularName),
-                                    'add' . ucfirst($singularRelatedName),
-                                    array(
-                                        new Arg(new Variable('this')),
-                                        new Arg(new ConstFetch(new Name('true')))
-                                    )
-                                )
-                            ),
-                        )
-                    ),
-                    new Return_(new Variable('this'))
-                )
-            ),
-            array(
-                'comments' => array(
-                    new Comment(
-                        new Documentor(array(
-                            new ParamRow($targetModel, $singularName),
-                            new ParamRow('bool', 'stopPropagation'),
-                            new ReturnRow('$this')
-                        ))
-                    )
-                )
-            )
+        return $this->getBidiretionalMethodNode(
+            $fieldMapping,
+            $relatedName,
+            'add',
+            'add',
+            'add',
+            new Arg(new Variable('this'))
         );
     }
 
@@ -112,59 +70,17 @@ abstract class AbstractMany2Many extends Abstract2ManyRelationType
      */
     protected function getBidiretionalRemoveMethodNode(FieldMappingInterface $fieldMapping, $relatedName)
     {
-        if (!$fieldMapping instanceof AbstractMany2ManyMapping) {
-            throw new \InvalidArgumentException('Field mapping has to be AbstractMany2ManyMapping!');
+        if (!$fieldMapping instanceof AbstractRelationMapping) {
+            throw new \InvalidArgumentException('Field mapping has to be AbstractRelationMapping!');
         }
 
-        $name = $fieldMapping->getName();
-        $singularName = StringUtil::singularify($name);
-        $singularRelatedName = StringUtil::singularify($relatedName);
-        $targetModel = $fieldMapping->getTargetModel();
-
-        return new ClassMethod('remove' . ucfirst($singularName),
-            array(
-                'type' => 1,
-                'params' => array(
-                    new Param($singularName, null, new Name($targetModel)),
-                    new Param('stopPropagation', new ConstFetch(new Name('false')))
-                ),
-                'stmts' => array(
-                    new MethodCall(
-                        new PropertyFetch(new Variable('this'), $name),
-                        'removeElement',
-                        array(
-                            new Arg(new Variable($singularName))
-                        )
-                    ),
-                    new If_(
-                        new BooleanNot(new Variable('stopPropagation')),
-                        array(
-                            'stmts' => array(
-                                new MethodCall(
-                                    new Variable($singularName),
-                                    'remove' . ucfirst($singularRelatedName),
-                                    array(
-                                        new Arg(new Variable('this')),
-                                        new Arg(new ConstFetch(new Name('true')))
-                                    )
-                                )
-                            ),
-                        )
-                    ),
-                    new Return_(new Variable('this'))
-                )
-            ),
-            array(
-                'comments' => array(
-                    new Comment(
-                        new Documentor(array(
-                            new ParamRow($targetModel, $singularName),
-                            new ParamRow('bool', 'stopPropagation'),
-                            new ReturnRow('$this')
-                        ))
-                    )
-                )
-            )
+        return $this->getBidiretionalMethodNode(
+            $fieldMapping,
+            $relatedName,
+            'remove',
+            'remove',
+            'removeElement',
+            new Arg(new Variable('this'))
         );
     }
 
