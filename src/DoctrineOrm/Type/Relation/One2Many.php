@@ -24,41 +24,22 @@ use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\PropertyProperty;
 use PhpParser\Node\Stmt\Return_;
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
+use Saxulum\ModelGenerator\Mapping\Field\Relation\AbstractRelationMapping;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\One2ManyMapping;
 use Saxulum\ModelGenerator\PhpDoc\Documentor;
 use Saxulum\ModelGenerator\PhpDoc\ParamRow;
 use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
-use Saxulum\ModelGenerator\PhpDoc\VarRow;
 use Saxulum\ModelGenerator\Helper\StringUtil;
 
 class One2Many extends Abstract2ManyRelationType
 {
     /**
-     * @param FieldMappingInterface $fieldMapping
-     * @return Node[]
+     * @param AbstractRelationMapping $fieldMapping
+     * @return string
      */
-    public function getPropertyNodes(FieldMappingInterface $fieldMapping)
+    protected function getVarString(AbstractRelationMapping $fieldMapping)
     {
-        if (!$fieldMapping instanceof One2ManyMapping) {
-            throw new \InvalidArgumentException('Field mapping has to be One2ManyMapping!');
-        }
-
-        return array(
-            new Property(2,
-                array(
-                    new PropertyProperty($fieldMapping->getName())
-                ),
-                array(
-                    'comments' => array(
-                        new Comment(
-                            new Documentor(array(
-                                new VarRow($fieldMapping->getTargetModel() . '[]|\Doctrine\Common\Collections\Collection')
-                            ))
-                        )
-                    )
-                )
-            )
-        );
+        return $fieldMapping->getTargetModel() . '[]|\Doctrine\Common\Collections\Collection';
     }
 
     /**
