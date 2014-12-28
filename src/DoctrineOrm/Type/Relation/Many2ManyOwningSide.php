@@ -20,7 +20,7 @@ use Saxulum\ModelGenerator\Mapping\Field\Relation\Many2ManyOwningSideMapping;
 use Saxulum\ModelGenerator\PhpDoc\Documentor;
 use Saxulum\ModelGenerator\PhpDoc\ParamRow;
 use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
-use Symfony\Component\PropertyAccess\StringUtil;
+use Saxulum\ModelGenerator\Helper\StringUtil;
 
 class Many2ManyOwningSide extends AbstractMany2Many
 {

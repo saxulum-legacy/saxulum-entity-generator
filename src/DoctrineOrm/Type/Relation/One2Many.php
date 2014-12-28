@@ -32,7 +32,7 @@ use Saxulum\ModelGenerator\PhpDoc\Documentor;
 use Saxulum\ModelGenerator\PhpDoc\ParamRow;
 use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
 use Saxulum\ModelGenerator\PhpDoc\VarRow;
-use Symfony\Component\PropertyAccess\StringUtil;
+use Saxulum\ModelGenerator\Helper\StringUtil;
 
 class One2Many implements TypeInterface
 {
