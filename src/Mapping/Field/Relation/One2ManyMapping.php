@@ -2,15 +2,8 @@
 
 namespace Saxulum\ModelGenerator\Mapping\Field\Relation;
 
-use Saxulum\ModelGenerator\Mapping\Field\AbstractFieldMapping;
-
-class One2ManyMapping extends AbstractFieldMapping
+class One2ManyMapping extends AbstractRelationMapping
 {
-    /**
-     * @var string
-     */
-    protected $targetModel;
-
     /**
      * @var string
      */
@@ -23,17 +16,8 @@ class One2ManyMapping extends AbstractFieldMapping
      */
     public function __construct($name, $targetModel, $mappedBy)
     {
-        parent::__construct($name);
-        $this->targetModel = $targetModel;
+        parent::__construct($name, $targetModel);
         $this->mappedBy = $mappedBy;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTargetModel()
-    {
-        return $this->targetModel;
     }
 
     /**
