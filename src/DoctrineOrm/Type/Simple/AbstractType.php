@@ -156,19 +156,17 @@ abstract class AbstractType implements TypeInterface
     }
 
     /**
-     * @param FieldMappingInterface $fieldMapping
      * @return null|Expr
      */
-    protected function getSetterDefault(FieldMappingInterface $fieldMapping)
+    protected function getSetterDefault()
     {
         return null;
     }
 
     /**
-     * @param FieldMappingInterface $fieldMapping
-     * @return null|string|Name
+     * @return null|string
      */
-    protected function getSetterType(FieldMappingInterface $fieldMapping)
+    protected function getSetterType()
     {
         return null;
     }
