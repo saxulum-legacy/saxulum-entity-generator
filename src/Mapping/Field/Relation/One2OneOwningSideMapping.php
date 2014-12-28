@@ -21,18 +21,18 @@ class One2OneOwningSideMapping extends AbstractOne2OneMapping
     }
 
     /**
-     * @return string
-     */
-    public function getType()
-    {
-        return 'one2one-owningside';
-    }
-
-    /**
      * @return null|string
      */
     public function getInversedBy()
     {
         return $this->inversedBy;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return 'one2one-owningside';
     }
 }

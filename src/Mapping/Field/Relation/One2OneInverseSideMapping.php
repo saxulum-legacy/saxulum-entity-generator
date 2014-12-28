@@ -21,18 +21,18 @@ class One2OneInverseSideMapping extends AbstractOne2OneMapping
     }
 
     /**
-     * @return string
-     */
-    public function getType()
-    {
-        return 'one2one-inverseside';
-    }
-
-    /**
      * @return null|string
      */
     public function getMappedBy()
     {
         return $this->mappedBy;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return 'one2one-inverseside';
     }
 }
