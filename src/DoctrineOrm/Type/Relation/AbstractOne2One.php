@@ -24,7 +24,6 @@ use PhpParser\Node\Stmt\Return_;
 use Saxulum\ModelGenerator\DoctrineOrm\TypeInterface;
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\AbstractOne2OneMapping;
-use Saxulum\ModelGenerator\Mapping\Field\Relation\One2OneOwningSideMapping;
 use Saxulum\ModelGenerator\PhpDoc\Documentor;
 use Saxulum\ModelGenerator\PhpDoc\ParamRow;
 use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
