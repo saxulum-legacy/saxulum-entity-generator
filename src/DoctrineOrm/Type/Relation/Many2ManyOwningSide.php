@@ -46,7 +46,7 @@ class Many2ManyOwningSide extends AbstractMany2Many
         return array(
             $this->getBidiretionalAddMethodNode($fieldMapping, $inversedBy),
             $this->getBidiretionalRemoveMethodNode($fieldMapping, $inversedBy),
-            $this->getBidiretionalSetterMethodNode($fieldMapping, $inversedBy),
+            $this->getBidiretionalSetterMethodNode($fieldMapping),
             $this->getGetterMethodNode($fieldMapping)
         );
     }

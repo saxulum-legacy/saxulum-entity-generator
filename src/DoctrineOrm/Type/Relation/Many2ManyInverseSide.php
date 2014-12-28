@@ -25,7 +25,7 @@ class Many2ManyInverseSide extends AbstractMany2Many
         return array(
             $this->getBidiretionalAddMethodNode($fieldMapping, $fieldMapping->getMappedBy()),
             $this->getBidiretionalRemoveMethodNode($fieldMapping, $fieldMapping->getMappedBy()),
-            $this->getBidiretionalSetterMethodNode($fieldMapping, $fieldMapping->getMappedBy()),
+            $this->getBidiretionalSetterMethodNode($fieldMapping),
             $this->getGetterMethodNode($fieldMapping)
         );
     }
