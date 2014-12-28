@@ -20,7 +20,7 @@ class DateTimeType extends AbstractType
 
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @return null|string
+     * @return null|string|Name
      */
     protected function getSetterType(FieldMappingInterface $fieldMapping)
     {

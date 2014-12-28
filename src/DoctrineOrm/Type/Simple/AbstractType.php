@@ -166,7 +166,7 @@ abstract class AbstractType implements TypeInterface
 
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @return null|string
+     * @return null|string|Name
      */
     protected function getSetterType(FieldMappingInterface $fieldMapping)
     {

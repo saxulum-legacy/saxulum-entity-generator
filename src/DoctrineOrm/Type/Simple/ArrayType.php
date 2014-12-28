@@ -2,7 +2,6 @@
 
 namespace Saxulum\ModelGenerator\DoctrineOrm\Type\Simple;
 
-use PhpParser\Node\Expr;
 use PhpParser\Node\Name;
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 
@@ -10,7 +9,7 @@ class ArrayType extends AbstractType
 {
     /**
      * @param FieldMappingInterface $fieldMapping
-     * @return null|string
+     * @return null|string|Name
      */
     protected function getSetterType(FieldMappingInterface $fieldMapping)
     {
