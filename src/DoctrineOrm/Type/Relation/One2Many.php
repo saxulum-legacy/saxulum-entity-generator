@@ -31,7 +31,7 @@ use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
 use Saxulum\ModelGenerator\PhpDoc\VarRow;
 use Saxulum\ModelGenerator\Helper\StringUtil;
 
-class One2Many extends AbstractRelationType
+class One2Many extends Abstract2ManyRelationType
 {
     /**
      * @param FieldMappingInterface $fieldMapping
@@ -57,20 +57,6 @@ class One2Many extends AbstractRelationType
                         )
                     )
                 )
-            )
-        );
-    }
-
-    /**
-     * @param FieldMappingInterface $fieldMapping
-     * @return Node[]
-     */
-    public function getConstructNodes(FieldMappingInterface $fieldMapping)
-    {
-        return array(
-            new Assign(
-                new PropertyFetch(new Variable('this'), $fieldMapping->getName()),
-                new New_(new Name('\Doctrine\Common\Collections\ArrayCollection'))
             )
         );
     }
