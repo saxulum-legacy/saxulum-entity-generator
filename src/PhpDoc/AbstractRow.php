@@ -11,10 +11,15 @@ abstract class AbstractRow
 
     /**
      * @param string|null $part
+     * @param string|null $prefix
      */
-    protected function addPart($part)
+    protected function addPart($part, $prefix = null)
     {
         if (null !== $part) {
+            if(null !== $prefix) {
+                $part = $prefix . $part;
+            }
+
             $this->parts[] = $part;
         }
     }
