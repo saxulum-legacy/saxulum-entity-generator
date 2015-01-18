@@ -14,7 +14,7 @@ class Documentor
      */
     public function __construct(array $rows)
     {
-        if(count($rows) === 0) {
+        if (count($rows) === 0) {
             throw new \InvalidArgumentException('At least one row needs to be given!');
         }
 

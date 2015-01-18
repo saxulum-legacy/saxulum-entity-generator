@@ -16,7 +16,7 @@ abstract class AbstractRow
     protected function addPart($part, $prefix = null)
     {
         if (null !== $part) {
-            if(null !== $prefix) {
+            if (null !== $prefix) {
                 $part = $prefix . $part;
             }
 
