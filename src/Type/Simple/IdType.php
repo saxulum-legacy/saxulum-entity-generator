@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator\DoctrineOrm\Type\Simple;
+namespace Saxulum\ModelGenerator\Type\Simple;
 
 use PhpParser\Node;
 use PhpParser\Node\Arg;
@@ -12,18 +12,18 @@ use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 class IdType extends AbstractType
 {
     /**
-     * @param FieldMappingInterface $fieldMapping
+     * @param  FieldMappingInterface $fieldMapping
      * @return Node[]
      */
     public function getMethodsNodes(FieldMappingInterface $fieldMapping)
     {
         return array(
-            $this->getGetterMethodNode($fieldMapping)
+            $this->getGetterMethodNode($fieldMapping),
         );
     }
 
     /**
-     * @param FieldMappingInterface $fieldMapping
+     * @param  FieldMappingInterface $fieldMapping
      * @return Node[]
      */
     public function getMetadataNodes(FieldMappingInterface $fieldMapping)
@@ -34,32 +34,24 @@ class IdType extends AbstractType
                     new MethodCall(
                         new MethodCall(new Variable('builder'), 'createField', array(
                             new Arg(new String($fieldMapping->getName())),
-                            new Arg(new String('integer'))
+                            new Arg(new String('integer')),
                         )),
                         'isPrimaryKey'
                     ),
                     'generatedValue'
                 ),
                 'build'
-            )
+            ),
         );
     }
 
     /**
-     * @param FieldMappingInterface $fieldMapping
+     * @param  FieldMappingInterface $fieldMapping
      * @return string
      */
     public function getPhpDocType(FieldMappingInterface $fieldMapping)
     {
         return 'int';
-    }
-
-    /**
-     * @return string
-     */
-    protected function getOrmType()
-    {
-        return 'id';
     }
 
     /**

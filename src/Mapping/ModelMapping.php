@@ -33,7 +33,7 @@ class ModelMapping
     }
 
     /**
-     * @param FieldMappingInterface $fieldMapping
+     * @param  FieldMappingInterface $fieldMapping
      * @return $this
      */
     public function addField(FieldMappingInterface $fieldMapping)

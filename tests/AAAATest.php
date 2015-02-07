@@ -2,8 +2,6 @@
 
 namespace Saxulum\Tests\ModelGenerator;
 
-use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Doctrine\ORM\Mapping\ClassMetadata;
 use PhpParser\Error;
 use PhpParser\Lexer;
 use PhpParser\NodeDumper;

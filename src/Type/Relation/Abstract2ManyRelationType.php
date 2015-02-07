@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator\DoctrineOrm\Type\Relation;
+namespace Saxulum\ModelGenerator\Type\Relation;
 
 use PhpParser\Comment;
 use PhpParser\Node;
@@ -20,14 +20,14 @@ use PhpParser\Node\Stmt\Return_;
 use Saxulum\ModelGenerator\Helper\StringUtil;
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\AbstractRelationMapping;
-use Saxulum\ModelGenerator\PhpDoc\Documentor;
-use Saxulum\ModelGenerator\PhpDoc\ParamRow;
-use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
+use Saxulum\PhpDocGenerator\Documentor;
+use Saxulum\PhpDocGenerator\ParamRow;
+use Saxulum\PhpDocGenerator\ReturnRow;
 
 abstract class Abstract2ManyRelationType extends AbstractRelationType
 {
     /**
-     * @param FieldMappingInterface $fieldMapping
+     * @param  FieldMappingInterface $fieldMapping
      * @return Node[]
      */
     public function getConstructNodes(FieldMappingInterface $fieldMapping)
@@ -36,17 +36,17 @@ abstract class Abstract2ManyRelationType extends AbstractRelationType
             new Assign(
                 new PropertyFetch(new Variable('this'), $fieldMapping->getName()),
                 new New_(new Name('\Doctrine\Common\Collections\ArrayCollection'))
-            )
+            ),
         );
     }
 
     /**
-     * @param AbstractRelationMapping $fieldMapping
-     * @param string $relatedName
-     * @param string $methodPrefix
-     * @param string $relatedMethodPrefix
-     * @param string $collectionMethodName
-     * @param Arg $relatedArgument
+     * @param  AbstractRelationMapping $fieldMapping
+     * @param  string                  $relatedName
+     * @param  string                  $methodPrefix
+     * @param  string                  $relatedMethodPrefix
+     * @param  string                  $collectionMethodName
+     * @param  Arg                     $relatedArgument
      * @return Node
      */
     protected function getBidiretionalMethodNode(
@@ -62,19 +62,19 @@ abstract class Abstract2ManyRelationType extends AbstractRelationType
         $singularRelatedName = StringUtil::singularify($relatedName);
         $targetModel = $fieldMapping->getTargetModel();
 
-        return new ClassMethod($methodPrefix . ucfirst($singularName),
+        return new ClassMethod($methodPrefix.ucfirst($singularName),
             array(
                 'type' => 1,
                 'params' => array(
                     new Param($singularName, null, new Name($targetModel)),
-                    new Param('stopPropagation', new ConstFetch(new Name('false')))
+                    new Param('stopPropagation', new ConstFetch(new Name('false'))),
                 ),
                 'stmts' => array(
                     new MethodCall(
                         new PropertyFetch(new Variable('this'), $name),
                         $collectionMethodName,
                         array(
-                            new Arg(new Variable($singularName))
+                            new Arg(new Variable($singularName)),
                         )
                     ),
                     new If_(
@@ -83,17 +83,17 @@ abstract class Abstract2ManyRelationType extends AbstractRelationType
                             'stmts' => array(
                                 new MethodCall(
                                     new Variable($singularName),
-                                    $relatedMethodPrefix . ucfirst($singularRelatedName),
+                                    $relatedMethodPrefix.ucfirst($singularRelatedName),
                                     array(
                                         $relatedArgument,
-                                        new Arg(new ConstFetch(new Name('true')))
+                                        new Arg(new ConstFetch(new Name('true'))),
                                     )
-                                )
+                                ),
                             ),
                         )
                     ),
-                    new Return_(new Variable('this'))
-                )
+                    new Return_(new Variable('this')),
+                ),
             ),
             array(
                 'comments' => array(
@@ -101,10 +101,10 @@ abstract class Abstract2ManyRelationType extends AbstractRelationType
                         new Documentor(array(
                             new ParamRow($targetModel, $singularName),
                             new ParamRow('bool', 'stopPropagation'),
-                            new ReturnRow('$this')
+                            new ReturnRow('$this'),
                         ))
-                    )
-                )
+                    ),
+                ),
             )
         );
     }

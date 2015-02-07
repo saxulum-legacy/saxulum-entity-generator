@@ -10,8 +10,8 @@ class Many2ManyOwningSideMapping extends AbstractMany2ManyMapping
     protected $inversedBy;
 
     /**
-     * @param string $name
-     * @param string $targetModel
+     * @param string      $name
+     * @param string      $targetModel
      * @param string|null $inversedBy
      */
     public function __construct($name, $targetModel, $inversedBy = null)

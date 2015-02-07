@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator\DoctrineOrm\Type\Relation;
+namespace Saxulum\ModelGenerator\Type\Relation;
 
 use PhpParser\Node;
 use PhpParser\Node\Arg;
@@ -13,7 +13,7 @@ use Saxulum\ModelGenerator\Mapping\Field\Relation\Many2ManyInverseSideMapping;
 class Many2ManyInverseSideType extends AbstractMany2ManyType
 {
     /**
-     * @param FieldMappingInterface $fieldMapping
+     * @param  FieldMappingInterface $fieldMapping
      * @return Node[]
      */
     public function getMethodsNodes(FieldMappingInterface $fieldMapping)
@@ -28,13 +28,13 @@ class Many2ManyInverseSideType extends AbstractMany2ManyType
             $this->getBidiretionalSetterMethodNode($fieldMapping),
             $this->getGetterMethodNode(
                 $fieldMapping->getName(),
-                $fieldMapping->getTargetModel() . '[]|\Doctrine\Common\Collections\Collection'
-            )
+                $fieldMapping->getTargetModel().'[]|\Doctrine\Common\Collections\Collection'
+            ),
         );
     }
 
     /**
-     * @param FieldMappingInterface $fieldMapping
+     * @param  FieldMappingInterface $fieldMapping
      * @return Node[]
      */
     public function getMetadataNodes(FieldMappingInterface $fieldMapping)
@@ -47,8 +47,8 @@ class Many2ManyInverseSideType extends AbstractMany2ManyType
             new MethodCall(new Variable('builder'), 'addInverseManyToMany', array(
                 new Arg(new String($fieldMapping->getName())),
                 new Arg(new String($fieldMapping->getTargetModel())),
-                new Arg(new String($fieldMapping->getMappedBy()))
-            ))
+                new Arg(new String($fieldMapping->getMappedBy())),
+            )),
         );
     }
 

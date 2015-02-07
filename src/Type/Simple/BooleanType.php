@@ -1,26 +1,26 @@
 <?php
 
-namespace Saxulum\ModelGenerator\DoctrineOrm\Type\Simple;
+namespace Saxulum\ModelGenerator\Type\Simple;
 
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 
-class StringType extends AbstractType
+class BooleanType extends AbstractType
 {
     /**
-     * @param FieldMappingInterface $fieldMapping
+     * @param  FieldMappingInterface $fieldMapping
      * @return string
      */
     public function getPhpDocType(FieldMappingInterface $fieldMapping)
     {
-        return 'string';
+        return 'bool';
     }
 
     /**
      * @return string
      */
-    public function getOrmType()
+    public function getGetterPrefix()
     {
-        return 'string';
+        return 'is';
     }
 
     /**
@@ -28,6 +28,6 @@ class StringType extends AbstractType
      */
     public function getName()
     {
-        return 'string';
+        return 'boolean';
     }
 }

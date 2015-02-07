@@ -12,6 +12,7 @@
   "require": {
     "php": ">=5.3",
     "nikic/php-parser": "v1.0.0beta1",
+    "saxulum/saxulum-phpdoc-generator": "~1.0@rc",
     "symfony/property-access": "~2.3"
   },
   "require-dev": {

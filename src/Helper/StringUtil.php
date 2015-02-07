@@ -7,7 +7,7 @@ use Symfony\Component\PropertyAccess\StringUtil as OrigStringUtil;
 class StringUtil
 {
     /**
-     * @param string $plural
+     * @param  string $plural
      * @return string
      */
     public static function singularify($plural)

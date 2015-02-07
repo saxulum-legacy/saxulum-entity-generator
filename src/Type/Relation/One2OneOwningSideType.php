@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator\DoctrineOrm\Type\Relation;
+namespace Saxulum\ModelGenerator\Type\Relation;
 
 use PhpParser\Comment;
 use PhpParser\Node;
@@ -17,14 +17,14 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Return_;
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\One2OneOwningSideMapping;
-use Saxulum\ModelGenerator\PhpDoc\Documentor;
-use Saxulum\ModelGenerator\PhpDoc\ParamRow;
-use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
+use Saxulum\PhpDocGenerator\Documentor;
+use Saxulum\PhpDocGenerator\ParamRow;
+use Saxulum\PhpDocGenerator\ReturnRow;
 
 class One2OneOwningSideType extends AbstractOne2OneType
 {
     /**
-     * @param FieldMappingInterface $fieldMapping
+     * @param  FieldMappingInterface $fieldMapping
      * @return Node[]
      */
     public function getMethodsNodes(FieldMappingInterface $fieldMapping)
@@ -36,18 +36,18 @@ class One2OneOwningSideType extends AbstractOne2OneType
         if (null === $inversedBy = $fieldMapping->getInversedBy()) {
             return array(
                 $this->getUnidirectionalSetterMethodNode($fieldMapping),
-                $this->getGetterMethodNode($fieldMapping->getName(), $fieldMapping->getTargetModel())
+                $this->getGetterMethodNode($fieldMapping->getName(), $fieldMapping->getTargetModel()),
             );
         }
 
         return array(
             $this->getBidiretionalSetterMethodNode($fieldMapping, $inversedBy, 'set', 'set'),
-            $this->getGetterMethodNode($fieldMapping->getName(), $fieldMapping->getTargetModel())
+            $this->getGetterMethodNode($fieldMapping->getName(), $fieldMapping->getTargetModel()),
         );
     }
 
     /**
-     * @param FieldMappingInterface $fieldMapping
+     * @param  FieldMappingInterface $fieldMapping
      * @return Node
      */
     protected function getUnidirectionalSetterMethodNode(FieldMappingInterface $fieldMapping)
@@ -59,35 +59,35 @@ class One2OneOwningSideType extends AbstractOne2OneType
         $name = $fieldMapping->getName();
         $targetModel = $fieldMapping->getTargetModel();
 
-        return new ClassMethod('set' . ucfirst($name),
+        return new ClassMethod('set'.ucfirst($name),
             array(
                 'type' => 1,
                 'params' => array(
-                    new Param($fieldMapping->getName(), new ConstFetch(new Name('null')), new Name($targetModel))
+                    new Param($fieldMapping->getName(), new ConstFetch(new Name('null')), new Name($targetModel)),
                 ),
                 'stmts' => array(
                     new Assign(
                         new PropertyFetch(new Variable('this'), $name),
                         new Variable($name)
                     ),
-                    new Return_(new Variable('this'))
-                )
+                    new Return_(new Variable('this')),
+                ),
             ),
             array(
                 'comments' => array(
                     new Comment(
                         new Documentor(array(
                             new ParamRow($targetModel, $name),
-                            new ReturnRow('$this')
+                            new ReturnRow('$this'),
                         ))
-                    )
-                )
+                    ),
+                ),
             )
         );
     }
 
     /**
-     * @param FieldMappingInterface $fieldMapping
+     * @param  FieldMappingInterface $fieldMapping
      * @return Node[]
      */
     public function getMetadataNodes(FieldMappingInterface $fieldMapping)
@@ -100,8 +100,8 @@ class One2OneOwningSideType extends AbstractOne2OneType
             return array(
                 new MethodCall(new Variable('builder'), 'addOwningOneToOne', array(
                     new Arg(new String($fieldMapping->getName())),
-                    new Arg(new String($fieldMapping->getTargetModel()))
-                ))
+                    new Arg(new String($fieldMapping->getTargetModel())),
+                )),
             );
         }
 
@@ -109,8 +109,8 @@ class One2OneOwningSideType extends AbstractOne2OneType
             new MethodCall(new Variable('builder'), 'addOwningOneToOne', array(
                 new Arg(new String($fieldMapping->getName())),
                 new Arg(new String($fieldMapping->getTargetModel())),
-                new Arg(new String($fieldMapping->getInversedBy()))
-            ))
+                new Arg(new String($fieldMapping->getInversedBy())),
+            )),
         );
     }
 

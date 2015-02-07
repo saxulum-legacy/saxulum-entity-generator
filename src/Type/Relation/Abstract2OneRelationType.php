@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator\DoctrineOrm\Type\Relation;
+namespace Saxulum\ModelGenerator\Type\Relation;
 
 use PhpParser\Comment;
 use PhpParser\Node;
@@ -19,17 +19,17 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Return_;
 use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\AbstractRelationMapping;
-use Saxulum\ModelGenerator\PhpDoc\Documentor;
-use Saxulum\ModelGenerator\PhpDoc\ParamRow;
-use Saxulum\ModelGenerator\PhpDoc\ReturnRow;
+use Saxulum\PhpDocGenerator\Documentor;
+use Saxulum\PhpDocGenerator\ParamRow;
+use Saxulum\PhpDocGenerator\ReturnRow;
 
 abstract class Abstract2OneRelationType extends AbstractRelationType
 {
     /**
-     * @param FieldMappingInterface $fieldMapping
-     * @param string $relatedName
-     * @param string $relatedRemovePrefix
-     * @param string $relatedAddPrefix
+     * @param  FieldMappingInterface $fieldMapping
+     * @param  string                $relatedName
+     * @param  string                $relatedRemovePrefix
+     * @param  string                $relatedAddPrefix
      * @return Node
      */
     protected function getBidiretionalSetterMethodNode(
@@ -45,12 +45,12 @@ abstract class Abstract2OneRelationType extends AbstractRelationType
         $name = $fieldMapping->getName();
         $targetModel = $fieldMapping->getTargetModel();
 
-        return new ClassMethod('set' . ucfirst($name),
+        return new ClassMethod('set'.ucfirst($name),
             array(
                 'type' => 1,
                 'params' => array(
                     new Param($name, new ConstFetch(new Name('null')), new Name($targetModel)),
-                    new Param('stopPropagation', new ConstFetch(new Name('false')))
+                    new Param('stopPropagation', new ConstFetch(new Name('false'))),
                 ),
                 'stmts' => array(
                     new If_(
@@ -68,13 +68,13 @@ abstract class Abstract2OneRelationType extends AbstractRelationType
                                         'stmts' => array(
                                             new MethodCall(
                                                 new PropertyFetch(new Variable('this'), $name),
-                                                $relatedRemovePrefix . ucfirst($relatedName),
+                                                $relatedRemovePrefix.ucfirst($relatedName),
                                                 array(
                                                     new Arg(new Variable('this')),
-                                                    new Arg(new ConstFetch(new Name('true')))
+                                                    new Arg(new ConstFetch(new Name('true'))),
                                                 )
-                                            )
-                                        )
+                                            ),
+                                        ),
                                     )
                                 ),
                                 new If_(
@@ -86,13 +86,13 @@ abstract class Abstract2OneRelationType extends AbstractRelationType
                                         'stmts' => array(
                                             new MethodCall(
                                                 new Variable($name),
-                                                $relatedAddPrefix . ucfirst($relatedName),
+                                                $relatedAddPrefix.ucfirst($relatedName),
                                                 array(
                                                     new Arg(new Variable('this')),
-                                                    new Arg(new ConstFetch(new Name('true')))
+                                                    new Arg(new ConstFetch(new Name('true'))),
                                                 )
-                                            )
-                                        )
+                                            ),
+                                        ),
                                     )
                                 ),
                             ),
@@ -102,8 +102,8 @@ abstract class Abstract2OneRelationType extends AbstractRelationType
                         new PropertyFetch(new Variable('this'), $name),
                         new Variable($name)
                     ),
-                    new Return_(new Variable('this'))
-                )
+                    new Return_(new Variable('this')),
+                ),
             ),
             array(
                 'comments' => array(
@@ -111,10 +111,10 @@ abstract class Abstract2OneRelationType extends AbstractRelationType
                         new Documentor(array(
                             new ParamRow($targetModel, $name),
                             new ParamRow('bool', 'stopPropagation'),
-                            new ReturnRow('$this')
+                            new ReturnRow('$this'),
                         ))
-                    )
-                )
+                    ),
+                ),
             )
         );
     }

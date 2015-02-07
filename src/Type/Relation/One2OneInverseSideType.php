@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator\DoctrineOrm\Type\Relation;
+namespace Saxulum\ModelGenerator\Type\Relation;
 
 use PhpParser\Node;
 use PhpParser\Node\Arg;
@@ -13,7 +13,7 @@ use Saxulum\ModelGenerator\Mapping\Field\Relation\One2OneInverseSideMapping;
 class One2OneInverseSideType extends AbstractOne2OneType
 {
     /**
-     * @param FieldMappingInterface $fieldMapping
+     * @param  FieldMappingInterface $fieldMapping
      * @return Node[]
      */
     public function getMethodsNodes(FieldMappingInterface $fieldMapping)
@@ -24,12 +24,12 @@ class One2OneInverseSideType extends AbstractOne2OneType
 
         return array(
             $this->getBidiretionalSetterMethodNode($fieldMapping, $fieldMapping->getMappedBy(), 'set', 'set'),
-            $this->getGetterMethodNode($fieldMapping->getName(), $fieldMapping->getTargetModel())
+            $this->getGetterMethodNode($fieldMapping->getName(), $fieldMapping->getTargetModel()),
         );
     }
 
     /**
-     * @param FieldMappingInterface $fieldMapping
+     * @param  FieldMappingInterface $fieldMapping
      * @return Node[]
      */
     public function getMetadataNodes(FieldMappingInterface $fieldMapping)
@@ -42,8 +42,8 @@ class One2OneInverseSideType extends AbstractOne2OneType
             new MethodCall(new Variable('builder'), 'addInverseOneToOne', array(
                 new Arg(new String($fieldMapping->getName())),
                 new Arg(new String($fieldMapping->getTargetModel())),
-                new Arg(new String($fieldMapping->getMappedBy()))
-            ))
+                new Arg(new String($fieldMapping->getMappedBy())),
+            )),
         );
     }
 

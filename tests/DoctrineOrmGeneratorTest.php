@@ -3,20 +3,20 @@
 namespace Saxulum\Tests\ModelGenerator;
 
 use PhpParser\PrettyPrinter\Standard as PhpGenerator;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\Many2ManyInverseSideType;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\Many2ManyOwningSideType;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\Many2OneType;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\One2ManyType;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\One2OneInverseSideType;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Relation\One2OneOwningSideType;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\ArrayType;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\BooleanType;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\DateTimeType;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\DecimalType;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\IdType;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\IntegerType;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\StringType;
-use Saxulum\ModelGenerator\DoctrineOrm\Type\Simple\TextType;
+use Saxulum\ModelGenerator\Type\Relation\Many2ManyInverseSideType;
+use Saxulum\ModelGenerator\Type\Relation\Many2ManyOwningSideType;
+use Saxulum\ModelGenerator\Type\Relation\Many2OneType;
+use Saxulum\ModelGenerator\Type\Relation\One2ManyType;
+use Saxulum\ModelGenerator\Type\Relation\One2OneInverseSideType;
+use Saxulum\ModelGenerator\Type\Relation\One2OneOwningSideType;
+use Saxulum\ModelGenerator\Type\Simple\ArrayType;
+use Saxulum\ModelGenerator\Type\Simple\BooleanType;
+use Saxulum\ModelGenerator\Type\Simple\DateTimeType;
+use Saxulum\ModelGenerator\Type\Simple\DecimalType;
+use Saxulum\ModelGenerator\Type\Simple\IdType;
+use Saxulum\ModelGenerator\Type\Simple\IntegerType;
+use Saxulum\ModelGenerator\Type\Simple\StringType;
+use Saxulum\ModelGenerator\Type\Simple\TextType;
 use Saxulum\ModelGenerator\DoctrineOrmGenerator;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\Many2ManyInverseSideMapping;
 use Saxulum\ModelGenerator\Mapping\Field\Relation\Many2ManyOwningSideMapping;
@@ -78,6 +78,6 @@ class DoctrineOrmGeneratorTest extends \PHPUnit_Framework_TestCase
         $modelMapping->addField(new One2OneOwningSideMapping('owningBidirectionalOne2One', '\Saxulum\Entity\Product', 'inverseBidirectionalOne2One'));
         $modelMapping->addField(new One2OneInverseSideMapping('inverseBidirectionalOne2One', '\Saxulum\Entity\Product', 'owningBidirectionalOne2One'));
 
-        $generator->generate($modelMapping, 'Saxulum\Entity', __DIR__ . '/../generated/Saxulum/Entity');
+        $generator->generate($modelMapping, 'Saxulum\Entity', __DIR__.'/../generated/Saxulum/Entity');
     }
 }
