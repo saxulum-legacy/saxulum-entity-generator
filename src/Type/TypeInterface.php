@@ -3,7 +3,7 @@
 namespace Saxulum\ModelGenerator\Type;
 
 use PhpParser\Node;
-use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
+use Saxulum\ModelGenerator\Mapping\FieldMappingInterface;
 
 interface TypeInterface
 {

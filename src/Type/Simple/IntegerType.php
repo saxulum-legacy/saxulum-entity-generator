@@ -2,7 +2,7 @@
 
 namespace Saxulum\ModelGenerator\Type\Simple;
 
-use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
+use Saxulum\ModelGenerator\Mapping\FieldMappingInterface;
 
 class IntegerType extends AbstractType
 {

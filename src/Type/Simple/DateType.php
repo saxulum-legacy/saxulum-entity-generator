@@ -5,7 +5,7 @@ namespace Saxulum\ModelGenerator\Type\Simple;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Name;
-use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
+use Saxulum\ModelGenerator\Mapping\FieldMappingInterface;
 
 class DateType extends AbstractType
 {

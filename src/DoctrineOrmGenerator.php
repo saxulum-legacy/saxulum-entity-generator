@@ -16,7 +16,6 @@ use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\PrettyPrinter\Standard as PhpGenerator;
 use Saxulum\ModelGenerator\Type\TypeInterface;
-use Saxulum\ModelGenerator\Mapping\ModelMapping;
 use Saxulum\PhpDocGenerator\Documentor;
 use Saxulum\PhpDocGenerator\ParamRow;
 
@@ -53,13 +52,13 @@ class DoctrineOrmGenerator
     }
 
     /**
-     * @param  ModelMapping $modelMapping
-     * @param  string       $namespace
-     * @param  string       $path
-     * @param  bool         $override
+     * @param  EntityMapping $modelMapping
+     * @param  string        $namespace
+     * @param  string        $path
+     * @param  bool          $override
      * @return void
      */
-    public function generate(ModelMapping $modelMapping, $namespace, $path, $override = false)
+    public function generate(EntityMapping $modelMapping, $namespace, $path, $override = false)
     {
         $abstractNamespace = $namespace.'\\Base';
 
@@ -106,21 +105,21 @@ class DoctrineOrmGenerator
     }
 
     /**
-     * @param  ModelMapping $modelMapping
+     * @param  EntityMapping $modelMapping
      * @return Node[]
      * @throws \Exception
      */
-    protected function generatePropertyNodes(ModelMapping $modelMapping)
+    protected function generatePropertyNodes(EntityMapping $modelMapping)
     {
         return $this->generateNodes($modelMapping, 'getPropertyNodes');
     }
 
     /**
-     * @param  ModelMapping $modelMapping
+     * @param  EntityMapping $modelMapping
      * @return Node[]
      * @throws \Exception
      */
-    protected function generateConstructNodes(ModelMapping $modelMapping)
+    protected function generateConstructNodes(EntityMapping $modelMapping)
     {
         $constructNodes = $this->generateNodes($modelMapping, 'getConstructNodes');
 
@@ -139,21 +138,21 @@ class DoctrineOrmGenerator
     }
 
     /**
-     * @param  ModelMapping $modelMapping
+     * @param  EntityMapping $modelMapping
      * @return Node[]
      * @throws \Exception
      */
-    protected function generateMethodNodes(ModelMapping $modelMapping)
+    protected function generateMethodNodes(EntityMapping $modelMapping)
     {
         return $this->generateNodes($modelMapping, 'getMethodsNodes');
     }
 
     /**
-     * @param  ModelMapping $modelMapping
+     * @param  EntityMapping $modelMapping
      * @return Node[]
      * @throws \Exception
      */
-    protected function generateMetadataNodes(ModelMapping $modelMapping)
+    protected function generateMetadataNodes(EntityMapping $modelMapping)
     {
         return array(
             new ClassMethod('loadMetadata',
@@ -186,12 +185,12 @@ class DoctrineOrmGenerator
     }
 
     /**
-     * @param  ModelMapping $modelMapping
-     * @param  string       $getterName
+     * @param  EntityMapping $modelMapping
+     * @param  string        $getterName
      * @return Node[]
      * @throws \Exception
      */
-    protected function generateNodes(ModelMapping $modelMapping, $getterName)
+    protected function generateNodes(EntityMapping $modelMapping, $getterName)
     {
         $fieldNodes = array();
         foreach ($modelMapping->getFieldMappings() as $fieldMapping) {

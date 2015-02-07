@@ -17,7 +17,7 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\PropertyProperty;
 use PhpParser\Node\Stmt\Return_;
-use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
+use Saxulum\ModelGenerator\Mapping\FieldMappingInterface;
 use Saxulum\PhpDocGenerator\Documentor;
 use Saxulum\PhpDocGenerator\ParamRow;
 use Saxulum\PhpDocGenerator\ReturnRow;

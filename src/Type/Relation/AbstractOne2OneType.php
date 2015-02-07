@@ -3,8 +3,8 @@
 namespace Saxulum\ModelGenerator\Type\Relation;
 
 use PhpParser\Node;
-use Saxulum\ModelGenerator\Mapping\Field\FieldMappingInterface;
-use Saxulum\ModelGenerator\Mapping\Field\Relation\AbstractRelationMapping;
+use Saxulum\ModelGenerator\Mapping\FieldMappingInterface;
+use Saxulum\ModelGenerator\Mapping\Relation\AbstractRelationMapping;
 
 abstract class AbstractOne2OneType extends Abstract2OneRelationType
 {
