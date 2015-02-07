@@ -71,17 +71,54 @@ $entityMapping->addField(new SmallIntFieldMapping('smallint'));
 $entityMapping->addField(new StringFieldMapping('string'));
 $entityMapping->addField(new TextFieldMapping('text'));
 $entityMapping->addField(new TimeFieldMapping('time'));
-$entityMapping->addField(new Many2ManyOwningSideMapping('unidirectionalMany2Manies', '\Saxulum\Entity\Product'));
-$entityMapping->addField(new Many2ManyOwningSideMapping('owningBidirectionalMany2Manies', '\Saxulum\Entity\Product', 'inverseBidirectionalMany2Manies'));
-$entityMapping->addField(new Many2ManyInverseSideMapping('inverseBidirectionalMany2Manies', '\Saxulum\Entity\Product', 'owningBidirectionalMany2Manies'));
-$entityMapping->addField(new Many2OneMapping('unidirectionalMany2One', '\Saxulum\Entity\Product'));
-$entityMapping->addField(new Many2OneMapping('one', '\Saxulum\Entity\Product', 'manies'));
-$entityMapping->addField(new One2ManyMapping('manies', '\Saxulum\Entity\Product', 'one'));
-$entityMapping->addField(new One2OneOwningSideMapping('unidirectionalOne2One', '\Saxulum\Entity\Product'));
-$entityMapping->addField(new One2OneOwningSideMapping('owningBidirectionalOne2One', '\Saxulum\Entity\Product', 'inverseBidirectionalOne2One'));
-$entityMapping->addField(new One2OneInverseSideMapping('inverseBidirectionalOne2One', '\Saxulum\Entity\Product', 'owningBidirectionalOne2One'));
+$entityMapping->addField(new Many2ManyOwningSideMapping(
+    'unidirectionalMany2Manies',
+    '\Saxulum\Entity\Product'
+));
+$entityMapping->addField(new Many2ManyOwningSideMapping(
+    'owningBidirectionalMany2Manies',
+    '\Saxulum\Entity\Product',
+    'inverseBidirectionalMany2Manies'
+));
+$entityMapping->addField(new Many2ManyInverseSideMapping(
+    'inverseBidirectionalMany2Manies',
+    '\Saxulum\Entity\Product',
+    'owningBidirectionalMany2Manies'
+));
+$entityMapping->addField(new Many2OneMapping(
+    'unidirectionalMany2One',
+    '\Saxulum\Entity\Product'
+));
+$entityMapping->addField(new Many2OneMapping(
+    'one',
+    '\Saxulum\Entity\Product',
+    'manies'
+));
+$entityMapping->addField(new One2ManyMapping(
+    'manies',
+    '\Saxulum\Entity\Product',
+    'one'
+));
+$entityMapping->addField(new One2OneOwningSideMapping(
+    'unidirectionalOne2One',
+    '\Saxulum\Entity\Product'
+));
+$entityMapping->addField(new One2OneOwningSideMapping(
+    'owningBidirectionalOne2One',
+    '\Saxulum\Entity\Product',
+    'inverseBidirectionalOne2One'
+));
+$entityMapping->addField(new One2OneInverseSideMapping(
+    'inverseBidirectionalOne2One',
+    '\Saxulum\Entity\Product',
+    'owningBidirectionalOne2One'
+));
 
-$generator->generate($entityMapping, 'Namespace\To\Generated\Entity', __DIR__.'/../Namespace/To/Generated/Entity');
+$generator->generate(
+    $entityMapping,
+    'Saxulum\Entity\Product',
+    __DIR__.'/Saxulum/Entity/Product'
+);
 ```
 
 [1]: https://packagist.org/packages/saxulum/saxulum-entity-generator
