@@ -60,7 +60,8 @@ class EntityGeneratorTest extends \PHPUnit_Framework_TestCase
 {
     public function testSimple()
     {
-        $types = array(
+        $phpGenerator = new PhpGenerator();
+        $generator = new EntityGenerator($phpGenerator, array(
             new ArrayType(),
             new BigIntType(),
             new BlobType(),
@@ -86,10 +87,7 @@ class EntityGeneratorTest extends \PHPUnit_Framework_TestCase
             new One2ManyType(),
             new One2OneOwningSideType(),
             new One2OneInverseSideType(),
-        );
-
-        $phpGenerator = new PhpGenerator();
-        $generator = new EntityGenerator($phpGenerator, $types);
+        ));
 
         $modelMapping = new EntityMapping('Product');
         $modelMapping->addField(new ArrayFieldMapping('array'));

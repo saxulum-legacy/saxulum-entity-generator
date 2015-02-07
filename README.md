@@ -21,3 +21,7 @@ This library allow to generate out of a mapping php config.
 Through [Composer](http://getcomposer.org) as [saxulum/saxulum-entity-generator][1].
 
 ## Usage
+
+
+
+[1]: https://packagist.org/packages/saxulum/saxulum-entity-generator
