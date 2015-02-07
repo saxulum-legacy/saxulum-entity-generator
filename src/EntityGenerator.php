@@ -73,8 +73,8 @@ class EntityGenerator
 
         $abstracClassName = 'Abstract' . $modelMapping->getName();
 
-        $classPath = $path . DIRECTORY_SEPARATOR . $modelMapping->getName() . ' . php';
-        $abstractClassPath = $abstractPath . DIRECTORY_SEPARATOR . $abstracClassName . ' . php';
+        $classPath = $path . DIRECTORY_SEPARATOR . $modelMapping->getName() . '.php';
+        $abstractClassPath = $abstractPath . DIRECTORY_SEPARATOR . $abstracClassName . '.php';
 
         $nodes = array();
         $nodes = array_merge($nodes, $this->generatePropertyNodes($modelMapping));
