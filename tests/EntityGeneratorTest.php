@@ -89,44 +89,44 @@ class EntityGeneratorTest extends \PHPUnit_Framework_TestCase
             new One2OneInverseSideType(),
         ));
 
-        $modelMapping = new EntityMapping('Product');
-        $modelMapping->addField(new ArrayFieldMapping('array'));
-        $modelMapping->addField(new BigIntFieldMapping('bigint'));
-        $modelMapping->addField(new BlobFieldMapping('blob'));
-        $modelMapping->addField(new BooleanFieldMapping('bool'));
-        $modelMapping->addField(new DateTimeFieldMapping('datetime'));
-        $modelMapping->addField(new DateTimeZFieldMapping('datetimez'));
-        $modelMapping->addField(new DateFieldMapping('date'));
-        $modelMapping->addField(new DecimalFieldMapping('decimal'));
-        $modelMapping->addField(new FloatFieldMapping('float'));
-        $modelMapping->addField(new GuidFieldMapping('guid'));
-        $modelMapping->addField(new IdFieldMapping('id'));
-        $modelMapping->addField(new IntegerFieldMapping('integer'));
-        $modelMapping->addField(new JsonArrayFieldMapping('jsonArray'));
-        $modelMapping->addField(new ObjectFieldMapping('object', '\stdClass'));
-        $modelMapping->addField(new SimpleArrayFieldMapping('simpleArray'));
-        $modelMapping->addField(new SmallIntFieldMapping('smallint'));
-        $modelMapping->addField(new StringFieldMapping('string'));
-        $modelMapping->addField(new TextFieldMapping('text'));
-        $modelMapping->addField(new TimeFieldMapping('time'));
-        $modelMapping->addField(new Many2ManyOwningSideMapping('unidirectionalMany2Manies', '\Saxulum\Entity\Product'));
-        $modelMapping->addField(new Many2ManyOwningSideMapping('owningBidirectionalMany2Manies', '\Saxulum\Entity\Product', 'inverseBidirectionalMany2Manies'));
-        $modelMapping->addField(new Many2ManyInverseSideMapping('inverseBidirectionalMany2Manies', '\Saxulum\Entity\Product', 'owningBidirectionalMany2Manies'));
-        $modelMapping->addField(new Many2OneMapping('unidirectionalMany2One', '\Saxulum\Entity\Product'));
-        $modelMapping->addField(new Many2OneMapping('one', '\Saxulum\Entity\Product', 'manies'));
-        $modelMapping->addField(new One2ManyMapping('manies', '\Saxulum\Entity\Product', 'one'));
-        $modelMapping->addField(new One2OneOwningSideMapping('unidirectionalOne2One', '\Saxulum\Entity\Product'));
-        $modelMapping->addField(new One2OneOwningSideMapping('owningBidirectionalOne2One', '\Saxulum\Entity\Product', 'inverseBidirectionalOne2One'));
-        $modelMapping->addField(new One2OneInverseSideMapping('inverseBidirectionalOne2One', '\Saxulum\Entity\Product', 'owningBidirectionalOne2One'));
+        $entityMapping = new EntityMapping('Product');
+        $entityMapping->addField(new ArrayFieldMapping('array'));
+        $entityMapping->addField(new BigIntFieldMapping('bigint'));
+        $entityMapping->addField(new BlobFieldMapping('blob'));
+        $entityMapping->addField(new BooleanFieldMapping('bool'));
+        $entityMapping->addField(new DateTimeFieldMapping('datetime'));
+        $entityMapping->addField(new DateTimeZFieldMapping('datetimez'));
+        $entityMapping->addField(new DateFieldMapping('date'));
+        $entityMapping->addField(new DecimalFieldMapping('decimal'));
+        $entityMapping->addField(new FloatFieldMapping('float'));
+        $entityMapping->addField(new GuidFieldMapping('guid'));
+        $entityMapping->addField(new IdFieldMapping('id'));
+        $entityMapping->addField(new IntegerFieldMapping('integer'));
+        $entityMapping->addField(new JsonArrayFieldMapping('jsonArray'));
+        $entityMapping->addField(new ObjectFieldMapping('object', '\stdClass'));
+        $entityMapping->addField(new SimpleArrayFieldMapping('simpleArray'));
+        $entityMapping->addField(new SmallIntFieldMapping('smallint'));
+        $entityMapping->addField(new StringFieldMapping('string'));
+        $entityMapping->addField(new TextFieldMapping('text'));
+        $entityMapping->addField(new TimeFieldMapping('time'));
+        $entityMapping->addField(new Many2ManyOwningSideMapping('unidirectionalMany2Manies', '\Saxulum\Entity\Product'));
+        $entityMapping->addField(new Many2ManyOwningSideMapping('owningBidirectionalMany2Manies', '\Saxulum\Entity\Product', 'inverseBidirectionalMany2Manies'));
+        $entityMapping->addField(new Many2ManyInverseSideMapping('inverseBidirectionalMany2Manies', '\Saxulum\Entity\Product', 'owningBidirectionalMany2Manies'));
+        $entityMapping->addField(new Many2OneMapping('unidirectionalMany2One', '\Saxulum\Entity\Product'));
+        $entityMapping->addField(new Many2OneMapping('one', '\Saxulum\Entity\Product', 'manies'));
+        $entityMapping->addField(new One2ManyMapping('manies', '\Saxulum\Entity\Product', 'one'));
+        $entityMapping->addField(new One2OneOwningSideMapping('unidirectionalOne2One', '\Saxulum\Entity\Product'));
+        $entityMapping->addField(new One2OneOwningSideMapping('owningBidirectionalOne2One', '\Saxulum\Entity\Product', 'inverseBidirectionalOne2One'));
+        $entityMapping->addField(new One2OneInverseSideMapping('inverseBidirectionalOne2One', '\Saxulum\Entity\Product', 'owningBidirectionalOne2One'));
 
         $expectedFilePath = __DIR__.'/Entity/';
         $generatedFilePath = __DIR__.'/../generated/Saxulum/Entity/';
 
-        $generator->generate($modelMapping, 'Saxulum\Entity', $generatedFilePath);
+        $generator->generate($entityMapping, 'Saxulum\Entity', $generatedFilePath);
 
         $this->assertFileEquals(
-            $expectedFilePath.'Abstract'.$modelMapping->getName().'.php',
-            $generatedFilePath.'Base/Abstract'.$modelMapping->getName().'.php'
+            $expectedFilePath.'Abstract'.$entityMapping->getName().'.php',
+            $generatedFilePath.'Base/Abstract'.$entityMapping->getName().'.php'
         );
     }
 }
