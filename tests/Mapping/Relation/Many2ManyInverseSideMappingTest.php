@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\Tests\ModelGenerator\Mapping\Relation;
+namespace Saxulum\Tests\EntityGenerator\Mapping\Relation;
 
-use Saxulum\ModelGenerator\Mapping\Relation\Many2ManyInverseSideMapping;
+use Saxulum\EntityGenerator\Mapping\Relation\Many2ManyInverseSideMapping;
 
 class Many2ManyInverseSideMappingTest extends \PHPUnit_Framework_TestCase
 {

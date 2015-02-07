@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Type\Simple;
+namespace Saxulum\EntityGenerator\Type\Simple;
 
-use Saxulum\ModelGenerator\Mapping\FieldMappingInterface;
+use Saxulum\EntityGenerator\Mapping\FieldMappingInterface;
 
 class GuidType extends AbstractType
 {

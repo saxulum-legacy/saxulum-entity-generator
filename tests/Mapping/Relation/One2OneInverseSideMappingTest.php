@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\Tests\ModelGenerator\Mapping\Relation;
+namespace Saxulum\Tests\EntityGenerator\Mapping\Relation;
 
-use Saxulum\ModelGenerator\Mapping\Relation\One2OneInverseSideMapping;
+use Saxulum\EntityGenerator\Mapping\Relation\One2OneInverseSideMapping;
 
 class One2OneInverseSideMappingTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Type\Relation;
+namespace Saxulum\EntityGenerator\Type\Relation;
 
 use PhpParser\Comment;
 use PhpParser\Node;
@@ -10,9 +10,9 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\PropertyProperty;
 use PhpParser\Node\Stmt\Return_;
-use Saxulum\ModelGenerator\Type\TypeInterface;
-use Saxulum\ModelGenerator\Mapping\FieldMappingInterface;
-use Saxulum\ModelGenerator\Mapping\Relation\AbstractRelationMapping;
+use Saxulum\EntityGenerator\Type\TypeInterface;
+use Saxulum\EntityGenerator\Mapping\FieldMappingInterface;
+use Saxulum\EntityGenerator\Mapping\Relation\AbstractRelationMapping;
 use Saxulum\PhpDocGenerator\Documentor;
 use Saxulum\PhpDocGenerator\ReturnRow;
 use Saxulum\PhpDocGenerator\VarRow;

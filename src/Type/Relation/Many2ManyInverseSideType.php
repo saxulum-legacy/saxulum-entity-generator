@@ -1,14 +1,14 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Type\Relation;
+namespace Saxulum\EntityGenerator\Type\Relation;
 
 use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Scalar\String;
-use Saxulum\ModelGenerator\Mapping\FieldMappingInterface;
-use Saxulum\ModelGenerator\Mapping\Relation\Many2ManyInverseSideMapping;
+use Saxulum\EntityGenerator\Mapping\FieldMappingInterface;
+use Saxulum\EntityGenerator\Mapping\Relation\Many2ManyInverseSideMapping;
 
 class Many2ManyInverseSideType extends AbstractMany2ManyType
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\Tests\ModelGenerator\Mapping\Relation;
+namespace Saxulum\Tests\EntityGenerator\Mapping\Relation;
 
-use Saxulum\ModelGenerator\Mapping\Relation\Many2OneMapping;
+use Saxulum\EntityGenerator\Mapping\Relation\Many2OneMapping;
 
 class Many2OneMappingTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\Tests\ModelGenerator\Mapping\Field\Simple;
+namespace Saxulum\Tests\EntityGenerator\Mapping\Field\Simple;
 
-use Saxulum\ModelGenerator\Mapping\Simple\IdFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\IdFieldMapping;
 
 class IdFieldMappingTest extends \PHPUnit_Framework_TestCase
 {

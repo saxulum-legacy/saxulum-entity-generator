@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator;
+namespace Saxulum\EntityGenerator;
 
 use PhpParser\Comment;
 use PhpParser\Node;
@@ -15,11 +15,11 @@ use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\PrettyPrinter\Standard as PhpGenerator;
-use Saxulum\ModelGenerator\Type\TypeInterface;
+use Saxulum\EntityGenerator\Type\TypeInterface;
 use Saxulum\PhpDocGenerator\Documentor;
 use Saxulum\PhpDocGenerator\ParamRow;
 
-class DoctrineOrmGenerator
+class EntityGenerator
 {
     const CLASS_ORM_METADATA = '\Doctrine\ORM\Mapping\ClassMetadata';
     const CLASS_ORM_METADATA_BUILDER = '\Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder';
@@ -60,21 +60,21 @@ class DoctrineOrmGenerator
      */
     public function generate(EntityMapping $modelMapping, $namespace, $path, $override = false)
     {
-        $abstractNamespace = $namespace.'\\Base';
+        $abstractNamespace = $namespace . '\\Base';
 
         if (!is_dir($path)) {
             mkdir($path, 0777, true);
         }
 
-        $abstractPath = $path.DIRECTORY_SEPARATOR.'Base';
+        $abstractPath = $path . DIRECTORY_SEPARATOR . 'Base';
         if (!is_dir($abstractPath)) {
             mkdir($abstractPath, 0777, true);
         }
 
-        $abstracClassName = 'Abstract'.$modelMapping->getName();
+        $abstracClassName = 'Abstract' . $modelMapping->getName();
 
-        $classPath = $path.DIRECTORY_SEPARATOR.$modelMapping->getName().'.php';
-        $abstractClassPath = $abstractPath.DIRECTORY_SEPARATOR.$abstracClassName.'.php';
+        $classPath = $path . DIRECTORY_SEPARATOR . $modelMapping->getName() . ' . php';
+        $abstractClassPath = $abstractPath . DIRECTORY_SEPARATOR . $abstracClassName . ' . php';
 
         $nodes = array();
         $nodes = array_merge($nodes, $this->generatePropertyNodes($modelMapping));
@@ -83,12 +83,12 @@ class DoctrineOrmGenerator
         $nodes = array_merge($nodes, $this->generateMetadataNodes($modelMapping));
         $nodes = array(
             new Node\Stmt\Namespace_(new Name($abstractNamespace), array(
-                new Class_('Abstract'.$modelMapping->getName(), array('type' => 16, 'stmts' => $nodes)), )
+                new Class_('Abstract' . $modelMapping->getName(), array('type' => 16, 'stmts' => $nodes)), )
             ),
         );
         $abstractClassCode = $this->phpGenerator->prettyPrint($nodes);
 
-        file_put_contents($abstractClassPath, '<?php'.PHP_EOL.PHP_EOL.$abstractClassCode);
+        file_put_contents($abstractClassPath, '<?php' . PHP_EOL . PHP_EOL . $abstractClassCode);
 
         if (file_exists($classPath) && !$override) {
             return;
@@ -96,12 +96,12 @@ class DoctrineOrmGenerator
 
         $nodes = array(
             new Node\Stmt\Namespace_(new Name($namespace), array(
-                new Class_($modelMapping->getName(), array('extends' => new FullyQualified($abstractNamespace.'\\'.$abstracClassName))),
+                new Class_($modelMapping->getName(), array('extends' => new FullyQualified($abstractNamespace . '\\' . $abstracClassName))),
             )),
         );
 
         $classCode = $this->phpGenerator->prettyPrint($nodes);
-        file_put_contents($classPath, '<?php'.PHP_EOL.PHP_EOL.$classCode);
+        file_put_contents($classPath, '<?php' . PHP_EOL . PHP_EOL . $classCode);
     }
 
     /**

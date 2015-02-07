@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\Tests\ModelGenerator\Helper;
+namespace Saxulum\Tests\EntityGenerator\Helper;
 
-use Saxulum\ModelGenerator\Helper\StringUtil;
+use Saxulum\EntityGenerator\Helper\StringUtil;
 
 class StringUtilTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\Tests\ModelGenerator\Mapping\Field\Simple;
+namespace Saxulum\Tests\EntityGenerator\Mapping\Field\Simple;
 
-use Saxulum\ModelGenerator\Mapping\Simple\BooleanFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\BooleanFieldMapping;
 
 class BooleanFieldMappingTest extends \PHPUnit_Framework_TestCase
 {

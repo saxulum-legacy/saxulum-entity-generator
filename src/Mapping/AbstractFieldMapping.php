@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Mapping;
+namespace Saxulum\EntityGenerator\Mapping;
 
 abstract class AbstractFieldMapping implements FieldMappingInterface
 {

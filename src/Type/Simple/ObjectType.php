@@ -1,12 +1,12 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Type\Simple;
+namespace Saxulum\EntityGenerator\Type\Simple;
 
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Name;
-use Saxulum\ModelGenerator\Mapping\FieldMappingInterface;
-use Saxulum\ModelGenerator\Mapping\Simple\ObjectFieldMapping;
+use Saxulum\EntityGenerator\Mapping\FieldMappingInterface;
+use Saxulum\EntityGenerator\Mapping\Simple\ObjectFieldMapping;
 
 class ObjectType extends AbstractType
 {

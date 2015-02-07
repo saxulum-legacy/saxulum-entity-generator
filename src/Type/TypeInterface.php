@@ -1,9 +1,9 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Type;
+namespace Saxulum\EntityGenerator\Type;
 
 use PhpParser\Node;
-use Saxulum\ModelGenerator\Mapping\FieldMappingInterface;
+use Saxulum\EntityGenerator\Mapping\FieldMappingInterface;
 
 interface TypeInterface
 {

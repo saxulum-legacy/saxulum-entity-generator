@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\Tests\ModelGenerator\Mapping\Field\Simple;
+namespace Saxulum\Tests\EntityGenerator\Mapping\Field\Simple;
 
-use Saxulum\ModelGenerator\Mapping\Simple\GuidFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\GuidFieldMapping;
 
 class GuidFieldMappingTest extends \PHPUnit_Framework_TestCase
 {

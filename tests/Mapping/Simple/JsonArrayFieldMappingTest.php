@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\Tests\ModelGenerator\Mapping\Field\Simple;
+namespace Saxulum\Tests\EntityGenerator\Mapping\Field\Simple;
 
-use Saxulum\ModelGenerator\Mapping\Simple\JsonArrayFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\JsonArrayFieldMapping;
 
 class JsonArrayFieldMappingTest extends \PHPUnit_Framework_TestCase
 {

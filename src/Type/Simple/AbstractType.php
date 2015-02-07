@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Type\Simple;
+namespace Saxulum\EntityGenerator\Type\Simple;
 
 use PhpParser\Comment;
 use PhpParser\Node;
@@ -17,12 +17,12 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\PropertyProperty;
 use PhpParser\Node\Stmt\Return_;
-use Saxulum\ModelGenerator\Mapping\FieldMappingInterface;
+use Saxulum\EntityGenerator\Mapping\FieldMappingInterface;
 use Saxulum\PhpDocGenerator\Documentor;
 use Saxulum\PhpDocGenerator\ParamRow;
 use Saxulum\PhpDocGenerator\ReturnRow;
 use Saxulum\PhpDocGenerator\VarRow;
-use Saxulum\ModelGenerator\Type\TypeInterface;
+use Saxulum\EntityGenerator\Type\TypeInterface;
 
 abstract class AbstractType implements TypeInterface
 {

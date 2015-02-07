@@ -1,4 +1,4 @@
 <?php
 
 $loader = require __DIR__.'/../vendor/autoload.php';
-$loader->setPsr4('Saxulum\Tests\ModelGenerator\\', __DIR__);
+$loader->setPsr4('Saxulum\Tests\EntityGenerator\\', __DIR__);

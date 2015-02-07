@@ -1,7 +1,7 @@
 {
-  "name": "saxulum/saxulum-model-generator",
-  "description": "Saxulum Model Generator",
-  "keywords": ["saxulum", "entity", "generator"],
+  "name": "saxulum/saxulum-entity-generator",
+  "description": "Saxulum Entity Generator",
+  "keywords": ["saxulum", "doctrine", "entity", "generator"],
   "license": "MIT",
   "authors": [
     {
@@ -11,7 +11,7 @@
   ],
   "require": {
     "php": ">=5.3",
-    "nikic/php-parser": "v1.0.0beta1",
+    "nikic/php-parser": "~1.1",
     "saxulum/saxulum-phpdoc-generator": "~1.0@rc",
     "symfony/property-access": "~2.3"
   },
@@ -20,6 +20,6 @@
     "doctrine/orm": "~2.4,>=2.4.6"
   },
   "autoload": {
-    "psr-4": { "Saxulum\\ModelGenerator\\": "src/" }
+    "psr-4": { "Saxulum\\EntityGenerator\\": "src/" }
   }
 }

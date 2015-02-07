@@ -1,13 +1,13 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Type\Simple;
+namespace Saxulum\EntityGenerator\Type\Simple;
 
 use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Scalar\String;
-use Saxulum\ModelGenerator\Mapping\FieldMappingInterface;
+use Saxulum\EntityGenerator\Mapping\FieldMappingInterface;
 
 class IdType extends AbstractType
 {

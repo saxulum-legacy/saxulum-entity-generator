@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Helper;
+namespace Saxulum\EntityGenerator\Helper;
 
 use Symfony\Component\PropertyAccess\StringUtil as OrigStringUtil;
 

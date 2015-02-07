@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\Tests\ModelGenerator\Mapping\Field\Simple;
+namespace Saxulum\Tests\EntityGenerator\Mapping\Field\Simple;
 
-use Saxulum\ModelGenerator\Mapping\Simple\DecimalFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\DecimalFieldMapping;
 
 class DecimalFieldMappingTest extends \PHPUnit_Framework_TestCase
 {

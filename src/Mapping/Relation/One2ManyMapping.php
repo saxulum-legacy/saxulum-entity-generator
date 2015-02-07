@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Mapping\Relation;
+namespace Saxulum\EntityGenerator\Mapping\Relation;
 
 class One2ManyMapping extends AbstractRelationMapping
 {

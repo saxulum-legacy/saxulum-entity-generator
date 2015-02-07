@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\Tests\ModelGenerator\Mapping\Field\Simple;
+namespace Saxulum\Tests\EntityGenerator\Mapping\Field\Simple;
 
-use Saxulum\ModelGenerator\Mapping\Simple\BlobFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\BlobFieldMapping;
 
 class BlobFieldMappingTest extends \PHPUnit_Framework_TestCase
 {

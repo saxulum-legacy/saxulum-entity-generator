@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\Tests\ModelGenerator\Mapping\Relation;
+namespace Saxulum\Tests\EntityGenerator\Mapping\Relation;
 
-use Saxulum\ModelGenerator\Mapping\Relation\Many2ManyOwningSideMapping;
+use Saxulum\EntityGenerator\Mapping\Relation\Many2ManyOwningSideMapping;
 
 class Many2ManyOwningSideMappingTest extends \PHPUnit_Framework_TestCase
 {

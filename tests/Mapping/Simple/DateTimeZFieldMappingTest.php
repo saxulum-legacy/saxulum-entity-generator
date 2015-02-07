@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\Tests\ModelGenerator\Mapping\Field\Simple;
+namespace Saxulum\Tests\EntityGenerator\Mapping\Field\Simple;
 
-use Saxulum\ModelGenerator\Mapping\Simple\DateTimeZFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\DateTimeZFieldMapping;
 
 class DateTimeZFieldMappingTest extends \PHPUnit_Framework_TestCase
 {

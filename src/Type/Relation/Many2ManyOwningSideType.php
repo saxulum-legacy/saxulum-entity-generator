@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Type\Relation;
+namespace Saxulum\EntityGenerator\Type\Relation;
 
 use PhpParser\Comment;
 use PhpParser\Node;
@@ -14,12 +14,12 @@ use PhpParser\Node\Param;
 use PhpParser\Node\Scalar\String;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Return_;
-use Saxulum\ModelGenerator\Mapping\FieldMappingInterface;
-use Saxulum\ModelGenerator\Mapping\Relation\Many2ManyOwningSideMapping;
+use Saxulum\EntityGenerator\Mapping\FieldMappingInterface;
+use Saxulum\EntityGenerator\Mapping\Relation\Many2ManyOwningSideMapping;
 use Saxulum\PhpDocGenerator\Documentor;
 use Saxulum\PhpDocGenerator\ParamRow;
 use Saxulum\PhpDocGenerator\ReturnRow;
-use Saxulum\ModelGenerator\Helper\StringUtil;
+use Saxulum\EntityGenerator\Helper\StringUtil;
 
 class Many2ManyOwningSideType extends AbstractMany2ManyType
 {

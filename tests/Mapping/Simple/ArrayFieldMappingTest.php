@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\Tests\ModelGenerator\Mapping\Field\Simple;
+namespace Saxulum\Tests\EntityGenerator\Mapping\Field\Simple;
 
-use Saxulum\ModelGenerator\Mapping\Simple\ArrayFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\ArrayFieldMapping;
 
 class ArrayFieldMappingTest extends \PHPUnit_Framework_TestCase
 {

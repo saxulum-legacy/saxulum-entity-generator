@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Type\Relation;
+namespace Saxulum\EntityGenerator\Type\Relation;
 
 use PhpParser\Comment;
 use PhpParser\Node;
@@ -12,13 +12,13 @@ use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Foreach_;
 use PhpParser\Node\Stmt\Return_;
-use Saxulum\ModelGenerator\Mapping\FieldMappingInterface;
-use Saxulum\ModelGenerator\Mapping\Relation\AbstractMany2ManyMapping;
-use Saxulum\ModelGenerator\Mapping\Relation\AbstractRelationMapping;
+use Saxulum\EntityGenerator\Mapping\FieldMappingInterface;
+use Saxulum\EntityGenerator\Mapping\Relation\AbstractMany2ManyMapping;
+use Saxulum\EntityGenerator\Mapping\Relation\AbstractRelationMapping;
 use Saxulum\PhpDocGenerator\Documentor;
 use Saxulum\PhpDocGenerator\ParamRow;
 use Saxulum\PhpDocGenerator\ReturnRow;
-use Saxulum\ModelGenerator\Helper\StringUtil;
+use Saxulum\EntityGenerator\Helper\StringUtil;
 
 abstract class AbstractMany2ManyType extends Abstract2ManyRelationType
 {

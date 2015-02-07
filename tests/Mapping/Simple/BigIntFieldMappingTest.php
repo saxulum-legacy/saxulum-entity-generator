@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\Tests\ModelGenerator\Mapping\Field\Simple;
+namespace Saxulum\Tests\EntityGenerator\Mapping\Field\Simple;
 
-use Saxulum\ModelGenerator\Mapping\Simple\BigIntFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\BigIntFieldMapping;
 
 class BigIntFieldMappingTest extends \PHPUnit_Framework_TestCase
 {

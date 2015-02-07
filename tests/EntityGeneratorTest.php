@@ -1,62 +1,62 @@
 <?php
 
-namespace Saxulum\Tests\ModelGenerator;
+namespace Saxulum\Tests\EntityGenerator;
 
 use PhpParser\PrettyPrinter\Standard as PhpGenerator;
-use Saxulum\ModelGenerator\Mapping\Simple\BigIntFieldMapping;
-use Saxulum\ModelGenerator\Mapping\Simple\BlobFieldMapping;
-use Saxulum\ModelGenerator\Mapping\Simple\DateFieldMapping;
-use Saxulum\ModelGenerator\Mapping\Simple\DateTimeZFieldMapping;
-use Saxulum\ModelGenerator\Mapping\Simple\FloatFieldMapping;
-use Saxulum\ModelGenerator\Mapping\Simple\GuidFieldMapping;
-use Saxulum\ModelGenerator\Mapping\Simple\JsonArrayFieldMapping;
-use Saxulum\ModelGenerator\Mapping\Simple\ObjectFieldMapping;
-use Saxulum\ModelGenerator\Mapping\Simple\SimpleArrayFieldMapping;
-use Saxulum\ModelGenerator\Mapping\Simple\SmallIntFieldMapping;
-use Saxulum\ModelGenerator\Mapping\Simple\TimeFieldMapping;
-use Saxulum\ModelGenerator\Type\Relation\Many2ManyInverseSideType;
-use Saxulum\ModelGenerator\Type\Relation\Many2ManyOwningSideType;
-use Saxulum\ModelGenerator\Type\Relation\Many2OneType;
-use Saxulum\ModelGenerator\Type\Relation\One2ManyType;
-use Saxulum\ModelGenerator\Type\Relation\One2OneInverseSideType;
-use Saxulum\ModelGenerator\Type\Relation\One2OneOwningSideType;
-use Saxulum\ModelGenerator\Type\Simple\ArrayType;
-use Saxulum\ModelGenerator\Type\Simple\BigIntType;
-use Saxulum\ModelGenerator\Type\Simple\BlobType;
-use Saxulum\ModelGenerator\Type\Simple\BooleanType;
-use Saxulum\ModelGenerator\Type\Simple\DateTimeType;
-use Saxulum\ModelGenerator\Type\Simple\DateTimeZType;
-use Saxulum\ModelGenerator\Type\Simple\DateType;
-use Saxulum\ModelGenerator\Type\Simple\DecimalType;
-use Saxulum\ModelGenerator\Type\Simple\FloatType;
-use Saxulum\ModelGenerator\Type\Simple\GuidType;
-use Saxulum\ModelGenerator\Type\Simple\IdType;
-use Saxulum\ModelGenerator\Type\Simple\IntegerType;
-use Saxulum\ModelGenerator\Type\Simple\JsonArrayType;
-use Saxulum\ModelGenerator\Type\Simple\ObjectType;
-use Saxulum\ModelGenerator\Type\Simple\SimpleArrayType;
-use Saxulum\ModelGenerator\Type\Simple\SmallIntType;
-use Saxulum\ModelGenerator\Type\Simple\StringType;
-use Saxulum\ModelGenerator\Type\Simple\TextType;
-use Saxulum\ModelGenerator\DoctrineOrmGenerator;
-use Saxulum\ModelGenerator\Mapping\Relation\Many2ManyInverseSideMapping;
-use Saxulum\ModelGenerator\Mapping\Relation\Many2ManyOwningSideMapping;
-use Saxulum\ModelGenerator\Mapping\Relation\Many2OneMapping;
-use Saxulum\ModelGenerator\Mapping\Relation\One2ManyMapping;
-use Saxulum\ModelGenerator\Mapping\Relation\One2OneInverseSideMapping;
-use Saxulum\ModelGenerator\Mapping\Relation\One2OneOwningSideMapping;
-use Saxulum\ModelGenerator\Mapping\Simple\ArrayFieldMapping;
-use Saxulum\ModelGenerator\Mapping\Simple\BooleanFieldMapping;
-use Saxulum\ModelGenerator\Mapping\Simple\DateTimeFieldMapping;
-use Saxulum\ModelGenerator\Mapping\Simple\DecimalFieldMapping;
-use Saxulum\ModelGenerator\Mapping\Simple\IdFieldMapping;
-use Saxulum\ModelGenerator\Mapping\Simple\IntegerFieldMapping;
-use Saxulum\ModelGenerator\Mapping\Simple\StringFieldMapping;
-use Saxulum\ModelGenerator\Mapping\Simple\TextFieldMapping;
-use Saxulum\ModelGenerator\EntityMapping;
-use Saxulum\ModelGenerator\Type\Simple\TimeType;
+use Saxulum\EntityGenerator\Mapping\Simple\BigIntFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\BlobFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\DateFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\DateTimeZFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\FloatFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\GuidFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\JsonArrayFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\ObjectFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\SimpleArrayFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\SmallIntFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\TimeFieldMapping;
+use Saxulum\EntityGenerator\Type\Relation\Many2ManyInverseSideType;
+use Saxulum\EntityGenerator\Type\Relation\Many2ManyOwningSideType;
+use Saxulum\EntityGenerator\Type\Relation\Many2OneType;
+use Saxulum\EntityGenerator\Type\Relation\One2ManyType;
+use Saxulum\EntityGenerator\Type\Relation\One2OneInverseSideType;
+use Saxulum\EntityGenerator\Type\Relation\One2OneOwningSideType;
+use Saxulum\EntityGenerator\Type\Simple\ArrayType;
+use Saxulum\EntityGenerator\Type\Simple\BigIntType;
+use Saxulum\EntityGenerator\Type\Simple\BlobType;
+use Saxulum\EntityGenerator\Type\Simple\BooleanType;
+use Saxulum\EntityGenerator\Type\Simple\DateTimeType;
+use Saxulum\EntityGenerator\Type\Simple\DateTimeZType;
+use Saxulum\EntityGenerator\Type\Simple\DateType;
+use Saxulum\EntityGenerator\Type\Simple\DecimalType;
+use Saxulum\EntityGenerator\Type\Simple\FloatType;
+use Saxulum\EntityGenerator\Type\Simple\GuidType;
+use Saxulum\EntityGenerator\Type\Simple\IdType;
+use Saxulum\EntityGenerator\Type\Simple\IntegerType;
+use Saxulum\EntityGenerator\Type\Simple\JsonArrayType;
+use Saxulum\EntityGenerator\Type\Simple\ObjectType;
+use Saxulum\EntityGenerator\Type\Simple\SimpleArrayType;
+use Saxulum\EntityGenerator\Type\Simple\SmallIntType;
+use Saxulum\EntityGenerator\Type\Simple\StringType;
+use Saxulum\EntityGenerator\Type\Simple\TextType;
+use Saxulum\EntityGenerator\EntityGenerator;
+use Saxulum\EntityGenerator\Mapping\Relation\Many2ManyInverseSideMapping;
+use Saxulum\EntityGenerator\Mapping\Relation\Many2ManyOwningSideMapping;
+use Saxulum\EntityGenerator\Mapping\Relation\Many2OneMapping;
+use Saxulum\EntityGenerator\Mapping\Relation\One2ManyMapping;
+use Saxulum\EntityGenerator\Mapping\Relation\One2OneInverseSideMapping;
+use Saxulum\EntityGenerator\Mapping\Relation\One2OneOwningSideMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\ArrayFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\BooleanFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\DateTimeFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\DecimalFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\IdFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\IntegerFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\StringFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\TextFieldMapping;
+use Saxulum\EntityGenerator\EntityMapping;
+use Saxulum\EntityGenerator\Type\Simple\TimeType;
 
-class DoctrineOrmGeneratorTest extends \PHPUnit_Framework_TestCase
+class EntityGeneratorTest extends \PHPUnit_Framework_TestCase
 {
     public function testSimple()
     {
@@ -89,7 +89,7 @@ class DoctrineOrmGeneratorTest extends \PHPUnit_Framework_TestCase
         );
 
         $phpGenerator = new PhpGenerator();
-        $generator = new DoctrineOrmGenerator($phpGenerator, $types);
+        $generator = new EntityGenerator($phpGenerator, $types);
 
         $modelMapping = new EntityMapping('Product');
         $modelMapping->addField(new ArrayFieldMapping('array'));

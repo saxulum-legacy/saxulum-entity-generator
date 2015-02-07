@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Mapping\Relation;
+namespace Saxulum\EntityGenerator\Mapping\Relation;
 
-use Saxulum\ModelGenerator\Mapping\AbstractFieldMapping;
+use Saxulum\EntityGenerator\Mapping\AbstractFieldMapping;
 
 abstract class AbstractRelationMapping extends AbstractFieldMapping
 {

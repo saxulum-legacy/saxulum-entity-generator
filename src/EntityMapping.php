@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\ModelGenerator;
+namespace Saxulum\EntityGenerator;
 
-use Saxulum\ModelGenerator\Mapping\FieldMappingInterface;
+use Saxulum\EntityGenerator\Mapping\FieldMappingInterface;
 
 class EntityMapping
 {

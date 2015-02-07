@@ -1,10 +1,10 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Type\Relation;
+namespace Saxulum\EntityGenerator\Type\Relation;
 
 use PhpParser\Node;
-use Saxulum\ModelGenerator\Mapping\FieldMappingInterface;
-use Saxulum\ModelGenerator\Mapping\Relation\AbstractRelationMapping;
+use Saxulum\EntityGenerator\Mapping\FieldMappingInterface;
+use Saxulum\EntityGenerator\Mapping\Relation\AbstractRelationMapping;
 
 abstract class AbstractOne2OneType extends Abstract2OneRelationType
 {

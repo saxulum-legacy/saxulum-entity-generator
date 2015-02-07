@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\Tests\ModelGenerator\Mapping\Field\Simple;
+namespace Saxulum\Tests\EntityGenerator\Mapping\Field\Simple;
 
-use Saxulum\ModelGenerator\Mapping\Simple\FloatFieldMapping;
+use Saxulum\EntityGenerator\Mapping\Simple\FloatFieldMapping;
 
 class FloatFieldMappingTest extends \PHPUnit_Framework_TestCase
 {

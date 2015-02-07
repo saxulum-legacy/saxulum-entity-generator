@@ -1,8 +1,8 @@
 <?php
 
-namespace Saxulum\ModelGenerator\Mapping\Simple;
+namespace Saxulum\EntityGenerator\Mapping\Simple;
 
-use Saxulum\ModelGenerator\Mapping\AbstractFieldMapping;
+use Saxulum\EntityGenerator\Mapping\AbstractFieldMapping;
 
 class IdFieldMapping extends AbstractFieldMapping
 {
