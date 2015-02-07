@@ -60,8 +60,7 @@ class EntityGeneratorTest extends \PHPUnit_Framework_TestCase
 {
     public function testSimple()
     {
-        $phpGenerator = new PhpGenerator();
-        $generator = new EntityGenerator($phpGenerator, array(
+        $generator = new EntityGenerator(new PhpGenerator(), array(
             new ArrayType(),
             new BigIntType(),
             new BlobType(),
