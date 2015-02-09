@@ -63,9 +63,7 @@ class EntityMapping
     public function setFields(array $fieldMappings)
     {
         $this->fieldMappings = array();
-        foreach($fieldMappings as $fieldMapping) {
-            $this->addField($fieldMapping);
-        }
+        $this->addFields($fieldMappings);
 
         return $this;
     }
