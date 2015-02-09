@@ -44,6 +44,19 @@ class EntityMapping
     }
 
     /**
+     * @param FieldMappingInterface[] $fieldMappings
+     * @return $this
+     */
+    public function addFields(array $fieldMappings)
+    {
+        foreach($fieldMappings as $fieldMapping) {
+            $this->addField($fieldMapping);
+        }
+
+        return $this;
+    }
+
+    /**
      * @return FieldMappingInterface[]
      */
     public function getFieldMappings()
