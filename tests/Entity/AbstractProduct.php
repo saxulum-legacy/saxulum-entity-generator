@@ -714,7 +714,7 @@ abstract class AbstractProduct
         $builder->addField('datetime', 'datetime');
         $builder->addField('datetimez', 'datetimez');
         $builder->addField('date', 'date');
-        $builder->addField('decimal', 'decimal');
+        $builder->addField('decimal', 'decimal', array('precision' => 9, 'scale' => 6));
         $builder->addField('float', 'float');
         $builder->addField('guid', 'guid');
         $builder->createField('id', 'integer')->isPrimaryKey()->generatedValue()->build();
@@ -723,8 +723,8 @@ abstract class AbstractProduct
         $builder->addField('object', 'object');
         $builder->addField('simpleArray', 'simple_array');
         $builder->addField('smallint', 'smallint');
-        $builder->addField('string', 'string');
-        $builder->addField('text', 'text');
+        $builder->addField('string', 'string', array('length' => 150));
+        $builder->addField('text', 'text', array('nullable' => true, 'unique' => true, 'columnName' => 'text', 'columnDefinition' => '', 'options' => array()));
         $builder->addField('time', 'time');
         $builder->addOwningManyToMany('unidirectionalMany2Manies', '\\Saxulum\\Entity\\Product');
         $builder->addOwningManyToMany('owningBidirectionalMany2Manies', '\\Saxulum\\Entity\\Product', 'inverseBidirectionalMany2Manies');

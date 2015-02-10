@@ -97,7 +97,7 @@ class EntityGeneratorTest extends \PHPUnit_Framework_TestCase
             ->addField(new DateTimeFieldMapping('datetime'))
             ->addField(new DateTimeZFieldMapping('datetimez'))
             ->addField(new DateFieldMapping('date'))
-            ->addField(new DecimalFieldMapping('decimal'))
+            ->addField(new DecimalFieldMapping('decimal', 9, 6))
             ->addField(new FloatFieldMapping('float'))
             ->addField(new GuidFieldMapping('guid'))
             ->addField(new IdFieldMapping('id'))
@@ -106,8 +106,8 @@ class EntityGeneratorTest extends \PHPUnit_Framework_TestCase
             ->addField(new ObjectFieldMapping('object', '\stdClass'))
             ->addField(new SimpleArrayFieldMapping('simpleArray'))
             ->addField(new SmallIntFieldMapping('smallint'))
-            ->addField(new StringFieldMapping('string'))
-            ->addField(new TextFieldMapping('text'))
+            ->addField(new StringFieldMapping('string', 150))
+            ->addField(new TextFieldMapping('text', true, true, 'text', '', array()))
             ->addField(new TimeFieldMapping('time'))
             ->addField(new Many2ManyOwningSideMapping(
                 'unidirectionalMany2Manies',
