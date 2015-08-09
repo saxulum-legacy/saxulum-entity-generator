@@ -100,9 +100,4 @@ abstract class AbstractFieldMapping implements FieldMappingInterface
     {
         return $this->options;
     }
-
-    /**
-     * @return string
-     */
-    abstract public function getType();
 }
