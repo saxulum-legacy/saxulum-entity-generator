@@ -186,7 +186,7 @@ abstract class AbstractType implements TypeInterface
 
     /**
      * @param  array      $data
-     * @return Array
+     * @return Array_
      * @throws \Exception
      */
     protected function covertArrayToNodes(array $data = array())
