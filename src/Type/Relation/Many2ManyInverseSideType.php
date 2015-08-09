@@ -6,7 +6,7 @@ use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
-use PhpParser\Node\Scalar\String;
+use PhpParser\Node\Scalar\String_;
 use Saxulum\EntityGenerator\Mapping\FieldMappingInterface;
 use Saxulum\EntityGenerator\Mapping\Relation\Many2ManyInverseSideMapping;
 
@@ -45,9 +45,9 @@ class Many2ManyInverseSideType extends AbstractMany2ManyType
 
         return array(
             new MethodCall(new Variable('builder'), 'addInverseManyToMany', array(
-                new Arg(new String($fieldMapping->getName())),
-                new Arg(new String($fieldMapping->getTargetModel())),
-                new Arg(new String($fieldMapping->getMappedBy())),
+                new Arg(new String_($fieldMapping->getName())),
+                new Arg(new String_($fieldMapping->getTargetModel())),
+                new Arg(new String_($fieldMapping->getMappedBy())),
             )),
         );
     }

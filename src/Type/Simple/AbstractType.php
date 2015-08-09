@@ -17,7 +17,7 @@ use PhpParser\Node\Name;
 use PhpParser\Node\Param;
 use PhpParser\Node\Scalar\DNumber;
 use PhpParser\Node\Scalar\LNumber;
-use PhpParser\Node\Scalar\String;
+use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\PropertyProperty;
@@ -135,23 +135,23 @@ abstract class AbstractType implements TypeInterface
         $items = array();
 
         if (null !== $nullable = $fieldMapping->isNullable()) {
-            $items[] = new ArrayItem(new ConstFetch(new Name($nullable ? 'true' : 'false')), new String('nullable'));
+            $items[] = new ArrayItem(new ConstFetch(new Name($nullable ? 'true' : 'false')), new String_('nullable'));
         }
 
         if (null !== $unique = $fieldMapping->isUnique()) {
-            $items[] = new ArrayItem(new ConstFetch(new Name($unique ? 'true' : 'false')), new String('unique'));
+            $items[] = new ArrayItem(new ConstFetch(new Name($unique ? 'true' : 'false')), new String_('unique'));
         }
 
         if (null !== $columnName = $fieldMapping->getColumnName()) {
-            $items[] = new ArrayItem(new String($columnName), new String('columnName'));
+            $items[] = new ArrayItem(new String_($columnName), new String_('columnName'));
         }
 
         if (null !== $columnDefinition = $fieldMapping->getColumnDefinition()) {
-            $items[] = new ArrayItem(new String($columnDefinition), new String('columnDefinition'));
+            $items[] = new ArrayItem(new String_($columnDefinition), new String_('columnDefinition'));
         }
 
         if (null !== $options = $fieldMapping->getOptions()) {
-            $items[] = new ArrayItem($this->covertArrayToNodes($options), new String('options'));
+            $items[] = new ArrayItem($this->covertArrayToNodes($options), new String_('options'));
         }
 
         $items = $this->addOtherMetadataArrayItems($fieldMapping, $items);
@@ -159,8 +159,8 @@ abstract class AbstractType implements TypeInterface
         if (count($items) > 0) {
             return array(
                 new MethodCall(new Variable('builder'), 'addField', array(
-                    new Arg(new String($fieldMapping->getName())),
-                    new Arg(new String($this->getName())),
+                    new Arg(new String_($fieldMapping->getName())),
+                    new Arg(new String_($this->getName())),
                     new Arg(new Array_($items)),
                 )),
             );
@@ -168,8 +168,8 @@ abstract class AbstractType implements TypeInterface
 
         return array(
             new MethodCall(new Variable('builder'), 'addField', array(
-                new Arg(new String($fieldMapping->getName())),
-                new Arg(new String($this->getName())),
+                new Arg(new String_($fieldMapping->getName())),
+                new Arg(new String_($this->getName())),
             )),
         );
     }
@@ -194,7 +194,7 @@ abstract class AbstractType implements TypeInterface
         $items = array();
         foreach ($data as $key => $value) {
             if (is_int($key)) {
-                $itemKey = new String($key);
+                $itemKey = new String_($key);
             } else {
                 $itemKey = new LNumber($key);
             }
@@ -202,7 +202,7 @@ abstract class AbstractType implements TypeInterface
             if (is_array($value)) {
                 $items[] = new ArrayItem($this->covertArrayToNodes($value), $itemKey);
             } elseif (is_string($value) || is_numeric($value)) {
-                $items[] = new ArrayItem(new String($value), $itemKey);
+                $items[] = new ArrayItem(new String_($value), $itemKey);
             } elseif (is_int($value)) {
                 $items[] = new ArrayItem(new LNumber($value), $itemKey);
             } elseif (is_float($value)) {

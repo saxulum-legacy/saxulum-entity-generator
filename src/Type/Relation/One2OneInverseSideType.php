@@ -6,7 +6,7 @@ use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
-use PhpParser\Node\Scalar\String;
+use PhpParser\Node\Scalar\String_;
 use Saxulum\EntityGenerator\Mapping\FieldMappingInterface;
 use Saxulum\EntityGenerator\Mapping\Relation\One2OneInverseSideMapping;
 
@@ -40,9 +40,9 @@ class One2OneInverseSideType extends AbstractOne2OneType
 
         return array(
             new MethodCall(new Variable('builder'), 'addInverseOneToOne', array(
-                new Arg(new String($fieldMapping->getName())),
-                new Arg(new String($fieldMapping->getTargetModel())),
-                new Arg(new String($fieldMapping->getMappedBy())),
+                new Arg(new String_($fieldMapping->getName())),
+                new Arg(new String_($fieldMapping->getTargetModel())),
+                new Arg(new String_($fieldMapping->getMappedBy())),
             )),
         );
     }

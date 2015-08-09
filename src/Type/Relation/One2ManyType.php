@@ -11,7 +11,7 @@ use PhpParser\Node\Expr\PropertyFetch;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Name;
 use PhpParser\Node\Param;
-use PhpParser\Node\Scalar\String;
+use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Foreach_;
 use PhpParser\Node\Stmt\Return_;
@@ -174,9 +174,9 @@ class One2ManyType extends Abstract2ManyRelationType
 
         return array(
             new MethodCall(new Variable('builder'), 'addOneToMany', array(
-                new Arg(new String($fieldMapping->getName())),
-                new Arg(new String($fieldMapping->getTargetModel())),
-                new Arg(new String($fieldMapping->getMappedBy())),
+                new Arg(new String_($fieldMapping->getName())),
+                new Arg(new String_($fieldMapping->getTargetModel())),
+                new Arg(new String_($fieldMapping->getMappedBy())),
             )),
         );
     }

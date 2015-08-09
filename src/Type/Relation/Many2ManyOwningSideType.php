@@ -11,7 +11,7 @@ use PhpParser\Node\Expr\PropertyFetch;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Name;
 use PhpParser\Node\Param;
-use PhpParser\Node\Scalar\String;
+use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Return_;
 use Saxulum\EntityGenerator\Mapping\FieldMappingInterface;
@@ -197,17 +197,17 @@ class Many2ManyOwningSideType extends AbstractMany2ManyType
         if (null === $fieldMapping->getInversedBy()) {
             return array(
                 new MethodCall(new Variable('builder'), 'addOwningManyToMany', array(
-                    new Arg(new String($fieldMapping->getName())),
-                    new Arg(new String($fieldMapping->getTargetModel())),
+                    new Arg(new String_($fieldMapping->getName())),
+                    new Arg(new String_($fieldMapping->getTargetModel())),
                 )),
             );
         }
 
         return array(
             new MethodCall(new Variable('builder'), 'addOwningManyToMany', array(
-                new Arg(new String($fieldMapping->getName())),
-                new Arg(new String($fieldMapping->getTargetModel())),
-                new Arg(new String($fieldMapping->getInversedBy())),
+                new Arg(new String_($fieldMapping->getName())),
+                new Arg(new String_($fieldMapping->getTargetModel())),
+                new Arg(new String_($fieldMapping->getInversedBy())),
             )),
         );
     }

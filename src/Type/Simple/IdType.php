@@ -6,7 +6,7 @@ use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
-use PhpParser\Node\Scalar\String;
+use PhpParser\Node\Scalar\String_;
 use Saxulum\EntityGenerator\Mapping\FieldMappingInterface;
 
 class IdType extends AbstractType
@@ -33,8 +33,8 @@ class IdType extends AbstractType
                 new MethodCall(
                     new MethodCall(
                         new MethodCall(new Variable('builder'), 'createField', array(
-                            new Arg(new String($fieldMapping->getName())),
-                            new Arg(new String('integer')),
+                            new Arg(new String_($fieldMapping->getName())),
+                            new Arg(new String_('integer')),
                         )),
                         'isPrimaryKey'
                     ),

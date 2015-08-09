@@ -4,7 +4,7 @@ namespace Saxulum\EntityGenerator\Type\Simple;
 
 use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Scalar\LNumber;
-use PhpParser\Node\Scalar\String;
+use PhpParser\Node\Scalar\String_;
 use Saxulum\EntityGenerator\Mapping\FieldMappingInterface;
 use Saxulum\EntityGenerator\Mapping\Simple\StringFieldMapping;
 
@@ -22,7 +22,7 @@ class StringType extends AbstractType
         }
 
         if (null !== $length = $fieldMapping->getLength()) {
-            $items[] = new ArrayItem(new LNumber($length), new String('length'));
+            $items[] = new ArrayItem(new LNumber($length), new String_('length'));
         }
 
         return $items;
